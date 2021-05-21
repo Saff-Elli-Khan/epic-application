@@ -1,0 +1,79 @@
+{
+  "name": "epic-application",
+  "version": "1.0.0",
+  "description": "A powerful Express Application Server Framework.",
+  "brand": {
+    "name": "Epic",
+    "country": "Pakistan",
+    "address": "Multan, Pakistan."
+  },
+  "private": true,
+  "scripts": {
+    "start": "cross-env PORT=8080 NODE_ENV=production node ./build/App.js",
+    "dev": "cross-env PORT=8080 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/App.ts",
+    "build": "tsc",
+    "gcloud-deploy": "gcloud config set project {project_id} && gcloud app deploy -q"
+  },
+  "dependencies": {
+    "@supercharge/request-ip": "^1.1.2",
+    "cross-env": "^7.0.2",
+    "compose-middleware": "^5.0.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "debug": "^4.2.0",
+    "epic-config-manager": "^1.0.1",
+    "epic-geo": "^2.0.6",
+    "epic-money": "^1.0.12",
+    "epic-pay": "^1.0.9",
+    "epic-permissions-manager": "^2.0.11",
+    "epic-sql": "^4.0.25",
+    "epic-tokens": "^1.0.10",
+    "epic-validator": "^2.0.7",
+    "express": "^4.17.1",
+    "express-ipfilter": "^1.1.2",
+    "glob": "^7.1.6",
+    "helmet": "^4.2.0",
+    "http-errors": "^1.8.0",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.4.17",
+    "slug": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.7.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.8",
+    "@types/debug": "^4.1.5",
+    "@types/express": "^4.17.9",
+    "@types/glob": "^7.1.3",
+    "@types/http-errors": "^1.8.0",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^14.14.7",
+    "@types/nodemailer": "^6.4.0",
+    "@types/slug": "^0.9.1",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "eslint": "^7.13.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5",
+    "nodemon": "^2.0.6"
+  },
+  "keywords": [
+    "epic",
+    "server",
+    "backend",
+    "application",
+    "api"
+  ],
+  "author": "Saif Ali Khan",
+  "license": "MIT",
+  "homepage": "https://github.com/Saff-Elli-Khan/epic-application#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saff-Elli-Khan/epic-application.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Saff-Elli-Khan/epic-application/issues"
+  }
+}
