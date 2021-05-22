@@ -13,6 +13,7 @@ import { GatewayManager as PaymentGatewayManager } from "epic-pay";
 import { Users } from "./database/core/users";
 import { Subscriptions } from "./database/core/subscriptions";
 
+// Geo Data Instance
 export const Geo = new EpicGeo();
 
 // Global Validator Instance
