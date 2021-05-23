@@ -99,7 +99,7 @@ export class CoreHelpers {
         );
       else throw new Error(`No results from your current request!`);
     } catch (error) {
-      return next(error);
+      return next(CoreHelpers.controllerEventError(eventName, req, error));
     }
   };
 
@@ -108,15 +108,31 @@ export class CoreHelpers {
     request: Request,
     response: R
   ) => {
-    // Call Controller Event
+    // Call Controller Event Handler
     // @ts-ignore
-    const ControllerEventFunction = ControllerEvents[eventName];
+    const ControllerEventHandler = ControllerEvents[eventName];
 
     // Validate Function
-    if (typeof ControllerEventFunction === "function")
-      ControllerEventFunction(response, request);
+    if (typeof ControllerEventHandler === "function")
+      ControllerEventHandler(request, response);
 
     return response;
+  };
+
+  static controllerEventError = (
+    eventName: string,
+    request: Request,
+    error: any
+  ) => {
+    // Call Controller Event Error Handler
+    // @ts-ignore
+    const ControllerEventErrorHandler = ControllerEvents[eventName + ".error"];
+
+    // Validate Function
+    if (typeof ControllerEventErrorHandler === "function")
+      ControllerEventErrorHandler(request, error);
+
+    return error;
   };
 
   static response = async <B extends boolean, T>(
