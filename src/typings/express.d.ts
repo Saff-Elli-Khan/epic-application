@@ -11,7 +11,11 @@ declare module "express-serve-static-core" {
     currency: string;
     date?: Date;
     database: ConnectionManager<any>;
-    authorization?: DECODED_TOKEN<"Authorization", AuthorizationPayload, any>;
+    authorization?: DECODED_TOKEN<
+      "Authorization",
+      AuthorizationPayload,
+      "Live" | "Test"
+    >;
     permissions: PermissionsInterface<typeof PermissionsManager>;
   }
 }
