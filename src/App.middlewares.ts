@@ -99,10 +99,13 @@ export const Middlewares = (App: Express) =>
 
         // Send Formated JSON Response Back
         res.json(
-          await CoreHelpers.response(
-            false,
-            error,
-            Configuration().DEBUGING ? error.stack : {}
+          CoreHelpers.controllerEvent(
+            "error",
+            await CoreHelpers.response(
+              false,
+              error,
+              Configuration().DEBUGING ? error.stack : {}
+            )
           )
         );
       }

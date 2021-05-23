@@ -5,7 +5,7 @@ export class BaseController<T extends Schema<any>> {
   constructor(public Schema: T) {}
 
   public search = () =>
-    CoreHelpers.controller(async (req) => [
+    CoreHelpers.controller("search.*", async (req) => [
       `Record(s) fetched successfully!`,
       await this.Schema.new()
         .withRelation(req.query.relation as any)
@@ -18,7 +18,7 @@ export class BaseController<T extends Schema<any>> {
     ]);
 
   public count = () =>
-    CoreHelpers.controller(async () => [
+    CoreHelpers.controller("count.*", async () => [
       `Record(s) count has been fetched!`,
       await this.Schema.new().count(),
     ]);

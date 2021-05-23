@@ -11,7 +11,7 @@ export class NotificationsController extends BaseController<
   }
 
   public search = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("search.notifications", async (req) => {
       await Validator.validate(req.params)
         .schema({
           userId: (_) => _.use("isUser"),

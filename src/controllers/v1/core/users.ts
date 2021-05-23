@@ -10,7 +10,7 @@ export class UsersController extends BaseController<typeof Users> {
 
   // Register a new User
   public create = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("create.user", async (req) => {
       await Validator.validate(req.body)
         .schema({
           fname: (_) => _.use("isFirstName"),
@@ -61,7 +61,7 @@ export class UsersController extends BaseController<typeof Users> {
     });
 
   public get = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("get.user", async (req) => {
       await Validator.validate(req.params)
         .schema({
           userId: (_) => _.use("isUserName"),
@@ -78,7 +78,7 @@ export class UsersController extends BaseController<typeof Users> {
     });
 
   public update = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("update.user", async (req) => {
       await Validator.validate(req.params)
         .schema({
           userId: (_) => _.use("isUser"),
@@ -100,6 +100,4 @@ export class UsersController extends BaseController<typeof Users> {
 
       return `User has been updated successfully!`;
     });
-
-  public delete = () => CoreHelpers.controller(async () => {});
 }

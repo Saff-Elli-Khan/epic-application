@@ -13,7 +13,7 @@ export class AuthController extends BaseController<typeof Users> {
   }
 
   public create = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("create.access", async (req) => {
       await Validator.validate(req.body)
         .schema({
           username: (_) => _.use("isUserName"),
@@ -98,7 +98,7 @@ export class AuthController extends BaseController<typeof Users> {
     });
 
   public update = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("update.access", async (req) => {
       await Validator.validate(req.authorization)
         .isObject("Authorization not found on the request!")
         .exec();
@@ -169,7 +169,7 @@ export class AuthController extends BaseController<typeof Users> {
     });
 
   public delete = () =>
-    CoreHelpers.controller(async (req) => {
+    CoreHelpers.controller("delete.access", async (req) => {
       await Validator.validate(req.authorization)
         .isObject("Authorization not found on the request!")
         .exec();
