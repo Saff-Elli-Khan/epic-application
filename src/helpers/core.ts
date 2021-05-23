@@ -88,6 +88,7 @@ export class CoreHelpers {
         res.json(
           CoreHelpers.controllerEvent(
             eventName,
+            req,
             await CoreHelpers.response(
               true,
               Results instanceof Array ? Results[0] : Results,
@@ -104,6 +105,7 @@ export class CoreHelpers {
 
   static controllerEvent = <R extends DefaultResponse<any, any>>(
     eventName: string,
+    request: Request,
     response: R
   ) => {
     // Call Controller Event
@@ -112,7 +114,7 @@ export class CoreHelpers {
 
     // Validate Function
     if (typeof ControllerEventFunction === "function")
-      ControllerEventFunction(response);
+      ControllerEventFunction(response, request);
 
     return response;
   };
