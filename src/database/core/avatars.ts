@@ -13,9 +13,7 @@ export const Avatars = new Schema("avatars", {
     defaultValue: new SQL_UUID().SHORT,
   }),
 
-  userId: new SQLString({
-    isBinary: true,
-  }),
+  userId: new SQLString(),
 
   uploadId: new SQLNumber({
     isLength: 50,

@@ -16,7 +16,6 @@ export const Uploads = new Schema("uploads", {
 
   userId: new SQLString({
     isNullable: true,
-    isBinary: true,
   }),
 
   type: new SQLEnum(["Local", "Global"]),
