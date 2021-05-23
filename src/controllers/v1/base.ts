@@ -1,7 +1,7 @@
 import { Schema } from "epic-sql";
 import { CoreHelpers } from "../../helpers/core";
 
-export class BaseController<T extends Schema<any>> {
+export class BaseController<T extends Schema<any> = any> {
   constructor(public Schema: T) {}
 
   public search = () =>
