@@ -187,6 +187,7 @@ export const GatewayManager = new PaymentGatewayManager({
   },
 });
 
+// Configuration Class
 export const Configuration = new (class {
   // Global Configuration
   public global = () => ({
