@@ -78,7 +78,7 @@ export const Middlewares = (App: Express) =>
     .use(
       async (
         error: Error,
-        _req: Request,
+        req: Request,
         res: Response,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         _next: NextFunction
@@ -101,6 +101,7 @@ export const Middlewares = (App: Express) =>
         res.json(
           CoreHelpers.controllerEvent(
             "error",
+            req,
             await CoreHelpers.response(
               false,
               error,
