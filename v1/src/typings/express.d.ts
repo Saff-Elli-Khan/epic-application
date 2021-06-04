@@ -6,16 +6,17 @@ import { AuthorizationPayload } from "./index";
 
 declare module "express-serve-static-core" {
   interface Request {
+    version: string;
     clientIp: string;
-    language: string;
-    currency: string;
-    date?: Date;
-    database: ConnectionManager<any>;
     authorization?: DECODED_TOKEN<
       "Authorization",
       AuthorizationPayload,
       "Live" | "Test"
     >;
+    language: string;
+    currency: string;
+    date?: Date;
+    database: ConnectionManager<any>;
     permissions: PermissionsInterface<typeof PermissionsManager>;
   }
 }

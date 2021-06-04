@@ -1,7 +1,8 @@
 import { BaseController } from "../base";
 import { CoreHelpers } from "../../../helpers/core";
 import { Users } from "../../../database/core/users";
-import { Configuration, TokensManager, Validator } from "../../../App.globals";
+import { Configuration, TokensManager } from "../../../App.globals";
+import { Validator } from "../../../App.validator";
 
 export class UsersController extends BaseController<typeof Users> {
   constructor() {

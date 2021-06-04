@@ -1,32 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import { PermissionsException } from "epic-permissions-manager";
-import { PermissionsManager, Validator } from "../App.globals";
-import { DropFirstParameter } from "../typings";
-import { ControllerEvents } from "../events/controller";
-
-export interface ValidationMessage {
-  param?: string;
-  location?: string;
-  message: string;
-  value?: any;
-}
-
-export interface DefaultResponse<B extends boolean, T> {
-  status: B;
-  messages: Array<ValidationMessage>;
-  data: T;
-  code: number;
-}
-
-export type ControllerReturnType =
-  | string
-  | [string, any]
-  | [string, any, number]
-  | void;
+import { PermissionsManager } from "../App.globals";
+import {
+  ControllerReturnType,
+  DefaultResponse,
+  DropFirstParameter,
+  ValidationMessage,
+} from "../typings";
+import { Validator } from "../App.validator";
 
 export class CoreHelpers {
   static controller = (
-    eventName: string,
+    name: string,
     Middleware: (
       req: Request,
       res: Response,
@@ -55,6 +40,13 @@ export class CoreHelpers {
               ["ASC", "DESC"],
               `Sorting value should be 'ASC' Or 'DESC'!`
             ),
+          between: (_) =>
+            _.optional()
+              .likeArray({ sanitize: true }, "Please provide a valid range!")
+              .isLength(
+                { min: 2, max: 2 },
+                "A range should contain minimum or maximum two elements!"
+              ),
           relation: (_) =>
             _.optional()
               .isString("Please provide a valid comma separated string!")
@@ -65,30 +57,20 @@ export class CoreHelpers {
                   .map((v) => v.trim())
                   .filter((v) => v)
               ),
-          range: (_) =>
-            _.optional()
-              .likeArray(
-                { sanitize: true },
-                "Please provide a valid Time range!"
-              )
-              .each((_) =>
-                _.isNumeric(
-                  { sanitize: true },
-                  "Please provide a valid Unix Timestamp!"
-                )
-              ),
         })
         .run();
 
-      // Process Operations
+      // Process Controller Operations
       const Results = await Middleware(req, res, next);
 
+      // Check Results
       if (Results)
-        // Callback with Response
+        // Call Controller Event & Return Response
         res.json(
-          CoreHelpers.controllerEvent(
-            eventName,
+          await CoreHelpers.controllerEvent(
+            name,
             req,
+            // Create Default Response
             await CoreHelpers.response(
               true,
               Results instanceof Array ? Results[0] : Results,
@@ -97,41 +79,54 @@ export class CoreHelpers {
             )
           )
         );
-      else throw new Error(`No results from your current request!`);
+      else throw new Error(`No results from the current request!`);
     } catch (error) {
-      return next(CoreHelpers.controllerEventError(eventName, req, error));
+      try {
+        // Call Controller Error Event & Pass Error
+        next(await CoreHelpers.controllerEventError(name, req, error));
+      } catch (error) {
+        next(error);
+      }
     }
   };
 
-  static controllerEvent = <R extends DefaultResponse<any, any>>(
+  static controllerEvent = async <R extends DefaultResponse<any, any>>(
     eventName: string,
-    request: Request,
-    response: R
+    req: Request,
+    res: R
   ) => {
+    // Load Controller Events
+    const ControllerEvents = require(`../controllers/${req.version}/events`)
+      .default;
+
     // Call Controller Event Handler
-    // @ts-ignore
     const ControllerEventHandler = ControllerEvents[eventName];
 
     // Validate Function
-    if (typeof ControllerEventHandler === "function")
-      ControllerEventHandler(request, response);
+    if (typeof ControllerEventHandler?.event === "function")
+      await ControllerEventHandler.event(req, res);
 
-    return response;
+    // Return Default Response
+    return res;
   };
 
-  static controllerEventError = (
+  static controllerEventError = async <T>(
     eventName: string,
-    request: Request,
-    error: any
+    req: Request,
+    error: T
   ) => {
-    // Call Controller Event Error Handler
-    // @ts-ignore
-    const ControllerEventErrorHandler = ControllerEvents[eventName + ".error"];
+    // Load Controller Events
+    const ControllerEvents = require(`../controllers/${req.version}/events`)
+      .default;
+
+    // Call Controller Event Handler
+    const ControllerEventHandler = ControllerEvents[eventName];
 
     // Validate Function
-    if (typeof ControllerEventErrorHandler === "function")
-      ControllerEventErrorHandler(request, error);
+    if (typeof ControllerEventHandler?.error === "function")
+      await ControllerEventHandler.error(req, error);
 
+    // Return Error
     return error;
   };
 

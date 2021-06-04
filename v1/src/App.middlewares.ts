@@ -78,7 +78,7 @@ export const Middlewares = (App: Express) =>
     .use(
       async (
         error: Error,
-        req: Request,
+        _req: Request,
         res: Response,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         _next: NextFunction
@@ -99,14 +99,10 @@ export const Middlewares = (App: Express) =>
 
         // Send Formated JSON Response Back
         res.json(
-          CoreHelpers.controllerEvent(
-            "error",
-            req,
-            await CoreHelpers.response(
-              false,
-              error,
-              Configuration().DEBUGING ? error.stack : {}
-            )
+          await CoreHelpers.response(
+            false,
+            error,
+            Configuration().DEBUGING ? error.stack : {}
           )
         );
       }

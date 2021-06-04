@@ -7,16 +7,26 @@ import Fs from "fs";
 import Glob from "glob";
 
 export class CoreMiddlewares {
+  static useVersion = (version: string) => async (
+    req: Request,
+    _: Response,
+    next: NextFunction
+  ) => {
+    req.version = version;
+
+    next();
+  };
+
   static useAuthorization = () => async (
-    request: Request,
+    req: Request,
     _: Response,
     next: NextFunction
   ) => {
     try {
-      if (typeof request.headers["authorization"] !== "string") return next();
+      if (typeof req.headers["authorization"] !== "string") return next();
 
       // Split Token
-      const Authorization = request.headers["authorization"].split(" ");
+      const Authorization = req.headers["authorization"].split(" ");
 
       // Get Token Details
       const GrantType = Authorization[0];
@@ -26,7 +36,7 @@ export class CoreMiddlewares {
         throw new Error(`Invalid Authorization Grant Type has been provided!`);
 
       // Verify Authorization Token
-      request.authorization = await TokensManager.verify({
+      req.authorization = await TokensManager.verify({
         type: "Authorization",
         token: GrantToken,
       });

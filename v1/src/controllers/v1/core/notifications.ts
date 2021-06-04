@@ -1,7 +1,7 @@
 import { BaseController } from "../base";
 import { Notifications } from "../../../database/core/notifications";
 import { CoreHelpers } from "../../../helpers/core";
-import { Validator } from "../../../App.globals";
+import { Validator } from "../../../App.validator";
 
 export class NotificationsController extends BaseController<
   typeof Notifications

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { NotificationsController } from "../../../controllers";
+import { NotificationsController } from "../../../controllers/v1";
 import { CoreHelpers } from "../../../helpers/core";
 import { CoreMiddlewares } from "../../../middlewares/core";
 

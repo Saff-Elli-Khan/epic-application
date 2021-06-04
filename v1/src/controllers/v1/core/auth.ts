@@ -4,8 +4,9 @@ import { Users } from "../../../database/core/users";
 import { Passwords } from "../../../database/core/passwords";
 import { Permissions } from "../../../database/core/permissions";
 import { AuthorizationPayload } from "../../../typings";
-import { Configuration, TokensManager, Validator } from "../../../App.globals";
+import { Configuration, TokensManager } from "../../../App.globals";
 import { Profiles } from "../../../database/core/profiles";
+import { Validator } from "../../../App.validator";
 
 export class AuthController extends BaseController<typeof Users> {
   constructor() {

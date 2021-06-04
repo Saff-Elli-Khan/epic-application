@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UsersController } from "../../../controllers";
+import { UsersController } from "../../../controllers/v1";
 import { CoreHelpers } from "../../../helpers/core";
 import { CoreMiddlewares } from "../../../middlewares/core";
 
