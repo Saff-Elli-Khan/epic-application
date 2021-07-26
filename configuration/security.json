@@ -1,0 +1,12 @@
+{
+  "encryption": {
+    "key": "Q58DJ2LWqIxesp3hsnatwdtg750bPdQ2"
+  },
+  "ip": {
+    "enabled": true,
+    "allowedIps": ["127.0.0.1", "::1"],
+    "filterMode": "allow",
+    "logLevel": "all",
+    "excludeRoutes": []
+  }
+}
