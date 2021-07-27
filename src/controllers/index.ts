@@ -6,6 +6,7 @@
  */
 
 import { Controller, Get } from "@saffellikhan/epic-express";
+import { Configuration } from "../App.globals";
 import { V1Controller } from "./v1";
 
 @Controller("/", {
@@ -14,6 +15,8 @@ import { V1Controller } from "./v1";
 export class APIController {
   @Get("/")
   public Stats() {
-    return `The ${"Test"} API is online listening to the requests!`;
+    return `The ${
+      Configuration().PACKAGE.brand.name
+    }'s API is online listening to the requests!`;
   }
 }
