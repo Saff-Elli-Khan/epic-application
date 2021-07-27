@@ -7,10 +7,10 @@
 
 import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";
-import { V1Controller } from "./v1";
+import { V1Controller } from "./v1/V1";
 
 @ParentController("/", {
-  childs: [V1Controller],
+  childs: /* @ApiControllerChilds */ [V1Controller] /* /ApiControllerChilds */,
 })
 export class APIController {
   @Get("/")

@@ -10,11 +10,13 @@ import {
 import { createSchema } from "@saffellikhan/epic-sql";
 import { Validator } from "../../App.validator";
 
-// @Temporary
+/* @Temporary */
 const Sample: any = {};
-// @/Temporary
+/* /Temporary */
 
-@Controller("{ControllerPrefix}")
+@Controller("{ControllerPrefix}", {
+  childs: /* @SampleControllerChilds */ [] /* /SampleControllerChilds */,
+})
 export class SampleController {
   @Get("/", "Fetch a list of Sample(s).")
   async ListSample(req: Request) {

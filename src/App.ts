@@ -1,2 +1,2 @@
-import "./controllers";
+import "./controllers/Api";
 import "./App.server";
