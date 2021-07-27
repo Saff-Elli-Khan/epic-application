@@ -16,82 +16,87 @@ const Sample: any = {};
 
 @Controller("{ControllerPrefix}")
 export class SampleController {
-  @Get()
-  async FindSample(req: Request) {
-    // Request Validation
-    await Validator.validate(req)
+  @Get("/", "Fetch a list of Sample(s).")
+  async ListSample(req: Request) {
+    // Create New Repository
+    const Repository = req.database.use(Sample);
+
+    // Search Sample
+    const Result = await Repository()
+      .search(req.query.search as string)
+      .select();
+
+    // Return Response
+    return new CreateResponse("Sample(s) fetched successfully!", Result);
+  }
+
+  @Get("/:SampleId/", "Fetch the Sample.")
+  async GetSample(req: Request) {
+    // Params Validation
+    await Validator.validate(req.params)
       .schema({
-        params: (_) =>
-          _.schema({
-            SampleId: (_) =>
-              _.optional({ checkFalsy: true, setUndefined: true }).isString(
-                "Please provide a valid Sample ID!"
-              ),
-          }),
+        SampleId: (_) =>
+          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+            "Please provide a valid Sample ID!"
+          ),
       })
       .exec();
 
     // Create New Repository
     const Repository = req.database.use(Sample);
 
-    // Find Sample
-    const Result = await (req.params.SampleId
-      ? Repository().where({
-          SampleId: req.params.SampleId,
-        })
-      : Repository().search(req.query.search as string)
-    ).select();
+    // Find A Sample
+    const Result = await Repository()
+      .where({ SampleId: req.params.SampleId })
+      .select();
 
     // Result Validation
-    if (!Result) throw new Error("We did not found that Sample!");
+    if (!Result[0]) throw new Error("We did not found that Sample!");
 
     // Return Response
-    return new CreateResponse("Sample fetched successfully!", Result);
+    return new CreateResponse("Sample fetched successfully!", Result[0]);
   }
 
-  @Post()
+  @Post("/", "Create a new Sample.")
   async CreateSample(req: Request) {
-    // Request Validation
-    await Validator.validate(req)
-      .schema({
-        params: (_) => _.schema({}),
-        body: (_) => _.schema({}),
-      })
-      .exec();
+    // Params Validation
+    await Validator.validate(req.params).schema({}).exec();
+
+    // Body Validation
+    await Validator.validate(req.body).schema({}).exec();
 
     // Create New Repository
     const Repository = req.database.use(Sample);
 
     // Return Response
     return new CreateResponse(
-      "Sample created successfully!",
+      "Sample has been created successfully!",
       // Create New Sample
       await Repository().create(createSchema(Sample, req.body))
     );
   }
 
-  @Patch()
+  @Patch("/:SampleId/", "Update the Sample.")
   async UpdateSample(req: Request) {
-    // Request Validation
-    await Validator.validate(req)
+    // Params Validation
+    await Validator.validate(req.params)
       .schema({
-        params: (_) =>
-          _.schema({
-            SampleId: (_) =>
-              _.optional({ checkFalsy: true, setUndefined: true }).isString(
-                "Please provide a valid Sample ID!"
-              ),
-          }),
-        body: (_) => _.schema({}),
+        SampleId: (_) =>
+          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+            "Please provide a valid Sample ID!"
+          ),
       })
       .exec();
+
+    // Body Validation
+    await Validator.validate(req.body).schema({}).exec();
 
     // Create New Repository
     const Repository = req.database.use(Sample);
 
     // Return Response
     return new CreateResponse(
-      "Sample(s) updated successfully!",
+      "Sample has been updated successfully!",
       // Create New Sample
       await Repository()
         .where({
@@ -101,18 +106,15 @@ export class SampleController {
     );
   }
 
-  @Delete()
+  @Delete("/:SampleId/", "Delete the Sample.")
   async DeleteSample(req: Request) {
-    // Request Validation
-    await Validator.validate(req)
+    // Params Validation
+    await Validator.validate(req.params)
       .schema({
-        params: (_) =>
-          _.schema({
-            SampleId: (_) =>
-              _.optional({ checkFalsy: true, setUndefined: true }).isString(
-                "Please provide a valid Sample ID!"
-              ),
-          }),
+        SampleId: (_) =>
+          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+            "Please provide a valid Sample ID!"
+          ),
       })
       .exec();
 
@@ -121,7 +123,7 @@ export class SampleController {
 
     // Return Response
     return new CreateResponse(
-      "Sample(s) deleted successfully!",
+      "Sample has been deleted successfully!",
       // Create New Sample
       await Repository()
         .where({
