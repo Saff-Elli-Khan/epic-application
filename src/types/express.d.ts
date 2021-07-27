@@ -1,4 +1,4 @@
-import { EpicSQLManager } from "epic-sql";
+import { EpicSQLManager } from "@saffellikhan/epic-sql";
 import { DECODED_TOKEN } from "epic-tokens";
 import { SchemaList } from "../database";
 import { AuthorizationPayload } from "./index";

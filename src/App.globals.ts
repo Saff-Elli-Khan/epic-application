@@ -1,7 +1,7 @@
 import Path from "path";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
-import { ConnectionConfiguration } from "epic-sql";
+import { ConnectionConfiguration } from "@saffellikhan/epic-sql";
 import {
   CurrencyInterface,
   LanguageInterface,

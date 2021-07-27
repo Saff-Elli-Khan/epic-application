@@ -1,10 +1,10 @@
-import { Column, OneRelation, Schema } from "epic-sql";
+import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
 import { Base } from "./Base";
 import { User } from "./User";
 
 @Schema()
 export class Subscription extends Base {
-  @Column({ index: ["UNIQUE"] })
+  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   SubscriptionId!: number;
 
   @Column()

@@ -1,4 +1,4 @@
-import { Schema, Column, BaseSchema, PrimaryKey } from "epic-sql";
+import { Schema, Column, BaseSchema, PrimaryKey } from "@saffellikhan/epic-sql";
 
 @Schema()
 export class Base extends BaseSchema {

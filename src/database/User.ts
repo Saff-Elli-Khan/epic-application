@@ -1,4 +1,10 @@
-import { Column, ManyRelation, OneRelation, Schema } from "epic-sql";
+import {
+  Column,
+  ManyRelation,
+  OneRelation,
+  Schema,
+  Utils,
+} from "@saffellikhan/epic-sql";
 import { Base } from "./Base";
 import { Password } from "./Password";
 import { Profile } from "./Profile";
@@ -7,7 +13,7 @@ import { Upload } from "./Upload";
 
 @Schema()
 export class User extends Base {
-  @Column({ index: ["UNIQUE"] })
+  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   UserId!: string;
 
   @Column()

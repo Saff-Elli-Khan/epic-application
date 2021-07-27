@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@saffellikhan/epic-express": "^1.0.0",
+    "@saffellikhan/epic-sql": "^1.0.1",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
     "compression": "^1.7.4",
@@ -27,7 +28,6 @@
     "epic-money": "^1.0.12",
     "epic-pay": "^1.0.13",
     "epic-permissions-manager": "^2.0.11",
-    "epic-sql": "^5.0.5",
     "epic-tokens": "^1.0.10",
     "epic-validator": "^2.0.7",
     "express": "^4.17.1",

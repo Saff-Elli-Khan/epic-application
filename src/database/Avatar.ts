@@ -1,11 +1,11 @@
-import { Column, OneRelation, Schema } from "epic-sql";
+import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
 import { Base } from "./Base";
 import { Upload } from "./Upload";
 import { User } from "./User";
 
 @Schema()
 export class Avatar extends Base {
-  @Column({ index: ["UNIQUE"] })
+  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   AvatarId!: number;
 
   @Column()

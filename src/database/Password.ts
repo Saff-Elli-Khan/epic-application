@@ -1,9 +1,9 @@
-import { Column, Schema } from "epic-sql";
+import { Column, Schema, Utils } from "@saffellikhan/epic-sql";
 import { Base } from "./Base";
 
 @Schema()
 export class Password extends Base {
-  @Column({ index: ["UNIQUE"] })
+  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   PasswordId!: number;
 
   @Column()
