@@ -5,7 +5,7 @@
  *
  */
 
-import { Controller, Get } from "epic-express";
+import { Controller, Get } from "@saffellikhan/epic-express";
 import { V1Controller } from "./v1";
 
 @Controller("/", {

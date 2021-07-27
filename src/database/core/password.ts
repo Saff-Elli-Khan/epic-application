@@ -1,13 +1,13 @@
 import { Column, Schema } from "epic-sql";
-import { Base } from "../base";
+import { Base } from "../Base";
 
 @Schema()
 export class Password extends Base {
   @Column({ index: ["UNIQUE"] })
-  passwordId!: number;
+  PasswordId!: number;
 
   @Column()
-  userId!: string;
+  UserId!: string;
 
   @Column({ length: null })
   value!: string;

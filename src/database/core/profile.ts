@@ -1,14 +1,14 @@
 import { Column, OneRelation, Schema } from "epic-sql";
-import { Base } from "../base";
-import { User } from "./user";
+import { Base } from "../Base";
+import { User } from "./User";
 
 @Schema()
 export class Profile extends Base {
   @Column({ index: ["UNIQUE"] })
-  profileId!: number;
+  ProfileId!: number;
 
   @Column()
-  userId!: string;
+  UserId!: string;
 
   @Column({ nullable: true })
   email?: string;
@@ -68,7 +68,7 @@ export class Profile extends Base {
 
   @OneRelation<User, Profile>({
     schema: () => User,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   user?: User;
 }

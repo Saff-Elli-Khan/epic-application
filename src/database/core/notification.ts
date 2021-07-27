@@ -1,14 +1,14 @@
 import { Column, OneRelation, Schema } from "epic-sql";
-import { Base } from "../base";
-import { User } from "./user";
+import { Base } from "../Base";
+import { User } from "./User";
 
 @Schema()
 export class Notification extends Base {
   @Column({ index: ["UNIQUE"] })
-  notificationId!: number;
+  NotificationId!: number;
 
   @Column()
-  userId!: number;
+  UserId!: number;
 
   @Column({
     choices: ["Success", "Info", "Warning", "Danger"],
@@ -33,7 +33,7 @@ export class Notification extends Base {
 
   @OneRelation<User, Notification>({
     schema: () => User,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   user?: User;
 }

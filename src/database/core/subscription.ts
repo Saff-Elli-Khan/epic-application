@@ -1,14 +1,14 @@
 import { Column, OneRelation, Schema } from "epic-sql";
-import { Base } from "../base";
-import { User } from "./user";
+import { Base } from "../Base";
+import { User } from "./User";
 
 @Schema()
 export class Subscription extends Base {
   @Column({ index: ["UNIQUE"] })
-  subscriptionId!: number;
+  SubscriptionId!: number;
 
   @Column()
-  userId!: string;
+  UserId!: string;
 
   @Column({ choices: ["Email", "Contact"] })
   type!: "Email" | "Contact";
@@ -24,7 +24,7 @@ export class Subscription extends Base {
 
   @OneRelation<User, Subscription>({
     schema: () => User,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   user?: User;
 }

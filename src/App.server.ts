@@ -1,4 +1,4 @@
-import { HTTP, EpicApplication } from "epic-express";
+import { HTTP, EpicApplication } from "@saffellikhan/epic-express";
 import { Middlewares } from "./App.middlewares";
 
 // Create Application

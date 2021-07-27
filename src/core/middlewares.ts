@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "epic-express";
+import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 import { getClientIp } from "@supercharge/request-ip";
 import { Configuration, TokensManager } from "../App.globals";
 import { compose } from "compose-middleware";

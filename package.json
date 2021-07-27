@@ -14,6 +14,7 @@
     "gcloud-deploy": "gcloud config set project {project_id} && gcloud app deploy -q"
   },
   "dependencies": {
+    "@saffellikhan/epic-express": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
     "compression": "^1.7.4",
@@ -22,7 +23,6 @@
     "cross-env": "^7.0.2",
     "dotenv": "^10.0.0",
     "epic-config-manager": "^1.0.3",
-    "epic-express": "^2.0.4",
     "epic-geo": "^2.0.6",
     "epic-money": "^1.0.12",
     "epic-pay": "^1.0.13",

@@ -1,14 +1,14 @@
 import { Column, ManyRelation, OneRelation, Schema } from "epic-sql";
-import { Base } from "../base";
-import { Password } from "./password";
-import { Profile } from "./profile";
-import { Subscription } from "./subscription";
-import { Upload } from "./upload";
+import { Base } from "../Base";
+import { Password } from "./Password";
+import { Profile } from "./Profile";
+import { Subscription } from "./Subscription";
+import { Upload } from "./Upload";
 
 @Schema()
 export class User extends Base {
   @Column({ index: ["UNIQUE"] })
-  userId!: string;
+  UserId!: string;
 
   @Column()
   fname!: string;
@@ -38,25 +38,25 @@ export class User extends Base {
 
   @ManyRelation<Password, User>({
     schema: () => Password,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   passwords?: Password[];
 
   @OneRelation<Profile, User>({
     schema: () => Profile,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   profile?: Profile;
 
   @ManyRelation<Subscription, User>({
     schema: () => Subscription,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   subscriptions?: Subscription[];
 
   @ManyRelation<Upload, User>({
     schema: () => Upload,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   uploads?: Upload[];
 }

@@ -1,13 +1,13 @@
 import { Column, Schema } from "epic-sql";
-import { Base } from "../base";
+import { Base } from "../Base";
 
 @Schema()
 export class Upload extends Base {
   @Column({ index: ["UNIQUE"] })
-  uploadId!: number;
+  UploadId!: number;
 
   @Column({ nullable: true })
-  userId?: string;
+  UserId?: string;
 
   @Column({ choices: ["Local", "Global"] })
   type!: "Local" | "Global";

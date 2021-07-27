@@ -1,28 +1,28 @@
 import { Column, OneRelation, Schema } from "epic-sql";
-import { Base } from "../base";
-import { Upload } from "./upload";
-import { User } from "./user";
+import { Base } from "../Base";
+import { Upload } from "./Upload";
+import { User } from "./User";
 
 @Schema()
 export class Avatar extends Base {
   @Column({ index: ["UNIQUE"] })
-  avatarId!: number;
+  AvatarId!: number;
 
   @Column()
-  userId!: string;
+  UserId!: string;
 
   @Column()
-  uploadId!: number;
+  UploadId!: number;
 
   @OneRelation<User, Avatar>({
     schema: () => User,
-    mapping: ["userId", "userId"],
+    mapping: ["UserId", "UserId"],
   })
   user?: User;
 
   @OneRelation<Upload, Avatar>({
     schema: () => Upload,
-    mapping: ["uploadId", "uploadId"],
+    mapping: ["UploadId", "UploadId"],
   })
   upload?: Upload;
 }

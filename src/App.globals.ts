@@ -1,4 +1,5 @@
 import Path from "path";
+import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { ConnectionConfiguration } from "epic-sql";
 import {
@@ -13,6 +14,9 @@ import {
   ConfigManager as EpicConfigManager,
   ConfigManagerUtils,
 } from "epic-config-manager";
+
+// Global Geo Manager
+export const Geo = new EpicGeo();
 
 // Global Tokens Manager
 export const TokensManager = new EpicTokens(
@@ -35,19 +39,19 @@ export const ConfigManager = new EpicConfigManager(
       // Uploads Configuration
       UPLOADS: require(Path.join(
         process.cwd(),
-        "./package.json"
+        "./configuration/uploads.json"
       )) as UploadsConfigInterface,
 
       // Supported Lanuages
       LANGUAGES: require(Path.join(
         process.cwd(),
-        "./src/configuration/languages.json"
+        "./configuration/languages.json"
       )) as LanguageInterface[],
 
       // Supported Currencies
       CURRENCIES: require(Path.join(
         process.cwd(),
-        "./src/configuration/currencies.json"
+        "./configuration/currencies.json"
       )) as CurrencyInterface[],
     });
 
@@ -56,19 +60,19 @@ export const ConfigManager = new EpicConfigManager(
       // Request & Data Security
       SECURITY: require(Path.join(
         process.cwd(),
-        "./src/configuration/security.json"
+        "./configuration/security.json"
       )) as SecurityConfigInterface,
 
       // Users Configuration
       USERS: require(Path.join(
         process.cwd(),
-        "./src/configuration/users.json"
+        "./configuration/users.json"
       )) as UsersConfigInterface,
 
       // Database Connection
       DATABASE: require(Path.join(
         process.cwd(),
-        "./src/configuration/database.json"
+        "./configuration/database.json"
       )) as ConnectionConfiguration<"mysql">,
     });
 
