@@ -1,6 +1,6 @@
-import { Controller, Request, Get } from "@saffellikhan/epic-express";
+import { ChildController, Request, Get } from "@saffellikhan/epic-express";
 
-@Controller("/v1/", { childs: [] })
+@ChildController("/v1/", { childs: [] })
 export class V1Controller {
   @Get()
   public Stats(req: Request) {
