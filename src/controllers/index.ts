@@ -5,11 +5,11 @@
  *
  */
 
-import { Controller, Get } from "@saffellikhan/epic-express";
+import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";
 import { V1Controller } from "./v1";
 
-@Controller("/", {
+@ParentController("/", {
   childs: [V1Controller],
 })
 export class APIController {
