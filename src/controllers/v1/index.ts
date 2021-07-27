@@ -1,7 +1,6 @@
 import { Controller, Request, Get } from "@saffellikhan/epic-express";
-import { UserController } from "./core/User";
 
-@Controller("/v1/", { childs: [UserController] })
+@Controller("/v1/", { childs: [] })
 export class V1Controller {
   @Get()
   public Stats(req: Request) {

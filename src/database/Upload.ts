@@ -1,5 +1,5 @@
 import { Column, Schema } from "epic-sql";
-import { Base } from "../Base";
+import { Base } from "./Base";
 
 @Schema()
 export class Upload extends Base {

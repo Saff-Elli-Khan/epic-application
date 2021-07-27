@@ -1,5 +1,5 @@
 import { Column, OneRelation, Schema } from "epic-sql";
-import { Base } from "../Base";
+import { Base } from "./Base";
 import { User } from "./User";
 
 @Schema()

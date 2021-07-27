@@ -1,10 +1,10 @@
-import { Avatar } from "./core/Avatar";
-import { Notification } from "./core/Notification";
-import { Password } from "./core/Password";
-import { Profile } from "./core/Profile";
-import { Subscription } from "./core/Subscription";
-import { Upload } from "./core/Upload";
-import { User } from "./core/User";
+import { Avatar } from "./Avatar";
+import { Notification } from "./Notification";
+import { Password } from "./Password";
+import { Profile } from "./Profile";
+import { Subscription } from "./Subscription";
+import { Upload } from "./Upload";
+import { User } from "./User";
 
 export const SchemaList = [
   // Core Schemas List
