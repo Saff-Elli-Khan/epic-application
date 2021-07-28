@@ -8,7 +8,7 @@ import {
   Delete,
 } from "@saffellikhan/epic-express";
 import { createSchema } from "@saffellikhan/epic-sql";
-import { Validator } from "../../App.validator";
+import { Validator } from "@AppPath/App.validator";
 
 /* @Temporary */
 const Sample: any = {};
