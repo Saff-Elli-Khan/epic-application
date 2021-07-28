@@ -9,7 +9,7 @@
     }
   },
   "permissions": {
-    "unauthenticated": ["Index"],
-    "authenticated": ["Index"]
+    "unauthenticated": ["Home"],
+    "authenticated": ["Home"]
   }
 }

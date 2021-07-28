@@ -2,11 +2,11 @@ import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";
 
 @ParentController("/", {
-  childs: /* @IndexControllerChilds */ [] /* /IndexControllerChilds */,
+  childs: /* @indexControllerChilds */ [] /* /indexControllerChilds */,
 })
-export class IndexController {
+export class indexController {
   @Get("/")
-  public Index() {
+  public Home() {
     return `The ${
       Configuration().PACKAGE.brand.name
     }'s API is online listening to the requests!`;
