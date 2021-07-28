@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@saffellikhan/epic-express": "^1.0.1",
-    "@saffellikhan/epic-sql": "^1.0.1",
+    "@saffellikhan/epic-sql": "^1.0.2",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
     "compression": "^1.7.4",
