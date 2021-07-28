@@ -12,4 +12,3 @@ export class indexController {
     }'s API is online listening to the requests!`;
   }
 }
-
