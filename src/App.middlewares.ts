@@ -8,7 +8,7 @@ import Path from "path";
 import { CoreMiddlewares } from "./core/middlewares";
 import { Configuration } from "./App.globals";
 import { Connection, EpicSQLManager } from "@saffellikhan/epic-sql";
-import { SchemaList } from "./database";
+import { SchemaList } from "./schemas";
 
 export const Middlewares = (Framework: Express) =>
   Framework
