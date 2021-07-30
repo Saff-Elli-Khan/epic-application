@@ -1,8 +1,19 @@
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ControllerChildsListTemplate> [{{ childs }}], </ControllerChildsListTemplate> */
+
 import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";
+/* @ImportsContainer */
+
+/* /ImportsContainer */
 
 @ParentController("/", {
-  childs: /* @indexControllerChilds */ [] /* /indexControllerChilds */,
+  childs:
+    /* @ControllerChildsContainer */
+    /* <indexControllerChilds[ControllerChildsListTemplate]> */
+    [],
+  /* </indexControllerChilds> */
+  /* /ControllerChildsContainer */
 })
 export class indexController {
   @Get("/")

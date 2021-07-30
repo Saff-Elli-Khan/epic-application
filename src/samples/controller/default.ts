@@ -1,3 +1,6 @@
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ControllerChildsListTemplate> [{{ childs }}], </ControllerChildsListTemplate> */
+
 import {
   Request,
   Controller,
@@ -9,13 +12,21 @@ import {
 } from "@saffellikhan/epic-express";
 import { createSchema } from "@saffellikhan/epic-sql";
 import { Validator } from "@AppPath/App.validator";
+/* @ImportsContainer */
+
+/* /ImportsContainer */
 
 /* @Temporary */
 const Sample: any = {};
 /* /Temporary */
 
 @Controller("{ControllerPrefix}", {
-  childs: /* @SampleControllerChilds */ [] /* /SampleControllerChilds */,
+  childs:
+    /* @ControllerChildsContainer */
+    /* <SampleControllerChilds[ControllerChildsListTemplate]> */
+    [],
+  /* </SampleControllerChilds> */
+  /* /ControllerChildsContainer */
 })
 export class SampleController {
   @Get("/", "Fetch a list of Sample(s).")
