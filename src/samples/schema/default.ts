@@ -5,7 +5,13 @@ import { Base } from "@AppPath/schemas/Base";
 /* @ImportsContainer */
 
 /* <SampleImport[ImportsTemplate]> */
-import { Schema, Column, Utils } from "@saffellikhan/epic-sql";
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
 /* </SampleImport> */
 
 /* /ImportsContainer */
