@@ -1,68 +1,96 @@
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <UserImport[ImportsTemplate]> */
 import {
-  Column,
-  ManyRelation,
-  OneRelation,
   Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
   Utils,
 } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* </UserImport> */
+
+/* <PasswordImport[ImportsTemplate]> */
 import { Password } from "./Password";
+/* </PasswordImport> */
+
+/* <ProfileImport[ImportsTemplate]> */
 import { Profile } from "./Profile";
+/* </ProfileImport> */
+
+/* <SubscriptionImport[ImportsTemplate]> */
 import { Subscription } from "./Subscription";
+/* </SubscriptionImport> */
+
+/* <UploadImport[ImportsTemplate]> */
 import { Upload } from "./Upload";
+/* </UploadImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class User extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
-  UserId!: string;
+  /* @ColumnsContainer */
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  UserId!: number;
+/* </UserIdColumn> */
 
-  @Column()
-  fname!: string;
+/* <FnameColumn[ColumnTemplate]> */
+@Column({
+}) Fname!: string;
+/* </FnameColumn> */
 
-  @Column()
-  lname!: string;
+/* <LnameColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Lname!: string;
+/* </LnameColumn> */
 
-  fullName() {
-    return `${this.fname} ${this.lname || ""}`.trim();
-  }
+/* <IsLoggedInColumn[ColumnTemplate]> */
+@Column({
+defaultValue: false,
+}) IsLoggedIn!: boolean;
+/* </IsLoggedInColumn> */
 
-  @Column({
-    choices: ["Offline", "Online"],
-  })
-  activity!: "Offline" | "Online";
+/* <StatusColumn[ColumnTemplate]> */
+@Column({
+choices: ["Active", "Paused", "Blocked"],
+defaultValue: "Paused",
+}) Status!: "Active" | "Paused" | "Blocked";
+/* </StatusColumn> */
 
-  @Column({
-    choices: ["Active", "Paused", "Blocked"],
-  })
-  status!: "Active" | "Paused" | "Blocked";
+/* <LastAccessColumn[ColumnTemplate]> */
+@Column({
+}) LastAccess!: number;
+/* </LastAccessColumn> */
 
-  @Column()
-  lastAccess!: number;
+/* <TagsColumn[ColumnTemplate]> */
+@Column({
+defaultValue: () => [],
+}) Tags!: Array<string>;
+/* </TagsColumn> */
 
-  @Column()
-  tags!: string[];
+/* <PasswordsColumn[ManyRelationTemplate]> */
+@ManyRelation<Password, User>({ schema: () => Password, mapping: ["UserId","UserId"] }) Passwords!: Password[];
+/* </PasswordsColumn> */
 
-  @ManyRelation<Password, User>({
-    schema: () => Password,
-    mapping: ["UserId", "UserId"],
-  })
-  passwords?: Password[];
+/* <ProfileColumn[OneRelationTemplate]> */
+@OneRelation<Profile, User>({ schema: () => Profile, mapping: ["UserId","UserId"] }) Profile!: Profile;
+/* </ProfileColumn> */
 
-  @OneRelation<Profile, User>({
-    schema: () => Profile,
-    mapping: ["UserId", "UserId"],
-  })
-  profile?: Profile;
+/* <SubscriptionsColumn[ManyRelationTemplate]> */
+@ManyRelation<Subscription, User>({ schema: () => Subscription, mapping: ["UserId","UserId"] }) Subscriptions!: Subscription[];
+/* </SubscriptionsColumn> */
 
-  @ManyRelation<Subscription, User>({
-    schema: () => Subscription,
-    mapping: ["UserId", "UserId"],
-  })
-  subscriptions?: Subscription[];
+/* <UploadsColumn[ManyRelationTemplate]> */
+@ManyRelation<Upload, User>({ schema: () => Upload, mapping: ["UserId","UserId"] }) Uploads!: Upload[];
+/* </UploadsColumn> */
 
-  @ManyRelation<Upload, User>({
-    schema: () => Upload,
-    mapping: ["UserId", "UserId"],
-  })
-  uploads?: Upload[];
+/* /ColumnsContainer */
 }

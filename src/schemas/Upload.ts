@@ -1,35 +1,81 @@
-import { Column, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <UploadImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </UploadImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Upload extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <UploadIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   UploadId!: number;
+/* </UploadIdColumn> */
 
-  @Column({ nullable: true })
-  UserId?: string;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column({ choices: ["Local", "Global"] })
-  type!: "Local" | "Global";
+/* <TypeColumn[ColumnTemplate]> */
+@Column({
+choices: ["Local", "Global"],
+}) Type!: "Local" | "Global";
+/* </TypeColumn> */
 
-  @Column({ nullable: true })
-  provider?: string;
+/* <ProviderColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Provider!: string;
+/* </ProviderColumn> */
 
-  @Column()
-  mimeType!: string;
+/* <MimeTypeColumn[ColumnTemplate]> */
+@Column({
+}) MimeType!: string;
+/* </MimeTypeColumn> */
 
-  @Column()
-  size!: number;
+/* <SizeColumn[ColumnTemplate]> */
+@Column({
+}) Size!: number;
+/* </SizeColumn> */
 
-  @Column({ length: null })
-  destination!: string;
+/* <DestinationColumn[ColumnTemplate]> */
+@Column({
+length: null,
+}) Destination!: string;
+/* </DestinationColumn> */
 
-  @Column({ length: 255 })
-  fileName!: string;
+/* <FileNameColumn[ColumnTemplate]> */
+@Column({
+length: 255,
+}) FileName!: string;
+/* </FileNameColumn> */
 
-  @Column({ length: null })
-  path!: string;
+/* <PathColumn[ColumnTemplate]> */
+@Column({
+length: null,
+}) Path!: string;
+/* </PathColumn> */
 
-  @Column({ nullable: true })
-  alt?: string;
+/* <AltColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Alt!: string;
+/* </AltColumn> */
+
+/* /ColumnsContainer */
 }

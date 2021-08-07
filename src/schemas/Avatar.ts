@@ -1,28 +1,55 @@
-import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
-import { Upload } from "./Upload";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <AvatarImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </AvatarImport> */
+
+/* <UserImport[ImportsTemplate]> */
 import { User } from "./User";
+/* </UserImport> */
+
+/* <UploadImport[ImportsTemplate]> */
+import { Upload } from "./Upload";
+/* </UploadImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Avatar extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <AvatarIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   AvatarId!: number;
+/* </AvatarIdColumn> */
 
-  @Column()
-  UserId!: string;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column()
-  UploadId!: number;
+/* <UploadIdColumn[ColumnTemplate]> */
+@Column({
+}) UploadId!: number;
+/* </UploadIdColumn> */
 
-  @OneRelation<User, Avatar>({
-    schema: () => User,
-    mapping: ["UserId", "UserId"],
-  })
-  user?: User;
+/* <UserColumn[OneRelationTemplate]> */
+@OneRelation<User, Avatar>({ schema: () => User, mapping: ["UserId","UserId"] }) User!: User;
+/* </UserColumn> */
 
-  @OneRelation<Upload, Avatar>({
-    schema: () => Upload,
-    mapping: ["UploadId", "UploadId"],
-  })
-  upload?: Upload;
+/* <UploadColumn[OneRelationTemplate]> */
+@OneRelation<Upload, Avatar>({ schema: () => Upload, mapping: ["UploadId","UploadId"] }) Upload!: Upload;
+/* </UploadColumn> */
+
+/* /ColumnsContainer */
 }

@@ -1,74 +1,131 @@
-import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <ProfileImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </ProfileImport> */
+
+/* <UserImport[ImportsTemplate]> */
 import { User } from "./User";
+/* </UserImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Profile extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <ProfileIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   ProfileId!: number;
+/* </ProfileIdColumn> */
 
-  @Column()
-  UserId!: string;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column({ nullable: true })
-  email?: string;
+/* <EmailColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Email!: string;
+/* </EmailColumn> */
 
-  @Column({ nullable: true })
-  contact?: number;
+/* <ContactColumn[ColumnTemplate]> */
+@Column({
+length: 15,
+nullable: true,
+}) Contact!: number;
+/* </ContactColumn> */
 
-  @Column({ nullable: true })
-  occupation?: string;
+/* <OccupationColumn[ColumnTemplate]> */
+@Column({
+length: 255,
+nullable: true,
+}) Occupation!: string;
+/* </OccupationColumn> */
 
-  @Column({ nullable: true })
-  business?: string;
+/* <BusinessColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Business!: string;
+/* </BusinessColumn> */
 
-  @Column({ nullable: true })
-  website?: string;
+/* <WebsiteColumn[ColumnTemplate]> */
+@Column({
+length: 255,
+nullable: true,
+}) Website!: string;
+/* </WebsiteColumn> */
 
-  @Column({ nullable: true, length: null })
-  bio?: string;
+/* <BioColumn[ColumnTemplate]> */
+@Column({
+length: 255,
+nullable: true,
+}) Bio!: string;
+/* </BioColumn> */
 
-  @Column({ nullable: true })
-  birthDate?: number;
+/* <BirthTimestampColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) BirthTimestamp!: number;
+/* </BirthTimestampColumn> */
 
-  @Column({ choices: ["Male", "Female", "Unknown"], defaultValue: "Unknown" })
-  gender!: "Male" | "Female" | "Unknown";
+/* <GenderColumn[ColumnTemplate]> */
+@Column({
+choices: ["Male", "Female", "Unknown"],
+defaultValue: "Unknown",
+}) Gender!: "Male" | "Female" | "Unknown";
+/* </GenderColumn> */
 
-  @Column({ nullable: true })
-  country?: string;
+/* <CountryColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Country!: string;
+/* </CountryColumn> */
 
-  @Column({ nullable: true })
-  state?: string;
+/* <StateColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) State!: string;
+/* </StateColumn> */
 
-  @Column({ nullable: true })
-  city?: string;
+/* <CityColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) City!: string;
+/* </CityColumn> */
 
-  @Column({ nullable: true })
-  address_1?: string;
+/* <Address_1Column[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Address_1!: string;
+/* </Address_1Column> */
 
-  @Column({ nullable: true })
-  address_2?: string;
+/* <Address_2Column[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Address_2!: string;
+/* </Address_2Column> */
 
-  @Column({
-    defaultValue: () => ({
-      facebook: null,
-      twitter: null,
-      linkedIn: null,
-      instagram: null,
-      youtube: null,
-    }),
-  })
-  socialLinks!: {
-    facebook: string | null;
-    twitter: string | null;
-    linkedIn: string | null;
-    instagram: string | null;
-    youtube: string | null;
-  };
+/* <SocialLinksColumn[ColumnTemplate]> */
+@Column({
+defaultValue: () => ({}),
+}) SocialLinks!: Record<string, string>;
+/* </SocialLinksColumn> */
 
-  @OneRelation<User, Profile>({
-    schema: () => User,
-    mapping: ["UserId", "UserId"],
-  })
-  user?: User;
+/* <UserColumn[OneRelationTemplate]> */
+@OneRelation<User, Profile>({ schema: () => User, mapping: ["UserId","UserId"] }) User!: User;
+/* </UserColumn> */
+
+/* /ColumnsContainer */
 }

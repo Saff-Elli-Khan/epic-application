@@ -1,17 +1,47 @@
-import { Column, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <PasswordImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </PasswordImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Password extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <PasswordIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   PasswordId!: number;
+/* </PasswordIdColumn> */
 
-  @Column()
-  UserId!: string;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column({ length: null })
-  value!: string;
+/* <ValueColumn[ColumnTemplate]> */
+@Column({
+length: null,
+}) Value!: string;
+/* </ValueColumn> */
 
-  @Column({ choices: ["Valid", "Expired"] })
-  status!: "Valid" | "Expired";
+/* <StatusColumn[ColumnTemplate]> */
+@Column({
+choices: ["Valid", "Expired"],
+defaultValue: "Valid",
+}) Status!: "Valid" | "Expired";
+/* </StatusColumn> */
+
+/* /ColumnsContainer */
 }

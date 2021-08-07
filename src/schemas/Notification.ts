@@ -1,39 +1,79 @@
-import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <NotificationImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </NotificationImport> */
+
+/* <UserImport[ImportsTemplate]> */
 import { User } from "./User";
+/* </UserImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Notification extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <NotificationIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   NotificationId!: number;
+/* </NotificationIdColumn> */
 
-  @Column()
-  UserId!: number;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column({
-    choices: ["Success", "Info", "Warning", "Danger"],
-    defaultValue: "Info",
-  })
-  type!: "Success" | "Info" | "Warning" | "Danger";
+/* <TypeColumn[ColumnTemplate]> */
+@Column({
+choices: ["Success", "Info", "Warning", "Danger"],
+defaultValue: "Info",
+}) Type!: "Success" | "Info" | "Warning" | "Danger";
+/* </TypeColumn> */
 
-  @Column({ defaultValue: () => ({ en: "N/A" }) })
-  subject?: Record<string, string>;
+/* <SubjectColumn[ColumnTemplate]> */
+@Column({
+defaultValue: () => ({en: "N/A"}),
+}) Subject!: Record<string, any>;
+/* </SubjectColumn> */
 
-  @Column({ defaultValue: () => ({ en: "N/A" }) })
-  message?: Record<string, string>;
+/* <MessageColumn[ColumnTemplate]> */
+@Column({
+defaultValue: () => ({ en: "N/A" }),
+}) Message!: Record<string, string>;
+/* </MessageColumn> */
 
-  @Column({ defaultValue: false })
-  seen!: boolean;
+/* <SeenColumn[ColumnTemplate]> */
+@Column({
+defaultValue: false,
+}) Seen!: boolean;
+/* </SeenColumn> */
 
-  @Column({ defaultValue: false })
-  important!: boolean;
+/* <ImportantColumn[ColumnTemplate]> */
+@Column({
+defaultValue: false,
+}) Important!: boolean;
+/* </ImportantColumn> */
 
-  @Column({ defaultValue: () => ({}) })
-  metadata!: Record<string, any>;
+/* <MetadataColumn[ColumnTemplate]> */
+@Column({
+defaultValue: () => ({}),
+}) Metadata!: Record<string, any>;
+/* </MetadataColumn> */
 
-  @OneRelation<User, Notification>({
-    schema: () => User,
-    mapping: ["UserId", "UserId"],
-  })
-  user?: User;
+/* <UserColumn[OneRelationTemplate]> */
+@OneRelation<User, Notification>({ schema: () => User, mapping: ["UserId","UserId"] }) User!: User;
+/* </UserColumn> */
+
+/* /ColumnsContainer */
 }

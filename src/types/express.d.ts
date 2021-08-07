@@ -1,6 +1,6 @@
 import { EpicSQLManager } from "@saffellikhan/epic-sql";
 import { DECODED_TOKEN } from "epic-tokens";
-import { SchemaList } from "../schemas";
+import { SchemaList } from "../schemas/index";
 import { AuthorizationPayload } from "./index";
 
 declare module "express-serve-static-core" {

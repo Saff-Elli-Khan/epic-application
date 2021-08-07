@@ -1,30 +1,65 @@
-import { Column, OneRelation, Schema, Utils } from "@saffellikhan/epic-sql";
-import { Base } from "./Base";
+/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
+/* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
+/* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
+
+import { Base } from "../schemas/Base";
+/* @ImportsContainer */
+/* <SubscriptionImport[ImportsTemplate]> */
+import {
+  Schema,
+  Column,
+  OneRelation,
+  ManyRelation,
+  Utils,
+} from "@saffellikhan/epic-sql";
+/* </SubscriptionImport> */
+
+/* <UserImport[ImportsTemplate]> */
 import { User } from "./User";
+/* </UserImport> */
+
+/* /ImportsContainer */
 
 @Schema()
 export class Subscription extends Base {
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* @ColumnsContainer */
+/* <SubscriptionIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   SubscriptionId!: number;
+/* </SubscriptionIdColumn> */
 
-  @Column()
-  UserId!: string;
+/* <UserIdColumn[ColumnTemplate]> */
+@Column({
+}) UserId!: string;
+/* </UserIdColumn> */
 
-  @Column({ choices: ["Email", "Contact"] })
-  type!: "Email" | "Contact";
+/* <TypeColumn[ColumnTemplate]> */
+@Column({
+choices: ["Email", "Contact"],
+}) Type!: "Email" | "Contact";
+/* </TypeColumn> */
 
-  @Column()
-  value!: string;
+/* <ValueColumn[ColumnTemplate]> */
+@Column({
+}) Value!: string;
+/* </ValueColumn> */
 
-  @Column({ defaultValue: false })
-  isVerified!: boolean;
+/* <IsVerifiedColumn[ColumnTemplate]> */
+@Column({
+defaultValue: false,
+}) IsVerified!: boolean;
+/* </IsVerifiedColumn> */
 
-  @Column({ defaultValue: false })
-  allowNewsLetters!: boolean;
+/* <AllowNewsLettersColumn[ColumnTemplate]> */
+@Column({
+defaultValue: false,
+}) AllowNewsLetters!: boolean;
+/* </AllowNewsLettersColumn> */
 
-  @OneRelation<User, Subscription>({
-    schema: () => User,
-    mapping: ["UserId", "UserId"],
-  })
-  user?: User;
+/* <UserColumn[OneRelationTemplate]> */
+@OneRelation<User, Subscription>({ schema: () => User, mapping: ["UserId","UserId"] }) User!: User;
+/* </UserColumn> */
+
+/* /ColumnsContainer */
 }
