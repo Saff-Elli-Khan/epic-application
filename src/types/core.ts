@@ -4,11 +4,6 @@ export interface PackageInterface {
   name: string;
   version: string;
   description: string;
-  brand: {
-    name: string;
-    country: string;
-    address: string;
-  };
   author: string;
   license: string;
 }
@@ -35,10 +30,6 @@ export interface UsersConfigInterface {
     authorization: {
       expiry: number;
     };
-  };
-  permissions: {
-    unauthenticated: string[];
-    authenticated: string[];
   };
 }
 

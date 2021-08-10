@@ -1,10 +1,11 @@
+import Fs from "fs";
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 import { getClientIp } from "@supercharge/request-ip";
 import { Configuration, TokensManager } from "../App.globals";
 import { compose } from "compose-middleware";
 import { IpFilter } from "express-ipfilter";
 import { Glob } from "glob";
-import Fs from "fs";
+import { Role } from "../schemas/Role";
 
 export class CoreMiddlewares {
   static useAuthorization = () => async (
@@ -18,17 +19,14 @@ export class CoreMiddlewares {
       // Split Token
       const Authorization = req.headers["authorization"].split(" ");
 
-      // Get Token Details
-      const GrantType = Authorization[0];
-      const GrantToken = Authorization[1];
-
-      if (GrantType.toLowerCase() !== "bearer")
-        throw new Error(`Invalid Authorization Grant Type has been provided!`);
+      // Check Token Type
+      if (Authorization[0].toLowerCase() !== "bearer")
+        throw new Error(`Invalid Authorization Token Type has been provided!`);
 
       // Verify Authorization Token
       req.authorization = await TokensManager.verify({
         type: "Authorization",
-        token: GrantToken,
+        token: Authorization[1],
       });
 
       next();
@@ -42,11 +40,29 @@ export class CoreMiddlewares {
     _: Response,
     next: NextFunction
   ) => {
-    // Resolve Permissions
-    req.permissions = Configuration().USERS.permissions[
-      req.authorization ? "authenticated" : "unauthenticated"
-    ];
+    // Create Roles Repository
+    const Roles = req.database.use(Role);
 
+    // Fetch Unauthenticated Permissions
+    req.permissions = Array.from(
+      new Set([
+        ...((
+          await Roles()
+            .where({ Title: "Unauthenticated" })
+            .select(["role.Permissions"])
+        )[0]?.Permissions || []),
+        ...(req.authorization?.payload?.permissions || []),
+      ])
+    );
+
+    next();
+  };
+
+  static useAccess = () => async (
+    req: Request,
+    _: Response,
+    next: NextFunction
+  ) => {
     next();
   };
 

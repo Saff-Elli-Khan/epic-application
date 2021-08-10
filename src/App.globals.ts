@@ -1,4 +1,5 @@
 import Path from "path";
+import { ConfigurationInterface as EpicConfigurationInterface } from "@saffellikhan/epic-cli";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { ConnectionConfiguration } from "@saffellikhan/epic-sql";
@@ -29,6 +30,12 @@ export const ConfigManager = new EpicConfigManager(
     public global = () => ({
       // If Enabled, Application will give Error Stacks for Errors on the requests
       DEBUGING: process.env.NODE_ENV === "development",
+
+      // Epic Project Information
+      PROJECT: require(Path.join(
+        process.cwd(),
+        "./epic.config.json"
+      )) as EpicConfigurationInterface,
 
       // Application Package Information
       PACKAGE: require(Path.join(

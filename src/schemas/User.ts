@@ -36,61 +36,90 @@ import { Upload } from "./Upload";
 @Schema()
 export class User extends Base {
   /* @ColumnsContainer */
-/* <UserIdColumn[ColumnTemplate]> */
-@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
-  UserId!: number;
-/* </UserIdColumn> */
+  /* <UserIdColumn[ColumnTemplate]> */
+  @Column({
+    index: ["UNIQUE"],
+  })
+  UserId!: string;
+  /* </UserIdColumn> */
 
-/* <FnameColumn[ColumnTemplate]> */
-@Column({
-}) Fname!: string;
-/* </FnameColumn> */
+  /* <FnameColumn[ColumnTemplate]> */
+  @Column({})
+  Fname!: string;
+  /* </FnameColumn> */
 
-/* <LnameColumn[ColumnTemplate]> */
-@Column({
-nullable: true,
-}) Lname!: string;
-/* </LnameColumn> */
+  /* <LnameColumn[ColumnTemplate]> */
+  @Column({
+    nullable: true,
+  })
+  Lname!: string;
+  /* </LnameColumn> */
 
-/* <IsLoggedInColumn[ColumnTemplate]> */
-@Column({
-defaultValue: false,
-}) IsLoggedIn!: boolean;
-/* </IsLoggedInColumn> */
+  /* <IsLoggedInColumn[ColumnTemplate]> */
+  @Column({
+    defaultValue: false,
+  })
+  IsLoggedIn!: boolean;
+  /* </IsLoggedInColumn> */
 
-/* <StatusColumn[ColumnTemplate]> */
-@Column({
-choices: ["Active", "Paused", "Blocked"],
-defaultValue: "Paused",
-}) Status!: "Active" | "Paused" | "Blocked";
-/* </StatusColumn> */
+  /* <StatusColumn[ColumnTemplate]> */
+  @Column({
+    choices: ["Active", "Paused", "Blocked"],
+    defaultValue: "Paused",
+  })
+  Status!: "Active" | "Paused" | "Blocked";
+  /* </StatusColumn> */
 
-/* <LastAccessColumn[ColumnTemplate]> */
-@Column({
-}) LastAccess!: number;
-/* </LastAccessColumn> */
+  /* <LastAccessColumn[ColumnTemplate]> */
+  @Column({})
+  LastAccess!: number;
+  /* </LastAccessColumn> */
 
-/* <TagsColumn[ColumnTemplate]> */
-@Column({
-defaultValue: () => [],
-}) Tags!: Array<string>;
-/* </TagsColumn> */
+  /* <TagsColumn[ColumnTemplate]> */
+  @Column({
+    defaultValue: () => [],
+  })
+  Tags!: Array<string>;
+  /* </TagsColumn> */
 
-/* <PasswordsColumn[ManyRelationTemplate]> */
-@ManyRelation<Password, User>({ schema: () => Password, mapping: ["UserId","UserId"] }) Passwords!: Password[];
-/* </PasswordsColumn> */
+  /* <RolesColumn[ColumnTemplate]> */
+  @Column({
+    defaultValue: () => ["User"],
+  })
+  Roles!: Array<string>;
+  /* </RolesColumn> */
 
-/* <ProfileColumn[OneRelationTemplate]> */
-@OneRelation<Profile, User>({ schema: () => Profile, mapping: ["UserId","UserId"] }) Profile!: Profile;
-/* </ProfileColumn> */
+  /* <PasswordsColumn[ManyRelationTemplate]> */
+  @ManyRelation<Password, User>({
+    schema: () => Password,
+    mapping: ["UserId", "UserId"],
+  })
+  Passwords!: Password[];
+  /* </PasswordsColumn> */
 
-/* <SubscriptionsColumn[ManyRelationTemplate]> */
-@ManyRelation<Subscription, User>({ schema: () => Subscription, mapping: ["UserId","UserId"] }) Subscriptions!: Subscription[];
-/* </SubscriptionsColumn> */
+  /* <ProfileColumn[OneRelationTemplate]> */
+  @OneRelation<Profile, User>({
+    schema: () => Profile,
+    mapping: ["UserId", "UserId"],
+  })
+  Profile!: Profile;
+  /* </ProfileColumn> */
 
-/* <UploadsColumn[ManyRelationTemplate]> */
-@ManyRelation<Upload, User>({ schema: () => Upload, mapping: ["UserId","UserId"] }) Uploads!: Upload[];
-/* </UploadsColumn> */
+  /* <SubscriptionsColumn[ManyRelationTemplate]> */
+  @ManyRelation<Subscription, User>({
+    schema: () => Subscription,
+    mapping: ["UserId", "UserId"],
+  })
+  Subscriptions!: Subscription[];
+  /* </SubscriptionsColumn> */
 
-/* /ColumnsContainer */
+  /* <UploadsColumn[ManyRelationTemplate]> */
+  @ManyRelation<Upload, User>({
+    schema: () => Upload,
+    mapping: ["UserId", "UserId"],
+  })
+  Uploads!: Upload[];
+  /* </UploadsColumn> */
+
+  /* /ColumnsContainer */
 }

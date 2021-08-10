@@ -1,4 +1,5 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
+/* <PluginSchemaTemplate> ...{{ schemas }}, </PluginSchemaTemplate> */
 /* <SchemaTemplate> {{ schema }}, </SchemaTemplate> */
 
 /* @ImportsContainer */
@@ -30,37 +31,48 @@ import { Upload } from "./Upload";
 import { User } from "./User";
 /* </UserImport> */
 
+/* <RoleImport[ImportsTemplate]> */
+import { Role } from "./Role";
+/* </RoleImport> */
+
 /* /ImportsContainer */
 
 export const SchemaList = [
+  /* @PluginSchemasContainer */
+  /* /PluginSchemasContainer */
+
   /* @SchemasContainer */
-/* <AvatarSchema[SchemaTemplate]> */
-Avatar,
-/* </AvatarSchema> */
+  /* <AvatarSchema[SchemaTemplate]> */
+  Avatar,
+  /* </AvatarSchema> */
 
-/* <NotificationSchema[SchemaTemplate]> */
-Notification,
-/* </NotificationSchema> */
+  /* <NotificationSchema[SchemaTemplate]> */
+  Notification,
+  /* </NotificationSchema> */
 
-/* <PasswordSchema[SchemaTemplate]> */
-Password,
-/* </PasswordSchema> */
+  /* <PasswordSchema[SchemaTemplate]> */
+  Password,
+  /* </PasswordSchema> */
 
-/* <ProfileSchema[SchemaTemplate]> */
-Profile,
-/* </ProfileSchema> */
+  /* <ProfileSchema[SchemaTemplate]> */
+  Profile,
+  /* </ProfileSchema> */
 
-/* <SubscriptionSchema[SchemaTemplate]> */
-Subscription,
-/* </SubscriptionSchema> */
+  /* <SubscriptionSchema[SchemaTemplate]> */
+  Subscription,
+  /* </SubscriptionSchema> */
 
-/* <UploadSchema[SchemaTemplate]> */
-Upload,
-/* </UploadSchema> */
+  /* <UploadSchema[SchemaTemplate]> */
+  Upload,
+  /* </UploadSchema> */
 
-/* <UserSchema[SchemaTemplate]> */
-User,
-/* </UserSchema> */
+  /* <UserSchema[SchemaTemplate]> */
+  User,
+  /* </UserSchema> */
 
-/* /SchemasContainer */
+  /* <RoleSchema[SchemaTemplate]> */
+  Role,
+  /* </RoleSchema> */
+
+  /* /SchemasContainer */
 ];

@@ -1,25 +1,22 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerChildsListTemplate> [{{ childs }}], </ControllerChildsListTemplate> */
+/* <ControllerChildsListTemplate> {{ child }}, </ControllerChildsListTemplate> */
 
 import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";
 /* @ImportsContainer */
-
 /* /ImportsContainer */
 
 @ParentController("/", {
-  childs:
+  childs: [
     /* @ControllerChildsContainer */
-    /* <indexControllerChilds[ControllerChildsListTemplate]> */
-    [],
-  /* </indexControllerChilds> */
-  /* /ControllerChildsContainer */
+    /* /ControllerChildsContainer */
+  ],
 })
 export class indexController {
   @Get("/")
   public Home() {
     return `The ${
-      Configuration().PACKAGE.brand.name
+      Configuration().PROJECT.brand.name
     }'s API is online listening to the requests!`;
   }
 }

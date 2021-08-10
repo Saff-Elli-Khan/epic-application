@@ -5,6 +5,7 @@ import {
   Request,
   Controller,
   CreateResponse,
+  Use,
   Get,
   Post,
   Patch,
@@ -12,8 +13,8 @@ import {
 } from "@saffellikhan/epic-express";
 import { createSchema } from "@saffellikhan/epic-sql";
 import { Validator } from "@AppPath/App.validator";
+import { CoreMiddlewares } from "@AppPath/core/middlewares";
 /* @ImportsContainer */
-
 /* /ImportsContainer */
 
 /* @Temporary */
@@ -29,7 +30,8 @@ const Sample: any = {};
   /* /ControllerChildsContainer */
 })
 export class SampleController {
-  @Get("/", "Fetch a list of Sample(s).")
+  @Get("/:userId/", "Fetch a list of Sample(s).")
+  @Use(CoreMiddlewares.useAccess())
   async ListSample(req: Request) {
     // Create New Repository
     const Repository = req.database.use(Sample);
@@ -43,7 +45,8 @@ export class SampleController {
     return new CreateResponse("Sample(s) fetched successfully!", Result);
   }
 
-  @Get("/:SampleId/", "Fetch the Sample.")
+  @Get("/:userId/:SampleId/", "Fetch the Sample.")
+  @Use(CoreMiddlewares.useAccess())
   async GetSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)
@@ -70,7 +73,8 @@ export class SampleController {
     return new CreateResponse("Sample fetched successfully!", Result[0]);
   }
 
-  @Post("/", "Create a new Sample.")
+  @Post("/:userId/", "Create a new Sample.")
+  @Use(CoreMiddlewares.useAccess())
   async CreateSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params).schema({}).exec();
@@ -89,7 +93,8 @@ export class SampleController {
     );
   }
 
-  @Patch("/:SampleId/", "Update the Sample.")
+  @Patch("/:userId/:SampleId/", "Update the Sample.")
+  @Use(CoreMiddlewares.useAccess())
   async UpdateSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)
@@ -119,7 +124,8 @@ export class SampleController {
     );
   }
 
-  @Delete("/:SampleId/", "Delete the Sample.")
+  @Delete("/:userId/:SampleId/", "Delete the Sample.")
+  @Use(CoreMiddlewares.useAccess())
   async DeleteSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)

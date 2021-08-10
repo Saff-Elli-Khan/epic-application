@@ -1,15 +1,17 @@
 {
   "version": 1,
-  "application": {
-    "name": "epic-application",
-    "description": "A powerful Express Application Server Framework.",
-    "brand": {
-      "name": "Epic",
-      "country": "Pakistan",
-      "address": "Multan"
-    }
-  },
   "type": "Application",
+  "name": "epic-application",
+  "description": "A powerful Express Application Server Framework.",
+  "history": {
+    "controller": "Test",
+    "schema": "User"
+  },
+  "brand": {
+    "name": "Epic",
+    "country": "Pakistan",
+    "address": "Multan"
+  },
   "paths": {
     "samples": "./src/samples/",
     "contollers": "./src/controllers/",
@@ -648,6 +650,23 @@
         "schema": "User",
         "type": "String",
         "length": 50,
+        "name": "UserId",
+        "nullable": false,
+        "defaultValue": "",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": [
+          "UNIQUE"
+        ],
+        "onUpdate": ""
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "User",
+        "type": "String",
+        "length": 50,
         "name": "Fname",
         "nullable": false,
         "defaultValue": "",
@@ -770,6 +789,61 @@
           "UserId"
         ],
         "name": "Uploads"
+      }
+    },
+    {
+      "command": "create-schema",
+      "params": {
+        "name": "Role",
+        "description": "Contains user roles.",
+        "template": "default"
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "Role",
+        "type": "String",
+        "length": 50,
+        "name": "Title",
+        "nullable": false,
+        "defaultValue": "",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": [
+          "UNIQUE"
+        ],
+        "onUpdate": ""
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "Role",
+        "type": "Array",
+        "arrayof": "String",
+        "name": "Permissions",
+        "nullable": false,
+        "defaultValue": "() => []",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": [],
+        "onUpdate": ""
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "User",
+        "type": "Array",
+        "arrayof": "String",
+        "name": "Roles",
+        "nullable": false,
+        "defaultValue": "() => []",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": [],
+        "onUpdate": ""
       }
     }
   ]

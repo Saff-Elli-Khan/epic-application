@@ -7,9 +7,5 @@
     "authorization": {
       "expiry": 86400
     }
-  },
-  "permissions": {
-    "unauthenticated": ["Home"],
-    "authenticated": ["Home"]
   }
 }
