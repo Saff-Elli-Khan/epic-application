@@ -3,7 +3,7 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import { Base } from "../schemas/Base";
+import { Base } from "./base";
 /* @ImportsContainer */
 /* <UserImport[ImportsTemplate]> */
 import {

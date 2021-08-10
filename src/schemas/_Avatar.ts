@@ -3,7 +3,7 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import { Base } from "../schemas/Base";
+import { Base } from "./base";
 /* @ImportsContainer */
 /* <AvatarImport[ImportsTemplate]> */
 import {
@@ -28,28 +28,36 @@ import { Upload } from "./Upload";
 @Schema()
 export class Avatar extends Base {
   /* @ColumnsContainer */
-/* <AvatarIdColumn[ColumnTemplate]> */
-@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  /* <AvatarIdColumn[ColumnTemplate]> */
+  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
   AvatarId!: number;
-/* </AvatarIdColumn> */
+  /* </AvatarIdColumn> */
 
-/* <UserIdColumn[ColumnTemplate]> */
-@Column({
-}) UserId!: string;
-/* </UserIdColumn> */
+  /* <UserIdColumn[ColumnTemplate]> */
+  @Column({})
+  UserId!: string;
+  /* </UserIdColumn> */
 
-/* <UploadIdColumn[ColumnTemplate]> */
-@Column({
-}) UploadId!: number;
-/* </UploadIdColumn> */
+  /* <UploadIdColumn[ColumnTemplate]> */
+  @Column({})
+  UploadId!: number;
+  /* </UploadIdColumn> */
 
-/* <UserColumn[OneRelationTemplate]> */
-@OneRelation<User, Avatar>({ schema: () => User, mapping: ["UserId","UserId"] }) User!: User;
-/* </UserColumn> */
+  /* <UserColumn[OneRelationTemplate]> */
+  @OneRelation<User, Avatar>({
+    schema: () => User,
+    mapping: ["UserId", "UserId"],
+  })
+  User!: User;
+  /* </UserColumn> */
 
-/* <UploadColumn[OneRelationTemplate]> */
-@OneRelation<Upload, Avatar>({ schema: () => Upload, mapping: ["UploadId","UploadId"] }) Upload!: Upload;
-/* </UploadColumn> */
+  /* <UploadColumn[OneRelationTemplate]> */
+  @OneRelation<Upload, Avatar>({
+    schema: () => Upload,
+    mapping: ["UploadId", "UploadId"],
+  })
+  Upload!: Upload;
+  /* </UploadColumn> */
 
-/* /ColumnsContainer */
+  /* /ColumnsContainer */
 }

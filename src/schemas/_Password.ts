@@ -3,9 +3,9 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import { Base } from "../schemas/Base";
+import { Base } from "./base";
 /* @ImportsContainer */
-/* <RoleImport[ImportsTemplate]> */
+/* <PasswordImport[ImportsTemplate]> */
 import {
   Schema,
   Column,
@@ -13,31 +13,37 @@ import {
   ManyRelation,
   Utils,
 } from "@saffellikhan/epic-sql";
-/* </RoleImport> */
+/* </PasswordImport> */
 
 /* /ImportsContainer */
 
 @Schema()
-export class Role extends Base {
+export class Password extends Base {
   /* @ColumnsContainer */
-  /* <RoleIdColumn[ColumnTemplate]> */
+  /* <PasswordIdColumn[ColumnTemplate]> */
   @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
-  RoleId!: number;
-  /* </RoleIdColumn> */
+  PasswordId!: number;
+  /* </PasswordIdColumn> */
 
-  /* <TitleColumn[ColumnTemplate]> */
-  @Column({
-    index: ["UNIQUE"],
-  })
-  Title!: string;
-  /* </TitleColumn> */
+  /* <UserIdColumn[ColumnTemplate]> */
+  @Column({})
+  UserId!: string;
+  /* </UserIdColumn> */
 
-  /* <PermissionsColumn[ColumnTemplate]> */
+  /* <ValueColumn[ColumnTemplate]> */
   @Column({
-    defaultValue: () => [],
+    length: null,
   })
-  Permissions!: Array<string>;
-  /* </PermissionsColumn> */
+  Value!: string;
+  /* </ValueColumn> */
+
+  /* <StatusColumn[ColumnTemplate]> */
+  @Column({
+    choices: ["Valid", "Expired"],
+    defaultValue: "Valid",
+  })
+  Status!: "Valid" | "Expired";
+  /* </StatusColumn> */
 
   /* /ColumnsContainer */
 }

@@ -51,8 +51,6 @@ export const Middlewares = (Framework: Express) =>
 
     // Core Middlewares
     .use([
-      CoreMiddlewares.useAuthorization(),
-      CoreMiddlewares.usePermissions(),
       CoreMiddlewares.useLanguage(),
       CoreMiddlewares.useCurrency(),
       CoreMiddlewares.useIPAddress(),

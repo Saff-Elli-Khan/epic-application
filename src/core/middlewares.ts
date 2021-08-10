@@ -1,70 +1,69 @@
 import Fs from "fs";
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 import { getClientIp } from "@supercharge/request-ip";
-import { Configuration, TokensManager } from "../App.globals";
+import { Configuration } from "../App.globals";
 import { compose } from "compose-middleware";
 import { IpFilter } from "express-ipfilter";
 import { Glob } from "glob";
-import { Role } from "../schemas/Role";
 
 export class CoreMiddlewares {
-  static useAuthorization = () => async (
-    req: Request,
-    _: Response,
-    next: NextFunction
-  ) => {
-    try {
-      if (typeof req.headers["authorization"] !== "string") return next();
+  // static useAuthorization = () => async (
+  //   req: Request,
+  //   _: Response,
+  //   next: NextFunction
+  // ) => {
+  //   try {
+  //     if (typeof req.headers["authorization"] !== "string") return next();
 
-      // Split Token
-      const Authorization = req.headers["authorization"].split(" ");
+  //     // Split Token
+  //     const Authorization = req.headers["authorization"].split(" ");
 
-      // Check Token Type
-      if (Authorization[0].toLowerCase() !== "bearer")
-        throw new Error(`Invalid Authorization Token Type has been provided!`);
+  //     // Check Token Type
+  //     if (Authorization[0].toLowerCase() !== "bearer")
+  //       throw new Error(`Invalid Authorization Token Type has been provided!`);
 
-      // Verify Authorization Token
-      req.authorization = await TokensManager.verify({
-        type: "Authorization",
-        token: Authorization[1],
-      });
+  //     // Verify Authorization Token
+  //     req.authorization = await TokensManager.verify({
+  //       type: "Authorization",
+  //       token: Authorization[1],
+  //     });
 
-      next();
-    } catch (error) {
-      next(error);
-    }
-  };
+  //     next();
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
 
-  static usePermissions = () => async (
-    req: Request,
-    _: Response,
-    next: NextFunction
-  ) => {
-    // Create Roles Repository
-    const Roles = req.database.use(Role);
+  // static usePermissions = () => async (
+  //   req: Request,
+  //   _: Response,
+  //   next: NextFunction
+  // ) => {
+  //   // Create Roles Repository
+  //   const Roles = req.database.use(Role);
 
-    // Fetch Unauthenticated Permissions
-    req.permissions = Array.from(
-      new Set([
-        ...((
-          await Roles()
-            .where({ Title: "Unauthenticated" })
-            .select(["role.Permissions"])
-        )[0]?.Permissions || []),
-        ...(req.authorization?.payload?.permissions || []),
-      ])
-    );
+  //   // Fetch Unauthenticated Permissions
+  //   req.permissions = Array.from(
+  //     new Set([
+  //       ...((
+  //         await Roles()
+  //           .where({ Title: "Unauthenticated" })
+  //           .select(["role.Permissions"])
+  //       )[0]?.Permissions || []),
+  //       ...(req.authorization?.payload?.permissions || []),
+  //     ])
+  //   );
 
-    next();
-  };
+  //   next();
+  // };
 
-  static useAccess = () => async (
-    req: Request,
-    _: Response,
-    next: NextFunction
-  ) => {
-    next();
-  };
+  // static useAccess = () => async (
+  //   req: Request,
+  //   _: Response,
+  //   next: NextFunction
+  // ) => {
+  //   next();
+  // };
 
   static useLanguage = () => async (
     req: Request,
