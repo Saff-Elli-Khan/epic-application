@@ -2,6 +2,7 @@
   "name": "epic-application",
   "version": "1.0.0",
   "description": "A powerful Express Application Server Framework.",
+  "private": true,
   "scripts": {
     "start": "tsc && cross-env PORT=8080 NODE_ENV=production node ./build/App.js",
     "dev": "cross-env PORT=8080 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/App.ts",
