@@ -1,4 +1,5 @@
 import EXPRESS, { Express, Request, Response, NextFunction } from "express";
+import { CustomMiddlewares } from "./middlewares";
 import Compression from "compression";
 import Cors from "cors";
 import Helmet from "helmet";
@@ -11,47 +12,49 @@ import { Connection, EpicSQLManager } from "@saffellikhan/epic-sql";
 import { SchemaList } from "./schemas/index";
 
 export const Middlewares = (Framework: Express) =>
-  Framework
+  CustomMiddlewares(
+    Framework
 
-    // Utility Middlewares
-    .use([
-      Logger("dev"),
-      Cors(),
-      Helmet(),
-      CookieParser(),
-      Compression(),
-      EXPRESS.json(),
-      EXPRESS.urlencoded({ extended: true }),
-    ])
+      // Utility Middlewares
+      .use([
+        Logger("dev"),
+        Cors(),
+        Helmet(),
+        CookieParser(),
+        Compression(),
+        EXPRESS.json(),
+        EXPRESS.urlencoded({ extended: true }),
+      ])
 
-    // Public Static Resources
-    .use(
-      "/public/*",
-      CoreMiddlewares.useStatic(Path.join(process.cwd(), "./public/"))
-    )
+      // Public Static Resources
+      .use(
+        "/public/*",
+        CoreMiddlewares.useStatic(Path.join(process.cwd(), "./public/"))
+      )
 
-    // Create Database Connection
-    .use(async (req: Request, _res: Response, next: NextFunction) => {
-      try {
-        // Create New SQL Manager
-        req.database = await new EpicSQLManager(
-          new Connection(
-            Configuration().DATABASE.type,
-            Configuration().DATABASE.options,
-            Configuration().DATABASE.logs
-          ),
-          SchemaList
-        ).sync(!Configuration().DEBUGING);
+      // Create Database Connection
+      .use(async (req: Request, _res: Response, next: NextFunction) => {
+        try {
+          // Create New SQL Manager
+          req.database = await new EpicSQLManager(
+            new Connection(
+              Configuration().DATABASE.type,
+              Configuration().DATABASE.options,
+              Configuration().DATABASE.logs
+            ),
+            SchemaList
+          ).sync(!Configuration().DEBUGING);
 
-        return next();
-      } catch (error) {
-        return next(error);
-      }
-    })
+          return next();
+        } catch (error) {
+          return next(error);
+        }
+      })
 
-    // Core Middlewares
-    .use([
-      CoreMiddlewares.useLanguage(),
-      CoreMiddlewares.useCurrency(),
-      CoreMiddlewares.useIPAddress(),
-    ]);
+      // Core Middlewares
+      .use([
+        CoreMiddlewares.useLanguage(),
+        CoreMiddlewares.useCurrency(),
+        CoreMiddlewares.useIPAddress(),
+      ])
+  );

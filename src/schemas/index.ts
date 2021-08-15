@@ -2,9 +2,17 @@
 /* <SchemaTemplate> {{ schema }}, </SchemaTemplate> */
 
 /* @ImportsContainer */
+/* <SettingsImport[ImportsTemplate]> */
+import { Settings } from "./Settings";
+/* </SettingsImport> */
+
 /* /ImportsContainer */
 
 export const SchemaList = [
   /* @SchemasContainer */
-  /* /SchemasContainer */
+/* <SettingsSchema[SchemaTemplate]> */
+Settings,
+/* </SettingsSchema> */
+
+/* /SchemasContainer */
 ];

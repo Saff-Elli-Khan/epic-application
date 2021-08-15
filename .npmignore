@@ -1,8 +1,9 @@
+temp/
 .temp/
 build/
 configuration/
 env/
+src/temp/
+src/.temp/
 src/core/
-src/samples/
-src/types/
 src/*.ts

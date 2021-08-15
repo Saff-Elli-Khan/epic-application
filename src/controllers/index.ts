@@ -1,5 +1,5 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerChildsListTemplate> {{ child }}, </ControllerChildsListTemplate> */
+/* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
 
 import { ParentController, Get } from "@saffellikhan/epic-express";
 import { Configuration } from "../App.globals";

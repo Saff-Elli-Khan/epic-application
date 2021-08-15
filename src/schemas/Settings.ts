@@ -3,9 +3,7 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import { Base } from "./base";
-/* @ImportsContainer */
-/* <RoleImport[ImportsTemplate]> */
+import { Base } from "../schemas/base";
 import {
   Schema,
   Column,
@@ -13,31 +11,28 @@ import {
   ManyRelation,
   Utils,
 } from "@saffellikhan/epic-sql";
-/* </RoleImport> */
-
+/* @ImportsContainer */
 /* /ImportsContainer */
 
 @Schema()
-export class Role extends Base {
+export class Settings extends Base {
   /* @ColumnsContainer */
-  /* <RoleIdColumn[ColumnTemplate]> */
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
-  RoleId!: number;
-  /* </RoleIdColumn> */
+/* <SettingsIdColumn[ColumnTemplate]> */
+@Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
+  SettingsId!: number;
+/* </SettingsIdColumn> */
 
-  /* <TitleColumn[ColumnTemplate]> */
-  @Column({
-    index: ["UNIQUE"],
-  })
-  Title!: string;
-  /* </TitleColumn> */
+/* <KeyColumn[ColumnTemplate]> */
+@Column({
+index: ["UNIQUE"],
+}) Key!: string;
+/* </KeyColumn> */
 
-  /* <PermissionsColumn[ColumnTemplate]> */
-  @Column({
-    defaultValue: () => [],
-  })
-  Permissions!: Array<string>;
-  /* </PermissionsColumn> */
+/* <ValueColumn[ColumnTemplate]> */
+@Column({
+nullable: true,
+}) Value!: any;
+/* </ValueColumn> */
 
-  /* /ColumnsContainer */
+/* /ColumnsContainer */
 }

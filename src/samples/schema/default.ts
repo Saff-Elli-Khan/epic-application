@@ -4,9 +4,6 @@
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
 import { Base } from "@AppPath/schemas/base";
-/* @ImportsContainer */
-
-/* <SampleImport[ImportsTemplate]> */
 import {
   Schema,
   Column,
@@ -14,8 +11,7 @@ import {
   ManyRelation,
   Utils,
 } from "@saffellikhan/epic-sql";
-/* </SampleImport> */
-
+/* @ImportsContainer */
 /* /ImportsContainer */
 
 @Schema()

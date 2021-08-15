@@ -74,5 +74,8 @@ env/
 .fusebox/
 
 # Build Source
+temp/
 .temp/
 build/
+src/.temp/
+src/temp/

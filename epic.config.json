@@ -5,7 +5,8 @@
   "description": "A powerful Express Application Server Framework.",
   "history": {
     "controller": "Test",
-    "schema": "User"
+    "schema": "Settings",
+    "middleware": "Auth"
   },
   "brand": {
     "name": "Epic",
@@ -15,7 +16,8 @@
   "paths": {
     "samples": "./src/samples/",
     "contollers": "./src/controllers/",
-    "schemas": "./src/schemas/"
+    "schemas": "./src/schemas/",
+    "middlewares": "./src/middlewares/"
   },
   "transactions": [
     {
@@ -104,10 +106,10 @@
         "schema": "Avatar",
         "type": "Relation",
         "relation": "User",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "User"
       }
     },
@@ -117,10 +119,10 @@
         "schema": "Avatar",
         "type": "Relation",
         "relation": "Upload",
-        "mapping": [
-          "UploadId",
-          "UploadId"
-        ],
+        "mapping": {
+          "0": "UploadId",
+          "1": "UploadId"
+        },
         "name": "Upload"
       }
     },
@@ -141,12 +143,12 @@
       "params": {
         "schema": "Notification",
         "type": "Enum",
-        "choices": [
-          "Success",
-          "Info",
-          "Warning",
-          "Danger"
-        ],
+        "choices": {
+          "0": "Success",
+          "1": "Info",
+          "2": "Warning",
+          "3": "Danger"
+        },
         "name": "Type",
         "nullable": false,
         "defaultValue": "\"Info\"",
@@ -216,10 +218,10 @@
         "schema": "Notification",
         "type": "Relation",
         "relation": "User",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "User"
       }
     },
@@ -252,10 +254,10 @@
       "params": {
         "schema": "Password",
         "type": "Enum",
-        "choices": [
-          "Valid",
-          "Expired"
-        ],
+        "choices": {
+          "0": "Valid",
+          "1": "Expired"
+        },
         "name": "Status",
         "nullable": false,
         "defaultValue": "\"Valid\"",
@@ -363,11 +365,11 @@
       "params": {
         "schema": "Profile",
         "type": "Enum",
-        "choices": [
-          "Male",
-          "Female",
-          "Unknown"
-        ],
+        "choices": {
+          "0": "Male",
+          "1": "Female",
+          "2": "Unknown"
+        },
         "name": "Gender",
         "nullable": false,
         "defaultValue": "\"Unknown\"",
@@ -452,10 +454,10 @@
         "schema": "Profile",
         "type": "Relation",
         "relation": "User",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "User"
       }
     },
@@ -476,10 +478,10 @@
       "params": {
         "schema": "Subscription",
         "type": "Enum",
-        "choices": [
-          "Email",
-          "Contact"
-        ],
+        "choices": {
+          "0": "Email",
+          "1": "Contact"
+        },
         "name": "Type",
         "nullable": false,
         "defaultValue": "",
@@ -526,10 +528,10 @@
         "schema": "Subscription",
         "type": "Relation",
         "relation": "User",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "User"
       }
     },
@@ -550,10 +552,10 @@
       "params": {
         "schema": "Upload",
         "type": "Enum",
-        "choices": [
-          "Local",
-          "Global"
-        ],
+        "choices": {
+          "0": "Local",
+          "1": "Global"
+        },
         "name": "Type",
         "nullable": false,
         "defaultValue": "",
@@ -655,9 +657,9 @@
         "defaultValue": "",
         "advancedProperties": true,
         "collation": "utf8mb4_unicode_ci",
-        "index": [
-          "UNIQUE"
-        ],
+        "index": {
+          "0": "UNIQUE"
+        },
         "onUpdate": ""
       }
     },
@@ -701,11 +703,11 @@
       "params": {
         "schema": "User",
         "type": "Enum",
-        "choices": [
-          "Active",
-          "Paused",
-          "Blocked"
-        ],
+        "choices": {
+          "0": "Active",
+          "1": "Paused",
+          "2": "Blocked"
+        },
         "name": "Status",
         "nullable": false,
         "defaultValue": "\"Paused\"",
@@ -743,10 +745,10 @@
         "type": "Array",
         "arrayof": "Relation",
         "relation": "Password",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "Passwords"
       }
     },
@@ -756,10 +758,10 @@
         "schema": "User",
         "type": "Relation",
         "relation": "Profile",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "Profile"
       }
     },
@@ -770,10 +772,10 @@
         "type": "Array",
         "arrayof": "Relation",
         "relation": "Subscription",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "Subscriptions"
       }
     },
@@ -784,10 +786,10 @@
         "type": "Array",
         "arrayof": "Relation",
         "relation": "Upload",
-        "mapping": [
-          "UserId",
-          "UserId"
-        ],
+        "mapping": {
+          "0": "UserId",
+          "1": "UserId"
+        },
         "name": "Uploads"
       }
     },
@@ -810,9 +812,9 @@
         "defaultValue": "",
         "advancedProperties": true,
         "collation": "utf8mb4_unicode_ci",
-        "index": [
-          "UNIQUE"
-        ],
+        "index": {
+          "0": "UNIQUE"
+        },
         "onUpdate": ""
       }
     },
@@ -827,7 +829,7 @@
         "defaultValue": "() => []",
         "advancedProperties": true,
         "collation": "utf8mb4_unicode_ci",
-        "index": [],
+        "index": {},
         "onUpdate": ""
       }
     },
@@ -840,6 +842,45 @@
         "name": "Roles",
         "nullable": false,
         "defaultValue": "() => []",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": {},
+        "onUpdate": ""
+      }
+    },
+    {
+      "command": "create-schema",
+      "params": {
+        "name": "Settings",
+        "description": "Contains Application settings.",
+        "template": "default"
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "Settings",
+        "type": "String",
+        "length": 50,
+        "name": "Key",
+        "nullable": false,
+        "defaultValue": "",
+        "advancedProperties": true,
+        "collation": "utf8mb4_unicode_ci",
+        "index": {
+          "0": "UNIQUE"
+        },
+        "onUpdate": ""
+      }
+    },
+    {
+      "command": "create-schema-column",
+      "params": {
+        "schema": "Settings",
+        "type": "Any",
+        "name": "Value",
+        "nullable": true,
+        "defaultValue": "",
         "advancedProperties": true,
         "collation": "utf8mb4_unicode_ci",
         "index": [],

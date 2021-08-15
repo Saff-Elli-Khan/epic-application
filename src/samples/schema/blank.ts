@@ -2,9 +2,7 @@
 /* <ColumnTemplate> @Column({{ options }}) {{ name }}!: {{ datatype }}; </ColumnTemplate> */
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
-/* @ImportsContainer */
 
-/* <SampleImport[ImportsTemplate]> */
 import {
   Schema,
   Column,
@@ -12,8 +10,7 @@ import {
   ManyRelation,
   Utils,
 } from "@saffellikhan/epic-sql";
-/* </SampleImport> */
-
+/* @ImportsContainer */
 /* /ImportsContainer */
 
 @Schema()
