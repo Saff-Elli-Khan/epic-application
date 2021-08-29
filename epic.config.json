@@ -1,6 +1,7 @@
 {
   "version": 1,
   "type": "Application",
+  "framework": "Express",
   "name": "epic-application",
   "description": "A powerful Express Application Server Framework.",
   "history": {

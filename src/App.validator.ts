@@ -21,30 +21,43 @@ export const Validator = new Validation({
           typeof entity === "string" ? entity + " " : ""
         }Name!`
       ),
-  isTitle: (_) =>
-    _.isString("Please provide a valid Title!")
-      .isLength({ min: 2 }, "Minimum 2 characters required for Title!")
-      .isLength({ max: 100 }, "Maximum 100 characters allowed for Title!"),
-  isShortDescription: (_) =>
-    _.isString("Please provide a valid Short Description!")
+  isTitle: (_, entity?: string) =>
+    _.isString(`Please provide a valid ${entity || "Title"}!`)
+      .isLength(
+        { min: 5 },
+        `Minimum 5 characters required for ${entity || "Title"}!`
+      )
+      .isLength(
+        { max: 100 },
+        `Maximum 100 characters allowed for ${entity || "Title"}!`
+      ),
+  isShortDescription: (_, entity?: string) =>
+    _.isString(`Please provide a valid Short ${entity || "Short Description"}!`)
       .isLength(
         { min: 15 },
-        "Minimum 15 characters required for Short Description!"
+        `Minimum 15 characters required for Short ${
+          entity || "Short Description"
+        }!`
       )
       .isLength(
         { max: 300 },
-        "Maximum 300 characters allowed for Short Description!"
+        `Maximum 300 characters allowed for ${entity || "Short Description"}!`
       ),
-  isDescription: (_) =>
-    _.isString("Please provide a valid Description!")
-      .isLength({ min: 15 }, "Minimum 15 characters required for Description!")
+  isDescription: (_, entity?: string, length?: number) =>
+    _.isString(`Please provide a valid Short ${entity || "Description"}!`)
       .isLength(
-        { max: 1500 },
-        "Maximum 1500 characters allowed for Description!"
+        { min: 15 },
+        `Minimum 15 characters required for Short ${entity || "Description"}!`
+      )
+      .isLength(
+        { max: length || 1500 },
+        `Maximum ${length || 1500} characters allowed for ${
+          entity || "Description"
+        }!`
       ),
   isFirstName: (_) =>
     _.isString("First name should be a string!")
-      .notEmpty({ checkFalsy: true }, "First name cannot be empty!")
+      .notEmpty({ falsy: true }, "First name cannot be empty!")
       .isLength({ max: 50 }, "Maximum 50 characters allowed for First name!"),
   isLastName: (_) =>
     _.isString("Last name should be a string!").isLength(
@@ -83,11 +96,6 @@ export const Validator = new Validation({
       { sanitize: true },
       "Please provide a valid Quantity!"
     ).isAmount({ min: 1 }, "Minimum allowed Quantity is 1!"),
-  isIBAN: (_) =>
-    _.matches(
-      /^([A-Z]{2}[ -]?[0-9]{2})(?=(?:[ -]?[A-Z0-9]){9,30}$)((?:[ -]?[A-Z0-9]{3,5}){2,7})([ -]?[A-Z0-9]{1,3})?$/,
-      "Invalid IBAN Number has been provided!"
-    ),
   isCountry: (_) =>
     _.isIn(Geo.countryList(), "Invalid Country Name has been provided!"),
   isContact: (_) =>

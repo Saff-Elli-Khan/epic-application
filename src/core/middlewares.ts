@@ -1,10 +1,17 @@
-import Fs from "fs";
-import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
+import {
+  Request,
+  Response,
+  NextFunction,
+  EpicHelpers,
+  CreateResponse,
+} from "@saffellikhan/epic-express";
 import { getClientIp } from "@supercharge/request-ip";
 import { Configuration } from "../App.globals";
 import { compose } from "compose-middleware";
-import { IpFilter } from "express-ipfilter";
 import { Glob } from "glob";
+import Fs from "fs";
+// @ts-ignore
+import IpFilter from "ip-filter";
 
 export class CoreMiddlewares {
   // static useAuthorization = () => async (
@@ -128,24 +135,36 @@ export class CoreMiddlewares {
     _: Response,
     next: NextFunction
   ) => {
-    req.clientIp = getClientIp(req) || "0.0.0.0/0";
+    req.clientIp = getClientIp(req) || "::1";
     next();
   };
 
-  static useIPFilter = (ips: string[]) => (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    // Check if IP Security Enabled
-    if (Configuration().SECURITY.ip.enabled)
-      IpFilter([...Configuration().SECURITY.ip.allowedIps, ips], {
-        ...Configuration().SECURITY.ip,
-        detectIp: () => req.clientIp,
-        log: Configuration().DEBUGING,
-      })(req, res, next);
-    else next();
-  };
+  static useIPFilter = (ips: string[]) =>
+    EpicHelpers.requestHandler((req, res, next) => {
+      // Check if IP Security Enabled
+      if (Configuration().SECURITY.ip.enabled)
+        if (
+          !IpFilter(req.clientIp, [
+            ...Configuration().SECURITY.ip.allowedIps,
+            ...ips,
+          ])
+        ) {
+          // Log Activity
+          console.log("Access Denied:", req.clientIp);
+
+          // Access Forbidden
+          res.status(403);
+
+          return new CreateResponse(
+            `System has blocked access for IP Address '${req.clientIp}'!`
+          ).isFalse();
+        }
+
+      // Log Activity
+      console.log("Access Granted:", req.clientIp);
+
+      next();
+    });
 
   static useIf = (
     callback: (req: Request, res: Response) => boolean,

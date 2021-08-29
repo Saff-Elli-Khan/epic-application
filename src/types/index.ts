@@ -1,6 +1,5 @@
 import { EpicSQLManager } from "@saffellikhan/epic-sql";
 import { SchemaList } from "../schemas/index";
-import { IpFilterOptions } from "express-ipfilter";
 
 export interface PackageInterface {
   name: string;
@@ -17,21 +16,20 @@ export interface UploadsConfigInterface {
 }
 
 export interface SecurityConfigInterface {
-  encryption: {
-    key: string;
-  };
-  ip: IpFilterOptions & { enabled: boolean; allowedIps: string[] };
-}
-
-export interface UsersConfigInterface {
-  default: string;
-  subscription: {
-    type: "Email" | "Contact";
-  };
-  tokens: {
-    authorization: {
-      expiry: number;
+  access: {
+    default: string;
+    subscription: {
+      type: "Email" | "Contact";
     };
+    tokens: {
+      authorization: {
+        expiry: number;
+      };
+    };
+  };
+  ip: {
+    enabled: boolean;
+    allowedIps: string[];
   };
 }
 

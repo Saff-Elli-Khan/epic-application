@@ -9,8 +9,8 @@
     "gcloud-deploy": "gcloud config set project {project_id} && gcloud app deploy -q"
   },
   "dependencies": {
-    "@saffellikhan/epic-cli": "^1.0.91",
-    "@saffellikhan/epic-express": "^1.0.1",
+    "@saffellikhan/epic-cli": "^1.0.93",
+    "@saffellikhan/epic-express": "^1.0.2",
     "@saffellikhan/epic-sql": "^1.0.2",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
@@ -24,10 +24,10 @@
     "epic-money": "^1.0.12",
     "epic-pay": "^1.0.13",
     "epic-tokens": "^1.0.10",
-    "epic-validator": "^2.0.7",
-    "express-ipfilter": "^1.2.0",
+    "epic-validator": "^3.0.6",
     "glob": "^7.1.6",
     "helmet": "^4.2.0",
+    "ip-filter": "^3.0.5",
     "morgan": "^1.10.0",
     "slug": "^4.0.2"
   },

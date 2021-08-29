@@ -7,7 +7,6 @@ import {
   CurrencyInterface,
   LanguageInterface,
   PackageInterface,
-  UsersConfigInterface,
   SecurityConfigInterface,
   UploadsConfigInterface,
 } from "./types";
@@ -69,12 +68,6 @@ export const ConfigManager = new EpicConfigManager(
         process.cwd(),
         "./configuration/security.json"
       )) as SecurityConfigInterface,
-
-      // Users Configuration
-      USERS: require(Path.join(
-        process.cwd(),
-        "./configuration/users.json"
-      )) as UsersConfigInterface,
 
       // Database Connection
       DATABASE: require(Path.join(

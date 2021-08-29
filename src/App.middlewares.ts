@@ -1,14 +1,16 @@
 import EXPRESS, { Express, Request, Response, NextFunction } from "express";
+import { Connection, EpicSQLManager } from "@saffellikhan/epic-sql";
 import { CustomMiddlewares } from "./middlewares";
+import { CoreMiddlewares } from "./core/middlewares";
+import { Configuration } from "./App.globals";
 import Compression from "compression";
 import Cors from "cors";
 import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import Path from "path";
-import { CoreMiddlewares } from "./core/middlewares";
-import { Configuration } from "./App.globals";
-import { Connection, EpicSQLManager } from "@saffellikhan/epic-sql";
+
+// Database Schemas List
 import { SchemaList } from "./schemas/index";
 
 export const Middlewares = (Framework: Express) =>

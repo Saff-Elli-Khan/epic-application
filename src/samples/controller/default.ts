@@ -5,7 +5,6 @@ import {
   Request,
   Controller,
   CreateResponse,
-  Use,
   Get,
   Post,
   Patch,
@@ -13,7 +12,6 @@ import {
 } from "@saffellikhan/epic-express";
 import { createSchema } from "@saffellikhan/epic-sql";
 import { Validator } from "@AppPath/App.validator";
-import { CoreMiddlewares } from "@AppPath/core/middlewares";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -30,8 +28,7 @@ const Sample: any = {};
   /* /ControllerChildsContainer */
 })
 export class SampleController {
-  @Get("/:userId/", "Fetch a list of Sample(s).")
-  @Use(CoreMiddlewares.useAccess())
+  @Get("/", "Fetch a list of Sample(s).")
   async ListSample(req: Request) {
     // Create New Repository
     const Repository = req.database.use(Sample);
@@ -45,14 +42,13 @@ export class SampleController {
     return new CreateResponse("Sample(s) fetched successfully!", Result);
   }
 
-  @Get("/:userId/:SampleId/", "Fetch the Sample.")
-  @Use(CoreMiddlewares.useAccess())
+  @Get("/:SampleId/", "Fetch the Sample.")
   async GetSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true, setUndefined: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })
@@ -73,8 +69,7 @@ export class SampleController {
     return new CreateResponse("Sample fetched successfully!", Result[0]);
   }
 
-  @Post("/:userId/", "Create a new Sample.")
-  @Use(CoreMiddlewares.useAccess())
+  @Post("/", "Create a new Sample.")
   async CreateSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params).schema({}).exec();
@@ -93,14 +88,13 @@ export class SampleController {
     );
   }
 
-  @Patch("/:userId/:SampleId/", "Update the Sample.")
-  @Use(CoreMiddlewares.useAccess())
+  @Patch("/:SampleId/", "Update the Sample.")
   async UpdateSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true, setUndefined: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })
@@ -124,14 +118,13 @@ export class SampleController {
     );
   }
 
-  @Delete("/:userId/:SampleId/", "Delete the Sample.")
-  @Use(CoreMiddlewares.useAccess())
+  @Delete("/:SampleId/", "Delete the Sample.")
   async DeleteSample(req: Request) {
     // Params Validation
     await Validator.validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ checkFalsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true, setUndefined: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })
