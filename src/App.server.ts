@@ -8,7 +8,6 @@ import {
 import { Middlewares } from "./App.middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
-import { Configuration } from "./App.globals";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -26,7 +25,7 @@ export class Application extends EpicApplication {
     // Return Response Object
     return new CreateResponse(
       err instanceof ValidatorException ? err.List : err.message || err,
-      Configuration().DEBUGING ? err.stack : {}
+      process.env.NODE_ENV === "development" ? err.stack : {}
     ).isFalse();
   };
 }

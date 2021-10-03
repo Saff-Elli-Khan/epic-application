@@ -3,9 +3,9 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import { Base } from "@AppPath/schemas/base";
 import {
   Schema,
+  BaseSchema,
   Column,
   OneRelation,
   ManyRelation,
@@ -15,13 +15,7 @@ import {
 /* /ImportsContainer */
 
 @Schema()
-export class Sample extends Base {
+export class Sample extends BaseSchema {
   /* @ColumnsContainer */
-
-  /* <SampleIdColumn[ColumnTemplate]> */
-  @Column({ index: ["UNIQUE"], defaultValue: () => Utils.uuidShort() })
-  SampleId!: number;
-  /* </SampleIdColumn> */
-
   /* /ColumnsContainer */
 }

@@ -8,21 +8,4 @@ env/
 # Source
 src/temp/
 src/.temp/
-src/core/
 src/*.ts
-
-src/controllers/index.ts
-src/middlewares/index.ts
-src/schemas/index.ts
-src/schemas/base.ts
-src/schemas/Settings.ts
-
-# Samples
-src/samples/controller/blank.ts
-src/samples/controller/private.ts
-src/samples/controller/public.ts
-
-src/samples/middleware/blank.ts
-
-src/samples/schema/blank.ts
-src/samples/schema/default.ts

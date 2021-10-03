@@ -10,8 +10,6 @@ import {
   Patch,
   Delete,
 } from "@saffellikhan/epic-express";
-import { createSchema } from "@saffellikhan/epic-sql";
-import { Validator } from "@AppPath/App.validator";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -19,17 +17,15 @@ import { Validator } from "@AppPath/App.validator";
 const Sample: any = {};
 /* /Temporary */
 
-@Controller("{ControllerPrefix}", {
-  childs:
+@Controller("<<ControllerPrefix>>", {
+  childs: [
     /* @ControllerChildsContainer */
-    /* <SampleControllerChilds[ControllerChildsListTemplate]> */
-    [],
-  /* </SampleControllerChilds> */
-  /* /ControllerChildsContainer */
+    /* /ControllerChildsContainer */
+  ],
 })
 export class SampleController {
   @Get("/", "Fetch a list of Sample(s).")
-  async ListSample(req: Request) {
+  async listSample(req: Request) {
     // Create New Repository
     const Repository = req.database.use(Sample);
 
@@ -43,12 +39,13 @@ export class SampleController {
   }
 
   @Get("/:SampleId/", "Fetch the Sample.")
-  async GetSample(req: Request) {
+  async getSample(req: Request) {
     // Params Validation
-    await Validator.validate(req.params)
+    await req.validator
+      .validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ falsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })
@@ -70,12 +67,12 @@ export class SampleController {
   }
 
   @Post("/", "Create a new Sample.")
-  async CreateSample(req: Request) {
+  async createSample(req: Request) {
     // Params Validation
-    await Validator.validate(req.params).schema({}).exec();
+    await req.validator.validate(req.params).schema({}).exec();
 
     // Body Validation
-    await Validator.validate(req.body).schema({}).exec();
+    await req.validator.validate(req.body).schema({}).exec();
 
     // Create New Repository
     const Repository = req.database.use(Sample);
@@ -84,24 +81,25 @@ export class SampleController {
     return new CreateResponse(
       "Sample has been created successfully!",
       // Create New Sample
-      await Repository().create(createSchema(Sample, req.body))
+      await Repository().create(Sample.new(req.body))
     );
   }
 
   @Patch("/:SampleId/", "Update the Sample.")
-  async UpdateSample(req: Request) {
+  async updateSample(req: Request) {
     // Params Validation
-    await Validator.validate(req.params)
+    await req.validator
+      .validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ falsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })
       .exec();
 
     // Body Validation
-    await Validator.validate(req.body).schema({}).exec();
+    await req.validator.validate(req.body).schema({}).exec();
 
     // Create New Repository
     const Repository = req.database.use(Sample);
@@ -114,17 +112,18 @@ export class SampleController {
         .where({
           SampleId: req.params.SampleId,
         })
-        .update(createSchema(Sample, req.body))
+        .update(Sample.new(req.body))
     );
   }
 
   @Delete("/:SampleId/", "Delete the Sample.")
-  async DeleteSample(req: Request) {
+  async deleteSample(req: Request) {
     // Params Validation
-    await Validator.validate(req.params)
+    await req.validator
+      .validate(req.params)
       .schema({
         SampleId: (_) =>
-          _.optional({ falsy: true, setUndefined: true }).isString(
+          _.optional({ falsy: true }).isString(
             "Please provide a valid Sample ID!"
           ),
       })

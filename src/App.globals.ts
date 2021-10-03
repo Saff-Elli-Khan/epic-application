@@ -1,92 +1,135 @@
-import Path from "path";
-import { ConfigurationInterface as EpicConfigurationInterface } from "@saffellikhan/epic-cli";
+import { Validation } from "epic-validator";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
-import { ConnectionConfiguration } from "@saffellikhan/epic-sql";
-import {
-  CurrencyInterface,
-  LanguageInterface,
-  PackageInterface,
-  SecurityConfigInterface,
-  UploadsConfigInterface,
-} from "./types";
-import {
-  ConfigManager as EpicConfigManager,
-  ConfigManagerUtils,
-} from "epic-config-manager";
-
-// Global Geo Manager
-export const Geo = new EpicGeo();
 
 // Global Tokens Manager
 export const TokensManager = new EpicTokens(
   () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z"
 );
 
-export const ConfigManager = new EpicConfigManager(
-  new (class {
-    // Global Configuration
-    public global = () => ({
-      // If Enabled, Application will give Error Stacks for Errors on the requests
-      DEBUGING: process.env.NODE_ENV === "development",
+// Geo Data Library
+export const GeoData = new EpicGeo();
 
-      // Epic Project Information
-      PROJECT: require(Path.join(
-        process.cwd(),
-        "./epic.config.json"
-      )) as EpicConfigurationInterface,
-
-      // Application Package Information
-      PACKAGE: require(Path.join(
-        process.cwd(),
-        "./package.json"
-      )) as PackageInterface,
-
-      // Uploads Configuration
-      UPLOADS: require(Path.join(
-        process.cwd(),
-        "./configuration/uploads.json"
-      )) as UploadsConfigInterface,
-
-      // Supported Lanuages
-      LANGUAGES: require(Path.join(
-        process.cwd(),
-        "./configuration/languages.json"
-      )) as LanguageInterface[],
-
-      // Supported Currencies
-      CURRENCIES: require(Path.join(
-        process.cwd(),
-        "./configuration/currencies.json"
-      )) as CurrencyInterface[],
-    });
-
-    // Development Configuration
-    public development = () => ({
-      // Request & Data Security
-      SECURITY: require(Path.join(
-        process.cwd(),
-        "./configuration/security.json"
-      )) as SecurityConfigInterface,
-
-      // Database Connection
-      DATABASE: require(Path.join(
-        process.cwd(),
-        "./configuration/database.json"
-      )) as ConnectionConfiguration<"mysql">,
-    });
-
-    // Production Configuration
-    public production = () =>
-      ConfigManagerUtils.deepMerge(this.development(), {
-        // Development Configuration Overrides
-      });
-
-    public export = () => ({
-      ...this.global(),
-      ...this[(process.env.NODE_ENV || "production") as "production"](),
-    });
-  })().export
-);
-
-export const Configuration = () => ConfigManager.render();
+// Data Validator Library
+export const Validator = new Validation({
+  isName: (_, entity) =>
+    _.isString(
+      `Please provide a valid ${
+        typeof entity === "string" ? entity + " " : ""
+      }Name!`
+    )
+      .isLength(
+        { min: 2 },
+        `Minimum 2 characters required for ${
+          typeof entity === "string" ? entity + " " : ""
+        }Name!`
+      )
+      .isLength(
+        { max: 50 },
+        `Maximum 50 characters allowed for ${
+          typeof entity === "string" ? entity + " " : ""
+        }Name!`
+      ),
+  isTitle: (_, entity?: string) =>
+    _.isString(`Please provide a valid ${entity || "Title"}!`)
+      .isLength(
+        { min: 5 },
+        `Minimum 5 characters required for ${entity || "Title"}!`
+      )
+      .isLength(
+        { max: 100 },
+        `Maximum 100 characters allowed for ${entity || "Title"}!`
+      ),
+  isShortDescription: (_, entity?: string) =>
+    _.isString(`Please provide a valid Short ${entity || "Short Description"}!`)
+      .isLength(
+        { min: 15 },
+        `Minimum 15 characters required for Short ${
+          entity || "Short Description"
+        }!`
+      )
+      .isLength(
+        { max: 300 },
+        `Maximum 300 characters allowed for ${entity || "Short Description"}!`
+      ),
+  isDescription: (_, entity?: string, length?: number) =>
+    _.isString(`Please provide a valid Short ${entity || "Description"}!`)
+      .isLength(
+        { min: 15 },
+        `Minimum 15 characters required for Short ${entity || "Description"}!`
+      )
+      .isLength(
+        { max: length || 1500 },
+        `Maximum ${length || 1500} characters allowed for ${
+          entity || "Description"
+        }!`
+      ),
+  isFirstName: (_) =>
+    _.isString("First name should be a string!")
+      .notEmpty({ falsy: true }, "First name cannot be empty!")
+      .isLength({ max: 50 }, "Maximum 50 characters allowed for First name!"),
+  isLastName: (_) =>
+    _.isString("Last name should be a string!").isLength(
+      { max: 50 },
+      "Maximum 50 characters allowed for Last name!"
+    ),
+  isUserName: (_) =>
+    _.isAlphanumeric({}, "Please provide a valid Username!")
+      .not()
+      .isIn(
+        ["admin", "administrator", "methods"],
+        "Invalid Username has been provided!"
+      ),
+  isPassword: (_) =>
+    _.required()
+      .isAlphanumeric(
+        { allowSpaces: false, strict: true },
+        "A valid Alphanumeric Password is required!"
+      )
+      .isLength(
+        { min: 6, max: 50 },
+        "Minimum 6 and Maximum 50 characters allowed for Password!"
+      ),
+  isAgreement: (_) =>
+    _.likeBoolean(
+      { sanitize: true, isTrue: true },
+      "You need to Agree our Terms of Services & Privacy policy!"
+    ),
+  isPrice: (_) =>
+    _.isNumeric({ sanitize: true }, "Please provide a valid Amount!").isAmount(
+      { min: 1 },
+      "Minimum allowed Amount is 1!"
+    ),
+  isQuantity: (_) =>
+    _.isNumeric(
+      { sanitize: true },
+      "Please provide a valid Quantity!"
+    ).isAmount({ min: 1 }, "Minimum allowed Quantity is 1!"),
+  isCountry: (_) =>
+    _.isIn(GeoData.countryList(), "Invalid Country Name has been provided!"),
+  isContact: (_) =>
+    _.isNumeric(
+      { sanitize: true },
+      "Please provide a valid Contact Number!"
+    ).isLength(
+      { min: 7, max: 15 },
+      "Please provide a valid Contact Number Length!"
+    ),
+  isBankCodeType: (_) =>
+    _.isIn(
+      ["Sort", "Swift", "BIC", "BSB"],
+      "Please provide a valid Bank Code Type!"
+    ),
+  isBankAccountNumberType: (_) =>
+    _.isIn(
+      ["Local", "International"],
+      "Please provide a valid Bank Account Number Type!"
+    ),
+  isBankAccountNumber: (_, type) =>
+    type === "Local"
+      ? _.isNumeric(
+          { sanitize: true },
+          "Invalid Bank Account Number has been provided!"
+        )
+      : _.use("isIBAN"),
+});

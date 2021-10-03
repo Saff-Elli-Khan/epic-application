@@ -7,27 +7,18 @@ import {
   CreateResponse,
   Post,
 } from "@saffellikhan/epic-express";
-import { Validator } from "@AppPath/App.validator";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
-@Controller("{ControllerPrefix}", {
-  childs:
+@Controller("<<ControllerPrefix>>", {
+  childs: [
     /* @ControllerChildsContainer */
-    /* <SampleControllerChilds[ControllerChildsListTemplate]> */
-    [],
-  /* </SampleControllerChilds> */
-  /* /ControllerChildsContainer */
+    /* /ControllerChildsContainer */
+  ],
 })
 export class SampleController {
   @Post("/", "Create an Action.")
   async doAction(req: Request) {
-    // Params Validation
-    await Validator.validate(req.params).schema({}).exec();
-
-    // Body Validation
-    await Validator.validate(req.body).schema({}).exec();
-
     // Return Response
     return new CreateResponse("Something great has been successfully done!");
   }

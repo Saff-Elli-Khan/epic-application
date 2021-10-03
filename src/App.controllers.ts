@@ -2,7 +2,6 @@
 /* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
 
 import { ParentController, Get } from "@saffellikhan/epic-express";
-import { Configuration } from "../App.globals";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -14,9 +13,7 @@ import { Configuration } from "../App.globals";
 })
 export class indexController {
   @Get("/")
-  public Home() {
-    return `The ${
-      Configuration().PROJECT.brand.name
-    }'s API is online listening to the requests!`;
+  public main() {
+    return `The API is online listening to the requests!`;
   }
 }
