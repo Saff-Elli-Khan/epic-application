@@ -16,6 +16,5 @@
     "paths": {
       "@AppPath/*": ["./src/*"]
     }
-  },
-  "exclude": ["./templates/"]
+  }
 }
