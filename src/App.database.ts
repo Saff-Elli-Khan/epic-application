@@ -6,6 +6,12 @@ import { ConfigManager } from "@saffellikhan/epic-cli";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
+// Schema List
+export const SchemaList = [
+  /* @SchemaListContainer */
+  /* /SchemaListContainer */
+];
+
 // Create A New Database Connection.
 export const createDatabaseConnection = (sync = false, logs = false) =>
   new EpicSQLManager(
@@ -23,10 +29,7 @@ export const createDatabaseConnection = (sync = false, logs = false) =>
         };
       })()
     ),
-    [
-      /* @SchemaListContainer */
-      /* /SchemaListContainer */
-    ]
+    SchemaList
   ).init({
     sync,
     logs,
