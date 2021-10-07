@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 
 export const SampleMiddleware = (
   req: Request,
