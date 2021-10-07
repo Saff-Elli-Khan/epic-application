@@ -8,6 +8,7 @@ import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import { GeoData, TokensManager, Validator } from "./App.globals";
+import { createDatabaseConnection } from "./App.database";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -24,13 +25,30 @@ export const Middlewares = (Framework: Express) =>
       EXPRESS.urlencoded({ extended: true }),
 
       // Global Features Injector Middleware
-      (req: Request, __: Response, next: NextFunction) => {
-        req.geo = GeoData;
-        req.tokens = TokensManager;
-        req.validator = Validator;
+      async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          // Add Database Manager
+          req.database = await createDatabaseConnection(
+            process.env.NODE_ENV === "development" &&
+              process.env.NODE_ENV === "development"
+          );
 
-        // Continue to Next Middleware
-        next();
+          // Add Rest Features
+          req.geo = GeoData;
+          req.tokens = TokensManager;
+          req.validator = Validator;
+
+          // On Request End
+          res.on("close", () => {
+            // End Database Connection
+            req.database.end();
+          });
+
+          // Continue to Next Middleware
+          next();
+        } catch (error) {
+          next(error);
+        }
       },
 
       /* @MiddlewaresContainer */

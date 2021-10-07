@@ -13,7 +13,7 @@ import { ParentController, Get } from "@saffellikhan/epic-express";
 })
 export class indexController {
   @Get("/")
-  public main() {
+  public APIHome() {
     return `The API is online listening to the requests!`;
   }
 }
