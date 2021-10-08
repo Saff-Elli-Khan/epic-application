@@ -29,8 +29,8 @@ export const Middlewares = (Framework: Express) =>
         try {
           // Add Database Manager
           req.database = await createDatabaseConnection(
-            process.env.NODE_ENV === "development" &&
-              process.env.NODE_ENV === "development"
+            process.env.NODE_ENV === "development",
+            process.env.NODE_ENV === "development"
           );
 
           // Add Rest Features

@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 
-export const SampleMiddleware = (
+export const SampleMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  // Continue to next middleware
-  next();
+  try {
+    // Continue to next middleware
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
