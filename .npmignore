@@ -3,3 +3,5 @@ temp/
 configuration/
 env/
 src/
+build/*.ts
+build/*.js
