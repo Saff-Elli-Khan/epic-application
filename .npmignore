@@ -1,11 +1,5 @@
-# Main
 temp/
 .temp/
-build/
 configuration/
 env/
-
-# Source
-src/temp/
-src/.temp/
-src/*.ts
+src/
