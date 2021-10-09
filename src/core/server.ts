@@ -5,7 +5,7 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
-import { Middlewares } from "./App.middlewares";
+import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
 

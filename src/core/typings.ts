@@ -1,7 +1,7 @@
 import { EpicSQLManager, Connection } from "@saffellikhan/epic-sql";
 import { DECODED_TOKEN } from "epic-tokens";
-import { SchemaList } from "./App.database";
-import { GeoData, TokensManager, Validator } from "./App.globals";
+import { SchemaList } from "./database";
+import { GeoData, TokensManager, Validator } from "./globals";
 
 // Override Express Interfaces
 declare module "express-serve-static-core" {

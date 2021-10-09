@@ -7,8 +7,8 @@ import Cors from "cors";
 import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
-import { GeoData, TokensManager, Validator } from "./App.globals";
-import { createDatabaseConnection } from "./App.database";
+import { GeoData, TokensManager, Validator } from "./globals";
+import { createDatabaseConnection } from "./database";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
