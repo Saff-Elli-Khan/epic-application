@@ -27,7 +27,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@AppPath/*": ["./src/*"]
+      "@AppPath/*": ["./src/*"],
+      "@Controllers/*": ["./src/controllers/*"],
+      "@Middlewares/*": ["./src/middlewares/*"],
+      "@Schemas/*": ["./src/schemas/*"]
     }
   }
 }
