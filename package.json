@@ -10,7 +10,6 @@
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.2",
-    "@saffellikhan/epic-sql": "^2.0.6",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
     "compression": "^1.7.4",
@@ -32,6 +31,7 @@
   },
   "devDependencies": {
     "@saffellikhan/epic-cli": "^2.2.0",
+    "@saffellikhan/epic-sql": "^2.0.7",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
