@@ -3,14 +3,7 @@
 /* <OneRelationTemplate> @OneRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}; </OneRelationTemplate> */
 /* <ManyRelationTemplate> @ManyRelation<{{ relation }}, {{ schema }}>({ schema: () => {{ relation }}, mapping: {{ mapping }} }) {{ name }}!: {{ relation }}[]; </ManyRelationTemplate> */
 
-import {
-  Schema,
-  BaseSchema,
-  Column,
-  OneRelation,
-  ManyRelation,
-  Utils,
-} from "@saffellikhan/epic-sql";
+import { Schema, BaseSchema } from "@saffellikhan/epic-sql";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
