@@ -8,7 +8,6 @@
     "dev": "cross-env PORT=8080 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/App.ts"
   },
   "dependencies": {
-    "@saffellikhan/epic-cli": "^2.1.8",
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.2",
     "@saffellikhan/epic-sql": "^2.0.5",
@@ -32,6 +31,7 @@
     "slug": "^4.0.2"
   },
   "devDependencies": {
+    "@saffellikhan/epic-cli": "^2.1.8",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
@@ -44,7 +44,8 @@
     "eslint": "^7.13.0",
     "nodemon": "^2.0.7",
     "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "typescript-transform-paths": "^3.3.1"
   },
   "keywords": [
     "epic",
