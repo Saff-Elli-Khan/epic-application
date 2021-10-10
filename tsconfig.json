@@ -1,9 +1,13 @@
 {
   "ts-node": {
     "transpileOnly": true,
-    "require": ["typescript-transform-paths/register"]
+    "require": [
+      "typescript-transform-paths/register",
+      "tsconfig-paths/register"
+    ]
   },
   "compilerOptions": {
+    "composite": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "target": "ES2017",

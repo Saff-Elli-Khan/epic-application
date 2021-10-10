@@ -79,3 +79,4 @@ temp/
 build/
 src/.temp/
 src/temp/
+tsconfig.tsbuildinfo
