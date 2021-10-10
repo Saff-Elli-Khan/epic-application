@@ -69,10 +69,9 @@ export const Validator = new Validation({
       .notEmpty({ falsy: true }, "First name cannot be empty!")
       .isLength({ max: 50 }, "Maximum 50 characters allowed for First name!"),
   isLastName: (_) =>
-    _.isString("Last name should be a string!").isLength(
-      { max: 50 },
-      "Maximum 50 characters allowed for Last name!"
-    ),
+    _.optional({ falsy: true })
+      .isString("Last name should be a string!")
+      .isLength({ max: 50 }, "Maximum 50 characters allowed for Last name!"),
   isUserName: (_) =>
     _.isAlphanumeric({}, "Please provide a valid Username!")
       .not()
