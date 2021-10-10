@@ -34,7 +34,8 @@
       "@AppPath/*": ["./src/*"],
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
-      "@Schemas/*": ["./src/schemas/*"]
+      "@Schemas/*": ["./src/schemas/*"],
+      "@AppExports": ["./src/exports"]
     }
   }
 }
