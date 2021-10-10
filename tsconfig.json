@@ -32,10 +32,10 @@
     "baseUrl": ".",
     "paths": {
       "@AppPath/*": ["./src/*"],
+      "@AppExports": ["./src/exports"],
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
-      "@Schemas/*": ["./src/schemas/*"],
-      "@AppExports": ["./src/exports"]
+      "@Schemas/*": ["./src/schemas/*"]
     }
   }
 }
