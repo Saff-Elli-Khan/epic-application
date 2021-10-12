@@ -24,7 +24,7 @@
     "epic-money": "^1.0.12",
     "epic-pay": "^1.0.13",
     "epic-tokens": "^1.0.10",
-    "epic-validator": "^3.0.6",
+    "epic-validator": "^3.1.2",
     "glob": "^7.1.6",
     "helmet": "^4.2.0",
     "ip-filter": "^3.0.5",
