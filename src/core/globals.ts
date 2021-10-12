@@ -79,6 +79,11 @@ export const Validator = new Validation({
         ["admin", "administrator", "methods"],
         "Invalid Username has been provided!"
       ),
+  isGender: (_) =>
+    _.isIn(
+      ["Male", "Female", "Unknown"],
+      "Please provide a valid Gender 'Male', 'Female' or 'Unknown'!"
+    ),
   isPassword: (_) =>
     _.required()
       .isAlphanumeric(
