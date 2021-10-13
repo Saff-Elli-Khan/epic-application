@@ -13,14 +13,16 @@ import { EpicTokensVerificationException } from "epic-tokens";
 export class Application extends EpicApplication {
   _beforeInit = () => Middlewares(this.Framework);
   _onRouteError = (err: any, _: Request, res: Response) => {
-    // Request Error
-    if (err instanceof ValidatorException) res.status(400);
-    // Authorization Failed
-    else if (err instanceof EpicTokensVerificationException) res.status(403);
-    // Page Not Found
-    else if (err?.message === "Not Found") res.status(404);
-    // Unknown Error
-    else res.status(500);
+    if (res.statusCode === 200) {
+      // Request Validation Error
+      if (err instanceof ValidatorException) res.status(400);
+      // Authorization Failed
+      else if (err instanceof EpicTokensVerificationException) res.status(403);
+      // Page Not Found
+      else if (err?.message === "Not Found") res.status(404);
+      // Unknown Error
+      else res.status(500);
+    }
 
     // Return Response Object
     return new CreateResponse(
