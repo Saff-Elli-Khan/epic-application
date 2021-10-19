@@ -1,8 +1,8 @@
 temp/
 .temp/
-configuration/
 env/
 src/
-build/app/
+public/
+build/core/
 build/*.ts
 build/*.js
