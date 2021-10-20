@@ -4,6 +4,8 @@
 import {
   ParentController,
   Get,
+  Request,
+  Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
 import { ConfigManager } from "@saffellikhan/epic-cli";
@@ -18,7 +20,7 @@ import { ConfigManager } from "@saffellikhan/epic-cli";
 })
 export class indexController {
   @Get("/")
-  public APIHome() {
+  public APIHome(_: Request, res: Response) {
     // Get API Details
     const APIDetails = ConfigManager.getConfig("main");
 
@@ -27,6 +29,7 @@ export class indexController {
       name: APIDetails.name,
       description: APIDetails.description,
       brand: APIDetails.brand,
+      ...res.locals,
     });
   }
 }
