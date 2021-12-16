@@ -8,7 +8,7 @@ import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import { GeoData, TokensManager, Validator } from "./globals";
-import { createDatabaseConnection } from "./database";
+import { createModelsManager } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -27,11 +27,8 @@ export const Middlewares = (Framework: Express) =>
       // Global Features Injector Middleware
       async (req: Request, res: Response, next: NextFunction) => {
         try {
-          // Add Database Manager
-          req.database = await createDatabaseConnection(
-            process.env.NODE_ENV === "development",
-            process.env.NODE_ENV === "development"
-          );
+          // Database Manager
+          req.modelsManager = createModelsManager();
 
           // Add Rest Features
           req.geo = GeoData;
@@ -39,9 +36,12 @@ export const Middlewares = (Framework: Express) =>
           req.validator = Validator;
 
           // On Request End
-          res.on("close", () => {
-            // End Database Connection
-            req.database.end();
+          res.on("close", async () => {
+            // Final Tasks
+            await req.response?.AfterResponse();
+
+            // Close Database Connection
+            req.modelsManager.end();
           });
 
           // Continue to Next Middleware
