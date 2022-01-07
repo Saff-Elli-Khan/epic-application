@@ -41,14 +41,18 @@ const Configuration = ConfigManager.getConfig("main");
 // Create a Database Connection
 new ConnectionManager(
   {
-    host: Configuration.database.host,
-    port: Configuration.database.port,
-    user: Configuration.database.user,
-    password: Configuration.database.password,
-    database: Configuration.database.dbname,
-    connectionLimit: Configuration.database.limit,
-    logs: process.env.NODE_ENV === "development",
-    sync: process.env.NODE_ENV === "development",
+    engine: Configuration.database.engine,
+    type: Configuration.database.type,
+    uri: Configuration.database.uri,
+    logs:
+      typeof Configuration.database.logs === "boolean"
+        ? Configuration.database.logs
+        : process.env.NODE_ENV === "development",
+    sync:
+      typeof Configuration.database.sync === "boolean"
+        ? Configuration.database.sync
+        : process.env.NODE_ENV === "development",
+    ...Configuration.database.options,
   },
   ModelList
 )

@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
-    "@saffellikhan/epic-express": "^1.0.6",
-    "@saffellikhan/epic-orm": "^1.0.3",
+    "@saffellikhan/epic-express": "^1.0.8",
+    "@saffellikhan/epic-orm": "^1.0.20",
     "@supercharge/request-ip": "^1.1.2",
     "compose-middleware": "^5.0.1",
     "compression": "^1.7.4",
@@ -33,7 +33,7 @@
     "slug": "^4.0.2"
   },
   "devDependencies": {
-    "@saffellikhan/epic-cli": "^2.2.25",
+    "@saffellikhan/epic-cli": "^2.2.31",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
