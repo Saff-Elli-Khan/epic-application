@@ -37,6 +37,6 @@
       "@Middlewares/*": ["./src/middlewares/*"],
       "@Schemas/*": ["./src/schemas/*"]
     },
-    "typeRoots": ["src/typings", "./node_modules/@types"]
+    "typeRoots": ["typings", "./node_modules/@types"]
   }
 }
