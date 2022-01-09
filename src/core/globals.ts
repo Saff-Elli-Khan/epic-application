@@ -1,6 +1,13 @@
 import { Validation } from "epic-validator";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
+import { ConfigManager } from "@saffellikhan/epic-cli";
+import { join as PathJoin } from "path";
+
+// Load Environment Variables
+require("dotenv").config({
+  path: PathJoin(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
+});
 
 // Global Tokens Manager
 export const TokensManager = new EpicTokens(
@@ -137,3 +144,26 @@ export const Validator = new Validation({
         )
       : _.use("isIBAN"),
 });
+
+// Inject Environment Variables into objects
+const InjectEnv = <T extends Record<string, any>>(object: T): T => {
+  for (const Key in object) {
+    const Value = object[Key];
+    if (typeof Value === "string")
+      object[Key] = Value.replace(
+        /\{\s*\{\s*(\w+)\s*\}\s*\}/g,
+        (_: string, key: string) => process.env[key]
+      );
+    else if (typeof Value === "object" && Value !== null)
+      object[Key] = InjectEnv(Value);
+  }
+
+  return object;
+};
+
+// Get Application Configuration
+export const Configuration = InjectEnv(ConfigManager.getConfig("main"));
+
+// Get Application Settings
+export const Settings: Record<string, any> =
+  Configuration.other[Configuration.name] || {};

@@ -7,8 +7,9 @@ import Cors from "cors";
 import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
-import { GeoData, TokensManager, Validator } from "./globals";
+import UserAgent from "express-useragent";
 import { createModelsManager } from "@saffellikhan/epic-orm";
+import { GeoData, TokensManager, Validator } from "./globals";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -21,6 +22,7 @@ export const Middlewares = (Framework: Express) =>
       Helmet(),
       CookieParser(),
       Compression(),
+      UserAgent.express(),
       EXPRESS.json(),
       EXPRESS.urlencoded({ extended: true }),
 

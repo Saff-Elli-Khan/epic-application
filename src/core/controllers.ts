@@ -23,6 +23,7 @@ export class indexController {
   public APIHome(_: Request, res: Response) {
     // Get API Details
     const APIDetails = ConfigManager.getConfig("main");
+    delete res.locals.useragent;
 
     // Return API Details
     return new CreateResponse(`The API is online listening to the requests!`, {

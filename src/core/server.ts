@@ -9,8 +9,8 @@ import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
 import { ConnectionManager } from "@saffellikhan/epic-orm";
-import { ConfigManager } from "@saffellikhan/epic-cli";
 import { ModelList } from "./models";
+import { Configuration } from "./globals";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -34,9 +34,6 @@ export class Application extends EpicApplication {
     ).isFalse();
   };
 }
-
-// Get Connection Details
-const Configuration = ConfigManager.getConfig("main");
 
 // Create a Database Connection
 new ConnectionManager(
