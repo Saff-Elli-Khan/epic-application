@@ -4,9 +4,11 @@
 import {
   Request,
   Controller,
+  Use,
   CreateResponse,
   Post,
 } from "@saffellikhan/epic-express";
+import { LocalSettings } from "@AppPath/helpers/middlewares";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -16,9 +18,10 @@ import {
     /* /ControllerChildsContainer */
   ],
 })
+@Use(LocalSettings("<<AppName>>"))
 export class SampleController {
-  @Post("/", "Create an Action.")
-  async doAction(req: Request) {
+  @Post("/", "Create Something...")
+  async Sample(req: Request) {
     // Params Validation
     await req.validator.validate(req.params).schema({}).exec();
 

@@ -36,7 +36,6 @@
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
       "@Schemas/*": ["./src/schemas/*"]
-    },
-    "typeRoots": ["typings", "./node_modules/@types"]
+    }
   }
 }

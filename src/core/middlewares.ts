@@ -9,7 +9,7 @@ import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
 import { createModelsManager } from "@saffellikhan/epic-orm";
-import { GeoData, TokensManager, Validator } from "./globals";
+import { Configuration, GeoData, TokensManager, Validator } from "./globals";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -29,8 +29,11 @@ export const Middlewares = (Framework: Express) =>
       // Global Features Injector Middleware
       async (req: Request, res: Response, next: NextFunction) => {
         try {
+          // Add Configuration
+          req.config = Configuration;
+
           // Database Manager
-          req.modelsManager = createModelsManager();
+          req.database = createModelsManager();
 
           // Add Rest Features
           req.geo = GeoData;
@@ -43,7 +46,7 @@ export const Middlewares = (Framework: Express) =>
             await req.response?.AfterResponse();
 
             // Close Database Connection
-            req.modelsManager.end();
+            req.database.end();
           });
 
           // Continue to Next Middleware
