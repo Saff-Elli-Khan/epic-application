@@ -4,5 +4,6 @@ env/
 src/
 public/
 build/core/
+build/helpers/
 build/*.ts
 build/*.js

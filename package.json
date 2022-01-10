@@ -4,9 +4,9 @@
   "description": "A powerful Epic application.",
   "private": true,
   "scripts": {
-    "start": "npm run build && cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
+    "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts",
-    "build": "ttsc -p tsconfig.json"
+    "build": "npx -y shx rm -rf tsconfig.tsbuildinfo build && ttsc -p tsconfig.json && npx shx rm -rf ./build/templates && npx shx cp -R ./src/templates/ ./build/templates/"
   },
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
@@ -36,7 +36,7 @@
     "slug": "^4.0.2"
   },
   "devDependencies": {
-    "@saffellikhan/epic-cli": "^2.2.31",
+    "@saffellikhan/epic-cli": "^2.2.37",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
