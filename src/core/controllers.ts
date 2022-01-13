@@ -19,7 +19,7 @@ import { ConfigManager } from "@saffellikhan/epic-cli";
   ],
 })
 export class indexController {
-  @Get("/")
+  @Get("/", { authType: "none" })
   public APIHome(_: Request, res: Response) {
     // Get API Details
     const APIDetails = ConfigManager.getConfig("main");
