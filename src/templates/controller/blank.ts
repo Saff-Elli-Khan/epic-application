@@ -8,7 +8,7 @@ import {
   CreateResponse,
   Post,
 } from "@saffellikhan/epic-express";
-import { LocalSettings } from "@AppPath/helpers/middlewares";
+import { LocalSettings } from "@AppPath/exports";
 /* @ImportsContainer */
 /* /ImportsContainer */
 

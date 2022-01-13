@@ -36,7 +36,7 @@
     "slug": "^4.0.2"
   },
   "devDependencies": {
-    "@saffellikhan/epic-cli": "^2.2.37",
+    "@saffellikhan/epic-cli": "^2.2.38",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
