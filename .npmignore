@@ -5,4 +5,3 @@ src/
 public/
 build/core/
 build/*.ts
-build/*.js
