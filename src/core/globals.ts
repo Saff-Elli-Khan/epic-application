@@ -2,6 +2,7 @@ import { Validation } from "epic-validator";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { ConfigManager } from "@saffellikhan/epic-cli";
+import { Schedular } from "@saffellikhan/epic-schedular";
 import { join as PathJoin } from "path";
 
 // Load Environment Variables
@@ -144,6 +145,9 @@ export const Validator = new Validation({
         )
       : _.use("isIBAN"),
 });
+
+// Create a Cron Scheduler Instance
+export const Schedule = new Schedular();
 
 // Inject Environment Variables into objects
 const InjectEnv = <T extends Record<string, any>>(object: T): T => {

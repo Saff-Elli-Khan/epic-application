@@ -9,6 +9,7 @@ import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
 import { ConnectionManager } from "@saffellikhan/epic-orm";
+import { InitializeCronJobs } from "./crons";
 import { ModelList } from "./models";
 import { Configuration } from "./globals";
 
@@ -60,5 +61,10 @@ new ConnectionManager(
       new Application({
         postman: Configuration.other.postman,
       })
-    ).listen(process.env.PORT || 8080)
+    )
+      .listen(process.env.PORT || 8080)
+      .then(async () => {
+        // Initialize Cron Jobs
+        await InitializeCronJobs();
+      })
   );
