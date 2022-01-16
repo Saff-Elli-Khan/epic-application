@@ -11,8 +11,9 @@
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.14",
-    "@saffellikhan/epic-orm": "^1.0.22",
+    "@saffellikhan/epic-orm": "^1.0.28",
     "@saffellikhan/epic-schedular": "^1.0.3",
+    "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
     "@types/express-useragent": "^1.0.1",
     "compose-middleware": "^5.0.1",
