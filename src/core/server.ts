@@ -9,7 +9,7 @@ import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
 import { ConnectionManager } from "@saffellikhan/epic-orm";
-import { InitializeCronJobs } from "./crons";
+import { InitializeCronJobs } from "./jobs";
 import { ModelList } from "./models";
 import { Configuration } from "./globals";
 
