@@ -5,13 +5,12 @@
   "private": true,
   "scripts": {
     "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
-    "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts",
-    "build": "npx -y shx rm -rf tsconfig.tsbuildinfo build && ttsc -p tsconfig.json && npx shx rm -rf ./build/templates && npx shx cp -R ./src/templates/ ./build/templates/"
+    "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts"
   },
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.14",
-    "@saffellikhan/epic-orm": "^1.0.28",
+    "@saffellikhan/epic-orm": "^1.0.29",
     "@saffellikhan/epic-schedular": "^1.0.3",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
