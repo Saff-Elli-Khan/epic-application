@@ -10,7 +10,7 @@
   "dependencies": {
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.14",
-    "@saffellikhan/epic-orm": "^1.0.29",
+    "@saffellikhan/epic-orm": "^1.0.32",
     "@saffellikhan/epic-schedular": "^1.0.3",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
