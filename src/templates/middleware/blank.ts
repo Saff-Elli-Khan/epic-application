@@ -1,7 +1,7 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 
-import { LocalSettings } from "@AppPath/exports";
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
+import { LocalSettings } from "@AppPath/exports";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
