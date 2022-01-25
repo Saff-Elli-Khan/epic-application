@@ -18,7 +18,7 @@ import { LocalSettings } from "@AppPath/exports";
     /* /ControllerChildsContainer */
   ],
 })
-@Use(LocalSettings("<<AppName>>"))
+@Use(LocalSettings(require("../../package.json").name))
 export class SampleController {
   @Post("/", "Create Something...")
   async Sample(req: Request) {
