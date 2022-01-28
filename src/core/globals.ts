@@ -155,6 +155,12 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
     const Value = object[Key];
     if (typeof Value === "string")
       object[Key] = Value.replace(
+        /object\(\s*\{\s*\{\s*(\w+)\s*\}\s*\}\s*\)/g,
+        (_: string, key: string) =>
+          typeof process.env[key] === "string"
+            ? JSON.parse(process.env[key]!)
+            : process.env[key]
+      ).replace(
         /\{\s*\{\s*(\w+)\s*\}\s*\}/g,
         (_: string, key: string) => process.env[key]
       );
