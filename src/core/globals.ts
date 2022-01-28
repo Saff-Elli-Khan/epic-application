@@ -173,3 +173,7 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 
 // Get Application Configuration
 export const Configuration = InjectEnv(ConfigManager.getConfig("main"));
+
+// Get Application Settings
+export const Settings: Record<string, any> =
+  Configuration.other[require("../../package.json").name];
