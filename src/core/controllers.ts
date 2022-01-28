@@ -7,8 +7,10 @@ import {
   Request,
   Response,
   CreateResponse,
+  Use,
 } from "@saffellikhan/epic-express";
 import { ConfigManager } from "@saffellikhan/epic-cli";
+import { LocalSettings } from "./helpers/middlewares";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
@@ -18,6 +20,7 @@ import { ConfigManager } from "@saffellikhan/epic-cli";
     /* /ControllerChildsContainer */
   ],
 })
+@Use(LocalSettings(require("../../package.json").name))
 export class indexController {
   @Get("/", { authType: "none" })
   public APIHome(_: Request, res: Response) {
