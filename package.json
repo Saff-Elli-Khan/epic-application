@@ -4,7 +4,7 @@
   "description": "A powerful Epic application.",
   "private": true,
   "scripts": {
-    "start": "epic build && cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
+    "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "dev": "epic build && cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts"
   },
   "dependencies": {
