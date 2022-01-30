@@ -1,5 +1,5 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerChildsListTemplate> [{{ childs }}], </ControllerChildsListTemplate> */
+/* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
 
 import {
   Request,
