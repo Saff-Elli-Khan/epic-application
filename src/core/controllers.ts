@@ -9,7 +9,6 @@ import {
   CreateResponse,
   Use,
 } from "@saffellikhan/epic-express";
-import { ConfigManager } from "@saffellikhan/epic-cli";
 import { LocalSettings } from "./helpers/middlewares";
 /* @ImportsContainer */
 /* /ImportsContainer */
@@ -23,16 +22,15 @@ import { LocalSettings } from "./helpers/middlewares";
 @Use(LocalSettings(require("../../package.json").name))
 export class indexController {
   @Get("/", { authType: "none" })
-  public APIHome(_: Request, res: Response) {
+  public APIHome(req: Request, res: Response) {
     // Get API Details
-    const APIDetails = ConfigManager.getConfig("main");
     delete res.locals.useragent;
 
     // Return API Details
     return new CreateResponse(`The API is online listening to the requests!`, {
-      name: APIDetails.name,
-      description: APIDetails.description,
-      brand: APIDetails.brand,
+      name: req.config.name,
+      description: req.config.description,
+      brand: req.config.brand,
       ...res.locals,
     });
   }
