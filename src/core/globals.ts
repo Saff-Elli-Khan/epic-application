@@ -168,9 +168,15 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
           object[Key] = ["1", "true"].includes(
             (process.env[MatchObject[2]] || "").toString().toLowerCase()
           ) as any;
-        else if (MatchObject[1] === "boolean")
+        else if (MatchObject[1] === "number")
           object[Key] = parseFloat(process.env[MatchObject[2]] || "") as any;
-        else object[Key] = process.env[MatchObject[2]] as any;
+        else if (MatchObject[1] === "string")
+          object[Key] = process.env[MatchObject[2]] as any;
+        else
+          object[Key] = Value.replace(
+            /\{\s*\{\s*(\w+)\s*\}\s*\}/g,
+            (_: string, key: string) => process.env[key]
+          ) as any;
       } else
         object[Key] = Value.replace(
           /\{\s*\{\s*(\w+)\s*\}\s*\}/g,
