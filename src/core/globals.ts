@@ -110,7 +110,12 @@ export const Validator = new Validation({
       { sanitize: true },
       "Please provide a valid Contact Number!"
     ).isLength(
-      { min: 7, max: 15 },
+      { min: 8, max: 11 },
+      "Please provide a valid Contact Number Length!"
+    ),
+  isContactString: (_) =>
+    _.isString("Please provide a valid Contact!").isLength(
+      { min: 8, max: 13 },
       "Please provide a valid Contact Number Length!"
     ),
   isBankCodeType: (_) =>
