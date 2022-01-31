@@ -48,15 +48,15 @@ export const Validator = new Validation({
         { max: 100 },
         `Maximum 100 characters allowed for ${entity || "Title"}!`
       ),
-  isShortDescription: (_, entity?: string) =>
-    _.isString(`Please provide a valid ${entity || "Short Description"}!`)
+  isShortString: (_, entity?: string) =>
+    _.isString(`Please provide a valid ${entity || "Short String"}!`)
       .isLength(
         { min: 15 },
-        `Minimum 15 characters required for ${entity || "Short Description"}!`
+        `Minimum 15 characters required for ${entity || "Short String"}!`
       )
       .isLength(
         { max: 300 },
-        `Maximum 300 characters allowed for ${entity || "Short Description"}!`
+        `Maximum 300 characters allowed for ${entity || "Short String"}!`
       ),
   isDescription: (_, entity?: string, length = 1500) =>
     _.isString(`Please provide a valid ${entity || "Description"}!`)
