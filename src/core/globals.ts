@@ -20,7 +20,7 @@ export const GeoData = new EpicGeo();
 
 // Data Validator Library
 export const Validator = new Validation({
-  isName: (_, entity) =>
+  isName: (_, entity?: string) =>
     _.isString(
       `Please provide a valid ${
         typeof entity === "string" ? entity + " " : ""
