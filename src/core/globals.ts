@@ -49,28 +49,24 @@ export const Validator = new Validation({
         `Maximum 100 characters allowed for ${entity || "Title"}!`
       ),
   isShortDescription: (_, entity?: string) =>
-    _.isString(`Please provide a valid Short ${entity || "Short Description"}!`)
+    _.isString(`Please provide a valid ${entity || "Short Description"}!`)
       .isLength(
         { min: 15 },
-        `Minimum 15 characters required for Short ${
-          entity || "Short Description"
-        }!`
+        `Minimum 15 characters required for ${entity || "Short Description"}!`
       )
       .isLength(
         { max: 300 },
         `Maximum 300 characters allowed for ${entity || "Short Description"}!`
       ),
-  isDescription: (_, entity?: string, length?: number) =>
-    _.isString(`Please provide a valid Short ${entity || "Description"}!`)
+  isDescription: (_, entity?: string, length = 1500) =>
+    _.isString(`Please provide a valid ${entity || "Description"}!`)
       .isLength(
         { min: 15 },
-        `Minimum 15 characters required for Short ${entity || "Description"}!`
+        `Minimum 15 characters required for ${entity || "Description"}!`
       )
       .isLength(
-        { max: length || 1500 },
-        `Maximum ${length || 1500} characters allowed for ${
-          entity || "Description"
-        }!`
+        { max: length },
+        `Maximum ${length} characters allowed for ${entity || "Description"}!`
       ),
   isUserName: (_, notIn: string[] = []) =>
     _.isAlphanumeric({}, "Please provide a valid Username!")
@@ -95,18 +91,18 @@ export const Validator = new Validation({
   isAgreement: (_) =>
     _.likeBoolean(
       { sanitize: true, isTrue: true },
-      "You need to Agree our Terms of Services & Privacy policy!"
+      "You must accept our agreement!"
     ),
-  isPrice: (_) =>
+  isPrice: (_, min = 1) =>
     _.isNumeric({ sanitize: true }, "Please provide a valid Amount!").isAmount(
-      { min: 1 },
-      "Minimum allowed Amount is 1!"
+      { min },
+      `Minimum allowed Amount is ${min}!`
     ),
-  isQuantity: (_) =>
+  isQuantity: (_, min = 1) =>
     _.isNumeric(
       { sanitize: true },
       "Please provide a valid Quantity!"
-    ).isAmount({ min: 1 }, "Minimum allowed Quantity is 1!"),
+    ).isAmount({ min }, `Minimum allowed Quantity is ${min}!`),
   isCountry: (_) =>
     _.isIn(GeoData.countryList(), "Invalid Country Name has been provided!"),
   isContact: (_) =>
