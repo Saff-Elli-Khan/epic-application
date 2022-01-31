@@ -72,21 +72,11 @@ export const Validator = new Validation({
           entity || "Description"
         }!`
       ),
-  isFirstName: (_) =>
-    _.isString("First name should be a string!")
-      .notEmpty({ falsy: true }, "First name cannot be empty!")
-      .isLength({ max: 50 }, "Maximum 50 characters allowed for First name!"),
-  isLastName: (_) =>
-    _.optional({ falsy: true })
-      .isString("Last name should be a string!")
-      .isLength({ max: 50 }, "Maximum 50 characters allowed for Last name!"),
-  isUserName: (_) =>
+  isUserName: (_, notIn: string[] = []) =>
     _.isAlphanumeric({}, "Please provide a valid Username!")
+      .isLength({ max: 50 }, "Maximum 50 characters allowed for Username!")
       .not()
-      .isIn(
-        ["admin", "administrator", "methods"],
-        "Invalid Username has been provided!"
-      ),
+      .isIn(notIn, "Invalid Username has been provided!"),
   isGender: (_) =>
     _.isIn(
       ["Male", "Female", "Unknown"],
