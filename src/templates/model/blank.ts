@@ -4,5 +4,5 @@ import { Model, BaseModel } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
-@Model()
+@Model<Sample>()
 export class Sample extends BaseModel {}
