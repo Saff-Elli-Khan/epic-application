@@ -40,6 +40,40 @@ export const Middlewares = (Framework: Express) =>
           req.tokens = TokensManager;
           req.validator = Validator;
 
+          // Basic Query Validation
+          await req.validator
+            .validate(req.query)
+            .schema(
+              {
+                search: (_) =>
+                  _.optional().isString(
+                    "Please provide a valid Search string!"
+                  ),
+                limit: (_) =>
+                  _.optional()
+                    .isNumeric(
+                      { sanitize: true },
+                      "Please provide a valid limit!"
+                    )
+                    .isAmount(
+                      { min: 1 },
+                      "Please provide limit greater than 0!"
+                    ),
+                offset: (_) =>
+                  _.optional()
+                    .isNumeric(
+                      { sanitize: true },
+                      "Please provide a valid offset!"
+                    )
+                    .isAmount(
+                      { min: 0 },
+                      "Please provide offset greater than or equal to 0!"
+                    ),
+              },
+              { strict: false }
+            )
+            .exec();
+
           // On Request End
           res.on("close", async () => {
             // Final Tasks
