@@ -69,6 +69,11 @@ export const Middlewares = (Framework: Express) =>
                       { min: 0 },
                       "Please provide offset greater than or equal to 0!"
                     ),
+                sort: (_) =>
+                  _.optional().isIn(
+                    ["ASC", "DESC"],
+                    "Please provide valid sorting ASC or DESC!"
+                  ),
               },
               { strict: false }
             )
