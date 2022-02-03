@@ -12,7 +12,7 @@
     "@saffellikhan/epic-cli": "^2.2.79",
     "@saffellikhan/epic-config-manager": "^1.0.1",
     "@saffellikhan/epic-express": "^1.0.14",
-    "@saffellikhan/epic-orm": "^1.0.40",
+    "@saffellikhan/epic-orm": "^1.0.41",
     "@saffellikhan/epic-schedular": "^1.0.3",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
