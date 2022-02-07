@@ -1,8 +1,14 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 
-import { Model, BaseModel } from "@saffellikhan/epic-orm";
+import { Model, BaseModel, Column } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
 
 @Model<Sample>()
-export class Sample extends BaseModel {}
+export class Sample extends BaseModel {
+  @Column({
+    type: String,
+    indexes: ["INDEX"],
+  })
+  createdBy!: string | null;
+}
