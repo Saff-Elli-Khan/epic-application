@@ -1,6 +1,9 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 /* <MiddlewareTemplate> {{ middleware }}, </MiddlewareTemplate> */
 
+/* @ImportsContainer */
+/* /ImportsContainer */
+
 import EXPRESS, { Express, Request, Response, NextFunction } from "express";
 import Compression from "compression";
 import Cors from "cors";
@@ -10,8 +13,6 @@ import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
 import { createModelsManager } from "@saffellikhan/epic-orm";
 import { Configuration, GeoData, TokensManager, Validator } from "./globals";
-/* @ImportsContainer */
-/* /ImportsContainer */
 
 export const Middlewares = (Framework: Express) =>
   Framework

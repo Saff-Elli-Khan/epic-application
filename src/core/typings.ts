@@ -15,9 +15,6 @@ declare module "express-serve-static-core" {
     /** Get Current Application's Configuration */
     config: ConfigurationInterface;
 
-    /** Get Current Application's Environment Settings */
-    settings: Record<string, any>;
-
     /** Get User's IP Address */
     clientIp: string;
 

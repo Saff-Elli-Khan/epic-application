@@ -1,8 +1,9 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 
-import { Model, BaseModel, Column } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
+
+import { Model, BaseModel, Column } from "@saffellikhan/epic-orm";
 
 @Model<Sample>()
 export class Sample extends BaseModel {

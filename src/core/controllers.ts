@@ -1,17 +1,16 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 /* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
 
+/* @ImportsContainer */
+/* /ImportsContainer */
+
 import {
   ParentController,
   Get,
   Request,
   Response,
   CreateResponse,
-  Use,
 } from "@saffellikhan/epic-express";
-import { LocalSettings } from "./helpers/middlewares";
-/* @ImportsContainer */
-/* /ImportsContainer */
 
 @ParentController("/", {
   childs: [
@@ -19,7 +18,6 @@ import { LocalSettings } from "./helpers/middlewares";
     /* /ControllerChildsContainer */
   ],
 })
-@Use(LocalSettings(require("../../package.json").name))
 export class indexController {
   @Get("/", { authType: "none" })
   public APIHome(req: Request, res: Response) {

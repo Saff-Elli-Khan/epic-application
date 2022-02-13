@@ -1,9 +1,10 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 
-import { Schedule } from "@AppPath/exports";
-import { getModelsManager } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
+
+import { Schedule } from "@AppPath/exports";
+import { getModelsManager } from "@saffellikhan/epic-orm";
 
 // Start Sample Cron Job
 export const SampleJob = () =>

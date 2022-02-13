@@ -1,16 +1,15 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 /* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
 
+/* @ImportsContainer */
+/* /ImportsContainer */
+
 import {
   Request,
   Controller,
-  Use,
   CreateResponse,
   Post,
 } from "@saffellikhan/epic-express";
-import { LocalSettings } from "@AppPath/exports";
-/* @ImportsContainer */
-/* /ImportsContainer */
 
 @Controller("<<ControllerPrefix>>", {
   childs: [
@@ -18,7 +17,6 @@ import { LocalSettings } from "@AppPath/exports";
     /* /ControllerChildsContainer */
   ],
 })
-@Use(LocalSettings(require("../../package.json").name))
 export class SampleController {
   @Post("/", "Create Something...")
   async Sample(req: Request) {

@@ -1,8 +1,9 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
 
-import { getModelsManager } from "@saffellikhan/epic-orm";
 /* @ImportsContainer */
 /* /ImportsContainer */
+
+import { getModelsManager } from "@saffellikhan/epic-orm";
 
 // Start Sample Job
 export const SampleJob = async () => {
