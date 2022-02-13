@@ -26,11 +26,19 @@ export class SampleController {
       .schema({}, { strict: false })
       .exec();
 
+    /**
+     * It is recommended to keep the following validators in place even if you don't want to validate any data.
+     * It will prevent the client from injecting unexpected data into the request.
+     *
+     * */
+
     // Params Validation
     await req.validator.validate(req.params).schema({}).exec();
 
     // Body Validation
     await req.validator.validate(req.body).schema({}).exec();
+
+    // Start coding here...
 
     // Return Response
     return new CreateResponse("Something great has been done successfully!");
