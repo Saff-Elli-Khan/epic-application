@@ -20,6 +20,12 @@ import {
 export class SampleController {
   @Post("/", "Create Something...")
   async Sample(req: Request) {
+    // Query Validation
+    await req.validator
+      .validate(req.query)
+      .schema({}, { strict: false })
+      .exec();
+
     // Params Validation
     await req.validator.validate(req.params).schema({}).exec();
 
