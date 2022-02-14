@@ -75,6 +75,38 @@ export const Middlewares = (Framework: Express) =>
                     ["ASC", "DESC"],
                     "Please provide valid sorting ASC or DESC!"
                   ),
+                createdBetween: (_) =>
+                  _.optional()
+                    .likeArray(
+                      { sanitize: true },
+                      "Please provide a valid timestamp list!"
+                    )
+                    .isLength(
+                      { min: 2, max: 2 },
+                      "Please provide a valid Range Array!"
+                    )
+                    .each((_) =>
+                      _.isNumeric(
+                        { sanitize: true },
+                        "Please provide a valid Unix timestamp!"
+                      )
+                    ),
+                modifiedBetween: (_) =>
+                  _.optional()
+                    .likeArray(
+                      { sanitize: true },
+                      "Please provide a valid timestamp list!"
+                    )
+                    .isLength(
+                      { min: 2, max: 2 },
+                      "Please provide a valid Range Array!"
+                    )
+                    .each((_) =>
+                      _.isNumeric(
+                        { sanitize: true },
+                        "Please provide a valid Unix timestamp!"
+                      )
+                    ),
               },
               { strict: false }
             )
