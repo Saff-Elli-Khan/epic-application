@@ -11,7 +11,7 @@ import { EpicTokensVerificationException } from "epic-tokens";
 import { ConnectionManager } from "@saffellikhan/epic-orm";
 import { InitializeCronJobs } from "./jobs";
 import { ModelList } from "./models";
-import { Configuration } from "./globals";
+import { Configuration, Schedule } from "./globals";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -64,7 +64,11 @@ new ConnectionManager(
     )
       .listen(process.env.PORT || 8080)
       .then(async () => {
-        // Initialize Cron Jobs
+        // Initialize Jobs
+        await Schedule.init();
+
+        console.log("Starting Background Jobs...");
+
         await InitializeCronJobs();
       })
   );

@@ -137,9 +137,6 @@ export const Validator = new Validation({
       : _.use("isIBAN"),
 });
 
-// Create a Cron Scheduler Instance
-export const Schedule = new Schedular();
-
 // Inject Environment Variables into objects
 const InjectEnv = <T extends Record<string, any>>(object: T): T => {
   for (const Key in object) {
@@ -148,7 +145,7 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
     if (typeof Value === "string") {
       // Resolve if value is an Object
       const MatchObject =
-        /(object|boolean|number|string)\(\s*\{\s*\{\s*(\w+)\s*\}\s*\}\s*\)/.exec(
+        /(object|boolean|number|string|list)\(\s*\{\s*\{\s*(\w+)\s*\}\s*\}\s*\)/.exec(
           Value
         );
 
@@ -163,6 +160,10 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
           object[Key] = parseFloat(process.env[MatchObject[2]] || "") as any;
         else if (MatchObject[1] === "string")
           object[Key] = process.env[MatchObject[2]] as any;
+        else if (MatchObject[1] === "list")
+          object[Key] = (process.env[MatchObject[2]] || "")
+            .split(",")
+            .map((_) => _.trim()) as any;
         else
           object[Key] = Value.replace(
             /\{\s*\{\s*(\w+)\s*\}\s*\}/g,
@@ -184,3 +185,15 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 export const Configuration = InjectEnv(
   JSON.parse(JSON.stringify(ConfigManager.getConfig("main")))
 );
+
+// Create a Cron Scheduler Instance
+export const Schedule = new Schedular({
+  name: "test",
+  redis: process.env.REDIS_HOST
+    ? {
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT || "6379"),
+        password: process.env.REDIS_PASSWORD,
+      }
+    : undefined,
+});
