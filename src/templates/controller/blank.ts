@@ -8,6 +8,7 @@ import Path from "path";
 import Fs from "fs";
 
 @Controller("<<RouteNamespace>>", {
+  /** Do not change the following code. */
   childs: Fs.readdirSync(__dirname)
     .filter((filename) =>
       new RegExp(`^<<FileName>>.[A-Z]\\w+.(ts|js)$`.replace(".", "\\.")).test(
@@ -20,6 +21,7 @@ import Fs from "fs";
           filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
         ]
     ),
+  /**/
 })
 export class SampleController {
   @Post("/", "Create Something...")
