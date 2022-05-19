@@ -1,9 +1,3 @@
-/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <MiddlewareTemplate> {{ middleware }}, </MiddlewareTemplate> */
-
-/* @ImportsContainer */
-/* /ImportsContainer */
-
 import EXPRESS, { Express, Request, Response, NextFunction } from "express";
 import Compression from "compression";
 import Cors from "cors";
@@ -11,9 +5,10 @@ import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
+import Path from "path";
+import Fs from "fs";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseDriver, GeoData, TokensManager, Validator } from "./globals";
-import { ImportMiddlewares } from "./imports";
 
 export const Middlewares = (Framework: Express) =>
   Framework
@@ -126,8 +121,12 @@ export const Middlewares = (Framework: Express) =>
         }
       },
 
-      ...ImportMiddlewares(),
-
-      /* @MiddlewaresContainer */
-      /* /MiddlewaresContainer */
+      ...Fs.readdirSync(Path.join(process.cwd(), "./src/middlewares/"))
+        .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+        .map(
+          (filename) =>
+            require(Path.join(process.cwd(), `./src/middlewares/${filename}`))[
+              filename.replace(/\.(ts|js)$/, "") + "Middleware"
+            ]
+        ),
     ]);

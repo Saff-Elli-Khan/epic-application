@@ -1,8 +1,3 @@
-/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-
-/* @ImportsContainer */
-/* /ImportsContainer */
-
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 
 export const SampleMiddleware = async (

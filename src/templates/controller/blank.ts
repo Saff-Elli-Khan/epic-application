@@ -1,21 +1,23 @@
-/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
-
-/* @ImportsContainer */
-/* /ImportsContainer */
-
 import {
   Request,
   Controller,
   CreateResponse,
   Post,
 } from "@saffellikhan/epic-express";
+import Path from "path";
+import Fs from "fs";
 
-@Controller("<<ControllerPrefix>>", {
-  childs: [
-    /* @ControllerChildsContainer */
-    /* /ControllerChildsContainer */
-  ],
+@Controller("<<RouteNamespace>>", {
+  childs: Fs.readdirSync(__dirname)
+    .filter((filename) =>
+      new RegExp(`^<<FileName>>.[A-Z]\\w+\\.(ts|js)$`).test(filename)
+    )
+    .map(
+      (filename) =>
+        require(Path.join(__dirname, filename))[
+          filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
+        ]
+    ),
 })
 export class SampleController {
   @Post("/", "Create Something...")

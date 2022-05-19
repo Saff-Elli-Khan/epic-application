@@ -1,9 +1,3 @@
-/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerTemplate> {{ child }}, </ControllerTemplate> */
-
-/* @ImportsContainer */
-/* /ImportsContainer */
-
 import {
   ParentController,
   Get,
@@ -11,17 +5,20 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
-import { ImportControllers } from "./imports";
+import Path from "path";
+import Fs from "fs";
 
 @ParentController("/", {
-  childs: [
-    ...ImportControllers(),
-
-    /* @ControllersContainer */
-    /* /ControllersContainer */
-  ],
+  childs: Fs.readdirSync(Path.join(process.cwd(), "./src/controllers/"))
+    .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+    .map(
+      (filename) =>
+        require(Path.join(process.cwd(), `./src/controllers/${filename}`))[
+          filename.replace(/\.(ts|js)$/, "") + "Controller"
+        ]
+    ),
 })
-export class indexController {
+export class RootController {
   @Get("/", { authType: "none" })
   public APIHome(_: Request, res: Response) {
     // Get API Details

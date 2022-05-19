@@ -8,8 +8,8 @@ import {
 import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
-import { InitializeCronJobs } from "./jobs";
 import { DatabaseDriver, Schedule } from "./globals";
+import { ExecuteJobs } from "./jobs";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -56,6 +56,6 @@ export class Application extends EpicApplication {
 
       console.log("Starting Background Jobs...");
 
-      await InitializeCronJobs();
+      await ExecuteJobs();
     });
 })();

@@ -1,8 +1,3 @@
-/* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-
-/* @ImportsContainer */
-/* /ImportsContainer */
-
 import { DatabaseDriver } from "@App/exports";
 import { DatabaseSession } from "@oridune/epic-odm";
 

@@ -3,9 +3,10 @@ import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { Schedular } from "@saffellikhan/epic-schedular";
 import { join as PathJoin } from "path";
-import { ModelList } from "./models";
 import { MongoDBDriver } from "@oridune/epic-odm";
 import Redis from "ioredis";
+import Path from "path";
+import Fs from "fs";
 
 // Load Environment Variables
 require("dotenv").config({
@@ -14,7 +15,14 @@ require("dotenv").config({
 
 // Create Database Driver
 export const DatabaseDriver = new MongoDBDriver(
-  ModelList,
+  Fs.readdirSync(Path.join(process.cwd(), "./src/models/"))
+    .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+    .map(
+      (filename) =>
+        require(Path.join(process.cwd(), `./src/models/${filename}`))[
+          filename.replace(/\.(ts|js)$/, "")
+        ]
+    ),
   process.env.DATABASE_URL || "mongodb://localhost:27017/test",
   {},
   process.env.NODE_ENV === "development"
