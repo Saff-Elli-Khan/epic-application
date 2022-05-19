@@ -8,7 +8,13 @@ import UserAgent from "express-useragent";
 import Path from "path";
 import Fs from "fs";
 import { DatabaseSession } from "@oridune/epic-odm";
-import { DatabaseDriver, GeoData, TokensManager, Validator } from "./globals";
+import {
+  Configuration,
+  DatabaseDriver,
+  GeoData,
+  TokensManager,
+  Validator,
+} from "./globals";
 
 export const Middlewares = (Framework: Express) =>
   Framework
@@ -121,6 +127,29 @@ export const Middlewares = (Framework: Express) =>
         }
       },
 
+      // Load Plugins
+      ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
+        (items, pluginName) => [
+          ...items,
+          ...Fs.readdirSync(
+            Path.join(
+              process.cwd(),
+              `./node_modules/${pluginName}/build/middlewares/`
+            )
+          )
+            .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+            .map(
+              (filename) =>
+                require(Path.join(
+                  process.cwd(),
+                  `./node_modules/${pluginName}/build/middlewares/${filename}`
+                ))[filename.replace(/\.(ts|js)$/, "") + "Middleware"]
+            ),
+        ],
+        []
+      ),
+
+      // Local Imports
       ...Fs.readdirSync(Path.join(process.cwd(), "./src/middlewares/"))
         .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
         .map(

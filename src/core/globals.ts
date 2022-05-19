@@ -13,21 +13,6 @@ require("dotenv").config({
   path: PathJoin(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
 });
 
-// Create Database Driver
-export const DatabaseDriver = new MongoDBDriver(
-  Fs.readdirSync(Path.join(process.cwd(), "./src/models/"))
-    .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-    .map(
-      (filename) =>
-        require(Path.join(process.cwd(), `./src/models/${filename}`))[
-          filename.replace(/\.(ts|js)$/, "")
-        ]
-    ),
-  process.env.DATABASE_URL || "mongodb://localhost:27017/test",
-  {},
-  process.env.NODE_ENV === "development"
-);
-
 // Global Tokens Manager
 export const TokensManager = new EpicTokens(
   () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z"
@@ -202,6 +187,43 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 // Get Epic Configuration
 export const Configuration = InjectEnv(
   require("../../package.json").epic || {}
+);
+
+// Create Database Driver
+export const DatabaseDriver = new MongoDBDriver(
+  [
+    // Load Plugins
+    ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
+      (items, pluginName) => [
+        ...items,
+        ...Fs.readdirSync(
+          Path.join(process.cwd(), `./node_modules/${pluginName}/build/models/`)
+        )
+          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+          .map(
+            (filename) =>
+              require(Path.join(
+                process.cwd(),
+                `./node_modules/${pluginName}/build/models/${filename}`
+              ))[filename.replace(/\.(ts|js)$/, "")]
+          ),
+      ],
+      []
+    ),
+
+    // Local Imports
+    ...Fs.readdirSync(Path.join(process.cwd(), "./src/models/"))
+      .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+      .map(
+        (filename) =>
+          require(Path.join(process.cwd(), `./src/models/${filename}`))[
+            filename.replace(/\.(ts|js)$/, "")
+          ]
+      ),
+  ],
+  process.env.DATABASE_URL || "mongodb://localhost:27017/test",
+  {},
+  process.env.NODE_ENV === "development"
 );
 
 // Create Redis Client
