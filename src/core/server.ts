@@ -8,10 +8,8 @@ import {
 import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
-import { ConnectionManager } from "@saffellikhan/epic-orm";
 import { InitializeCronJobs } from "./jobs";
-import { ModelList } from "./models";
-import { Configuration, Schedule } from "./globals";
+import { DatabaseDriver, Schedule } from "./globals";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -36,39 +34,28 @@ export class Application extends EpicApplication {
   };
 }
 
-// Create a Database Connection
-new ConnectionManager(
-  {
-    engine: Configuration.database.engine,
-    type: Configuration.database.type,
-    uri: Configuration.database.uri,
-    logs:
-      typeof Configuration.database.logs === "boolean"
-        ? Configuration.database.logs
-        : process.env.NODE_ENV === "development",
-    sync:
-      typeof Configuration.database.sync === "boolean"
-        ? Configuration.database.sync
-        : process.env.NODE_ENV === "development",
-    ...Configuration.database.options,
-  },
-  ModelList
-)
-  .init()
-  .then(() =>
-    // Start Application Server
-    new HTTP(
-      new Application({
-        postman: Configuration.other.postman,
-      })
-    )
-      .listen(process.env.PORT || 8080)
-      .then(async () => {
-        // Initialize Jobs
-        await Schedule.init();
+(async () => {
+  // Create a Database Connection
+  await DatabaseDriver.connect();
 
-        console.log("Starting Background Jobs...");
+  // Start Application Server
+  new HTTP(
+    new Application({
+      postman: {
+        apiKey: process.env.POSTMAN_API_KEY || "",
+        collectionId: process.env.POSTMAN_COLLECTION_ID || "",
+        collectionName: process.env.POSTMAN_COLLECTION_NAME || "",
+        disabled: !process.env.POSTMAN_API_KEY,
+      },
+    })
+  )
+    .listen(process.env.PORT || 8080)
+    .then(async () => {
+      // Initialize Jobs
+      await Schedule.init();
 
-        await InitializeCronJobs();
-      })
-  );
+      console.log("Starting Background Jobs...");
+
+      await InitializeCronJobs();
+    });
+})();

@@ -1,14 +1,24 @@
 import { Validation } from "epic-validator";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
-import { ConfigManager } from "@saffellikhan/epic-cli";
 import { Schedular } from "@saffellikhan/epic-schedular";
 import { join as PathJoin } from "path";
+import { ModelList } from "./models";
+import { MongoDBDriver } from "@oridune/epic-odm";
+import Redis from "ioredis";
 
 // Load Environment Variables
 require("dotenv").config({
   path: PathJoin(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
 });
+
+// Create Database Driver
+export const DatabaseDriver = new MongoDBDriver(
+  ModelList,
+  process.env.DATABASE_URL || "mongodb://localhost:27017/test",
+  {},
+  process.env.NODE_ENV === "development"
+);
 
 // Global Tokens Manager
 export const TokensManager = new EpicTokens(
@@ -181,19 +191,21 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
   return object;
 };
 
-// Get Application Configuration
+// Get Epic Configuration
 export const Configuration = InjectEnv(
-  JSON.parse(JSON.stringify(ConfigManager.getConfig("main")))
+  require("../../package.json").epic || {}
 );
+
+// Create Redis Client
+export const RedisClient = new Redis({
+  host: process.env.REDIS_HOST,
+  port: parseInt(process.env.REDIS_PORT || "6379"),
+  username: process.env.REDIS_USERNAME,
+  password: process.env.REDIS_PASSWORD,
+});
 
 // Create a Cron Scheduler Instance
 export const Schedule = new Schedular({
-  name: "test",
-  redis: process.env.REDIS_HOST
-    ? {
-        host: process.env.REDIS_HOST,
-        port: parseInt(process.env.REDIS_PORT || "6379"),
-        password: process.env.REDIS_PASSWORD,
-      }
-    : undefined,
+  name: require("../../package.json").name,
+  redis: RedisClient,
 });

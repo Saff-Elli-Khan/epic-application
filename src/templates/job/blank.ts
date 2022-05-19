@@ -3,15 +3,15 @@
 /* @ImportsContainer */
 /* /ImportsContainer */
 
-import { Schedule } from "@AppPath/exports";
-import { getModelsManager } from "@saffellikhan/epic-orm";
+import { DatabaseDriver, Schedule } from "@App/exports";
+import { DatabaseSession } from "@oridune/epic-odm";
 
 // Start Sample Cron Job
 export const SampleJob = () =>
   Schedule.task("Sample", "0 0 * * *", async (info) => {
-    // You can optionally perform database operations using Global Models Manager Instance
-    // Get Global Database Models Manager
-    const Database = getModelsManager();
+    // You can perform database operations. (optionally)
+    // Create Database Session
+    const Database = await new DatabaseSession(DatabaseDriver).start();
 
     // Do something very important (Every day at 00:00)...
     console.log("Sample job has been executed:", info);

@@ -1,6 +1,5 @@
-import { ConfigurationInterface } from "@saffellikhan/epic-cli";
+import { DatabaseSession } from "@oridune/epic-odm";
 import { CreateResponse } from "@saffellikhan/epic-express";
-import { ModelsManager } from "@saffellikhan/epic-orm";
 import { GeoData, TokensManager, Validator } from "./globals";
 
 // Override Express Interfaces
@@ -12,17 +11,14 @@ declare module "express-serve-static-core" {
     /** Get Current Request Controller Name */
     name: string;
 
-    /** Get Current Application's Configuration */
-    config: ConfigurationInterface;
-
     /** Get User's IP Address */
     clientIp: string;
 
     /** Current User Permission List */
     permissions?: string[];
 
-    /** Get Database Models Manager Instance */
-    database: ModelsManager;
+    /** Database Connection Session */
+    database: DatabaseSession<any>;
 
     /** Get Validator Instance */
     validator: typeof Validator;

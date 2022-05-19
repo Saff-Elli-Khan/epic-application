@@ -3,13 +3,10 @@
 /* @ImportsContainer */
 /* /ImportsContainer */
 
-import { Model, BaseModel, Column } from "@saffellikhan/epic-orm";
+import { Model, BaseModel, Field } from "@oridune/epic-odm";
 
 @Model<Sample>()
 export class Sample extends BaseModel {
-  @Column({
-    type: String,
-    indexes: ["INDEX"],
-  })
-  createdBy!: string | null;
+  @Field()
+  createdBy!: string;
 }

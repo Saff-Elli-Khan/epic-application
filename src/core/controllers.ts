@@ -1,5 +1,5 @@
 /* <ImportsTemplate> import { {{ modules }} } from "{{ location }}"; </ImportsTemplate> */
-/* <ControllerChildTemplate> {{ child }}, </ControllerChildTemplate> */
+/* <ControllerTemplate> {{ child }}, </ControllerTemplate> */
 
 /* @ImportsContainer */
 /* /ImportsContainer */
@@ -11,25 +11,26 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
+import { ImportControllers } from "./imports";
 
 @ParentController("/", {
   childs: [
-    /* @ControllerChildsContainer */
-    /* /ControllerChildsContainer */
+    ...ImportControllers(),
+
+    /* @ControllersContainer */
+    /* /ControllersContainer */
   ],
 })
 export class indexController {
   @Get("/", { authType: "none" })
-  public APIHome(req: Request, res: Response) {
+  public APIHome(_: Request, res: Response) {
     // Get API Details
     delete res.locals.useragent;
 
     // Return API Details
-    return new CreateResponse(`The API is online listening to the requests!`, {
-      name: req.config.name,
-      description: req.config.description,
-      brand: req.config.brand,
-      ...res.locals,
-    });
+    return new CreateResponse(
+      `The API is online listening to the requests!`,
+      res.locals
+    );
   }
 }

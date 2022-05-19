@@ -11,8 +11,9 @@ import Helmet from "helmet";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
-import { createModelsManager } from "@saffellikhan/epic-orm";
-import { Configuration, GeoData, TokensManager, Validator } from "./globals";
+import { DatabaseSession } from "@oridune/epic-odm";
+import { DatabaseDriver, GeoData, TokensManager, Validator } from "./globals";
+import { ImportMiddlewares } from "./imports";
 
 export const Middlewares = (Framework: Express) =>
   Framework
@@ -30,13 +31,10 @@ export const Middlewares = (Framework: Express) =>
       // Global Features Injector Middleware
       async (req: Request, res: Response, next: NextFunction) => {
         try {
-          // Add Configuration
-          req.config = Configuration;
+          // Create Database Session
+          req.database = await new DatabaseSession(DatabaseDriver).start();
 
-          // Database Manager
-          req.database = createModelsManager();
-
-          // Add Rest Features
+          // Add Common Features
           req.geo = GeoData;
           req.tokens = TokensManager;
           req.validator = Validator;
@@ -127,6 +125,8 @@ export const Middlewares = (Framework: Express) =>
           next(error);
         }
       },
+
+      ...ImportMiddlewares(),
 
       /* @MiddlewaresContainer */
       /* /MiddlewaresContainer */
