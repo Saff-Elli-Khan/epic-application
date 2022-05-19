@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "A powerful Epic application.",
   "private": true,
+  "packageManager": "npm",
   "epic": {
     "plugins": {}
   },
