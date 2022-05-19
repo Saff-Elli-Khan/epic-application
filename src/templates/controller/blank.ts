@@ -10,7 +10,7 @@ import Fs from "fs";
 @Controller("<<RouteNamespace>>", {
   childs: Fs.readdirSync(__dirname)
     .filter((filename) =>
-      new RegExp(`^<<FileName>>.[A-Z]\\w+\\.(ts|js)$`).test(filename)
+      new RegExp(`^<<FileName>>\\.[A-Z]\\w+\\.(ts|js)$`).test(filename)
     )
     .map(
       (filename) =>
