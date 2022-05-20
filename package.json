@@ -5,13 +5,14 @@
   "private": true,
   "packageManager": "npm",
   "epic": {
+    "locals": {},
     "plugins": {}
   },
   "scripts": {
     "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts",
     "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "build": "epic build",
-    "test": ""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@oridune/epic-odm": "^1.0.4",
