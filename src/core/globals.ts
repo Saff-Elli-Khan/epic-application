@@ -186,7 +186,7 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 
 // Get Epic Configuration
 export const Configuration = InjectEnv(
-  require("../../package.json").epic || {}
+  require(Path.join(process.cwd(), "./package.json")).epic || {}
 );
 
 // Create Database Driver
