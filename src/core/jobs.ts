@@ -9,17 +9,22 @@ export const ExecuteJobs = async () => {
     ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
       (items, pluginName) => [
         ...items,
-        ...Fs.readdirSync(
-          Path.join(process.cwd(), `./node_modules/${pluginName}/build/jobs/`)
-        )
-          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-          .map(
-            (filename) =>
-              require(Path.join(
+        ...(!Configuration.plugins[pluginName].disabled
+          ? Fs.readdirSync(
+              Path.join(
                 process.cwd(),
-                `./node_modules/${pluginName}/build/jobs/${filename}`
-              ))[filename.replace(/\.(ts|js)$/, "") + "Job"]
-          ),
+                `./node_modules/${pluginName}/build/jobs/`
+              )
+            )
+              .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+              .map(
+                (filename) =>
+                  require(Path.join(
+                    process.cwd(),
+                    `./node_modules/${pluginName}/build/jobs/${filename}`
+                  ))[filename.replace(/\.(ts|js)$/, "") + "Job"]
+              )
+          : []),
       ],
       []
     ),

@@ -196,17 +196,22 @@ export const DatabaseDriver = new MongoDBDriver(
     ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
       (items, pluginName) => [
         ...items,
-        ...Fs.readdirSync(
-          Path.join(process.cwd(), `./node_modules/${pluginName}/build/models/`)
-        )
-          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-          .map(
-            (filename) =>
-              require(Path.join(
+        ...(!Configuration.plugins[pluginName].disabled
+          ? Fs.readdirSync(
+              Path.join(
                 process.cwd(),
-                `./node_modules/${pluginName}/build/models/${filename}`
-              ))[filename.replace(/\.(ts|js)$/, "")]
-          ),
+                `./node_modules/${pluginName}/build/models/`
+              )
+            )
+              .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+              .map(
+                (filename) =>
+                  require(Path.join(
+                    process.cwd(),
+                    `./node_modules/${pluginName}/build/models/${filename}`
+                  ))[filename.replace(/\.(ts|js)$/, "")]
+              )
+          : []),
       ],
       []
     ),

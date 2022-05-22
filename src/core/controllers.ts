@@ -15,20 +15,22 @@ import { Configuration } from "./globals";
     ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
       (items, pluginName) => [
         ...items,
-        ...Fs.readdirSync(
-          Path.join(
-            process.cwd(),
-            `./node_modules/${pluginName}/build/controllers/`
-          )
-        )
-          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-          .map(
-            (filename) =>
-              require(Path.join(
+        ...(!Configuration.plugins[pluginName].disabled
+          ? Fs.readdirSync(
+              Path.join(
                 process.cwd(),
-                `./node_modules/${pluginName}/build/controllers/${filename}`
-              ))[filename.replace(/\.(ts|js)$/, "") + "Controller"]
-          ),
+                `./node_modules/${pluginName}/build/controllers/`
+              )
+            )
+              .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+              .map(
+                (filename) =>
+                  require(Path.join(
+                    process.cwd(),
+                    `./node_modules/${pluginName}/build/controllers/${filename}`
+                  ))[filename.replace(/\.(ts|js)$/, "") + "Controller"]
+              )
+          : []),
       ],
       []
     ),
