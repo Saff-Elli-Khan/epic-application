@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.4",
+    "@oridune/epic-odm": "^1.0.5",
     "@saffellikhan/epic-express": "^1.0.14",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
