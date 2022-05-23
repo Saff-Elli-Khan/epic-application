@@ -12,11 +12,12 @@
     "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T --files ./src/core/index.ts",
     "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "build": "epic build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync:postman": "cross-env NODE_ENV=development ts-node --ignore 'cache/' -T --files ./src/core/syncPostman.ts"
   },
   "dependencies": {
     "@oridune/epic-odm": "^1.0.5",
-    "@saffellikhan/epic-express": "^1.0.14",
+    "@saffellikhan/epic-express": "^2.0.0",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",

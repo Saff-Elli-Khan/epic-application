@@ -1,3 +1,4 @@
+import "./controllers";
 import {
   HTTP,
   EpicApplication,
@@ -8,8 +9,6 @@ import {
 import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
-import { DatabaseDriver, Schedule } from "./globals";
-import { ExecuteJobs } from "./jobs";
 
 // Create Application
 export class Application extends EpicApplication {
@@ -35,28 +34,4 @@ export class Application extends EpicApplication {
 }
 
 // Create Application Server
-export const Server = new HTTP(
-  new Application({
-    postman: {
-      apiKey: process.env.POSTMAN_API_KEY || "",
-      collectionId: process.env.POSTMAN_COLLECTION_ID || "",
-      collectionName: process.env.POSTMAN_COLLECTION_NAME || "",
-      disabled: !process.env.POSTMAN_API_KEY,
-    },
-  })
-);
-
-(async () => {
-  // Create a Database Connection
-  await DatabaseDriver.connect();
-
-  // Initialize Jobs
-  await Schedule.init();
-
-  console.log("Starting Background Jobs...");
-
-  await ExecuteJobs();
-
-  // Start Application Server
-  await Server.listen(process.env.PORT || 3742);
-})();
+export const Server = new HTTP(new Application());

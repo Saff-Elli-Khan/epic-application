@@ -1,5 +1,5 @@
 import {
-  ParentController,
+  RootController,
   Get,
   Request,
   Response,
@@ -9,7 +9,7 @@ import Path from "path";
 import Fs from "fs";
 import { Configuration } from "./globals";
 
-@ParentController("/", {
+@RootController("/", {
   childs: [
     // Load Plugins
     ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
@@ -46,8 +46,8 @@ import { Configuration } from "./globals";
       ),
   ],
 })
-export class RootController {
-  @Get("/", { authType: "none" })
+export class MainController {
+  @Get("/api/", { authType: "none" })
   public APIHome(_: Request, res: Response) {
     // Get API Details
     delete res.locals.useragent;

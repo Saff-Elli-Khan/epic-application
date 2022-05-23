@@ -2,7 +2,6 @@ import { Validation } from "epic-validator";
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { Schedular } from "@saffellikhan/epic-schedular";
-import { join as PathJoin } from "path";
 import { MongoDBDriver } from "@oridune/epic-odm";
 import Redis from "ioredis";
 import Path from "path";
@@ -10,7 +9,7 @@ import Fs from "fs";
 
 // Load Environment Variables
 require("dotenv").config({
-  path: PathJoin(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
+  path: Path.join(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
 });
 
 // Global Tokens Manager
