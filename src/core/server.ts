@@ -50,13 +50,13 @@ export const Server = new HTTP(
   // Create a Database Connection
   await DatabaseDriver.connect();
 
+  // Initialize Jobs
+  await Schedule.init();
+
+  console.log("Starting Background Jobs...");
+
+  await ExecuteJobs();
+
   // Start Application Server
-  Server.listen(process.env.PORT || 3742).then(async () => {
-    // Initialize Jobs
-    await Schedule.init();
-
-    console.log("Starting Background Jobs...");
-
-    await ExecuteJobs();
-  });
+  await Server.listen(process.env.PORT || 3742);
 })();
