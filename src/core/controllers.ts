@@ -47,7 +47,10 @@ import { Configuration } from "./globals";
   ],
 })
 export class MainController {
-  @Get("/api/", { authType: "none" })
+  @Get("/api/", {
+    authType: "none",
+    description: "Get metadata from the API home.",
+  })
   async APIHome(_: Request, res: Response) {
     // Get API Details
     delete res.locals.useragent;
