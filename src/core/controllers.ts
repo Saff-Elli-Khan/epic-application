@@ -48,7 +48,7 @@ import { Configuration } from "./globals";
 })
 export class MainController {
   @Get("/api/", { authType: "none" })
-  public APIHome(_: Request, res: Response) {
+  async APIHome(_: Request, res: Response) {
     // Get API Details
     delete res.locals.useragent;
 
