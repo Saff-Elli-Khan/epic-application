@@ -49,7 +49,7 @@ import { Configuration } from "./globals";
 export class MainController {
   @Get("/api/", {
     authType: "none",
-    description: "Get metadata from the API home.",
+    description: "Get the API details and metadata.",
   })
   async APIHome(_: Request, res: Response) {
     // Get API Details
