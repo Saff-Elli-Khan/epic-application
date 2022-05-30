@@ -21,7 +21,15 @@ export const Middlewares = (Framework: Express) =>
     // Utility Middlewares
     .use([
       Logger("dev"),
-      Cors(),
+      Cors({
+        allowedHeaders: process.env.CORS_ALLOW_HEADERS,
+        credentials: ["true", "1"].includes(
+          process.env.CORS_ALLOW_CREDENTIALS || ""
+        ),
+        exposedHeaders: process.env.CORS_EXPOSED_HEADERS,
+        methods: process.env.CORS_ALLOW_METHODS,
+        origin: process.env.CORS_ALLOW_ORIGIN,
+      }),
       Helmet(),
       CookieParser(),
       Compression(),
