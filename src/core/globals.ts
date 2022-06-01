@@ -146,10 +146,9 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
     const Value = object[Key];
     if (typeof Value === "string") {
       // Resolve if value is an Object
-      const MatchObject =
-        /(object|boolean|number|string|list)\(\s*\{\s*\{\s*(\w+)\s*\}\s*\}\s*\)/.exec(
-          Value
-        );
+      const MatchObject = /(object|boolean|number|string|list)\(\s*\{\s*\{\s*(\w+)\s*\}\s*\}\s*\)/.exec(
+        Value
+      );
 
       if (MatchObject) {
         if (MatchObject[1] === "object")
