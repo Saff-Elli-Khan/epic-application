@@ -1,6 +1,6 @@
 import { DatabaseDriver, Schedule } from "./globals";
 import { ExecuteJobs } from "./jobs";
-import { Server } from "./server";
+import { HTTPServer } from "./server";
 
 (async () => {
   // Create a Database Connection
@@ -13,5 +13,5 @@ import { Server } from "./server";
   await ExecuteJobs();
 
   // Start Application Server
-  await Server.listen(process.env.PORT || 3742);
+  await HTTPServer.listen(process.env.PORT || 3742);
 })();

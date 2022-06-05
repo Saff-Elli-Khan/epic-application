@@ -33,5 +33,5 @@ export class Application extends EpicApplication {
   };
 }
 
-// Create Application Server
-export const Server = new HTTP(new Application());
+// Create HTTP Server
+export const HTTPServer = new HTTP(new Application());

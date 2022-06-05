@@ -1,4 +1,4 @@
-import { Server } from "./server";
+import { HTTPServer } from "./server";
 import Path from "path";
 
 // Load Environment Variables
@@ -12,7 +12,7 @@ require("dotenv").config({
  * Execute the following script with "npm run sync:postman"
  *
  */
-Server.Application.syncPostman({
+HTTPServer.Application.syncPostman({
   apiKey: process.env.POSTMAN_API_KEY || "",
   collectionId: process.env.POSTMAN_COLLECTION_ID || "",
   collectionName: process.env.POSTMAN_COLLECTION_NAME || "",

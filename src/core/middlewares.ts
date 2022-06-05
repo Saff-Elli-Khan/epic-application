@@ -160,12 +160,15 @@ export const Middlewares = (Framework: Express) =>
       ),
 
       // Local Imports
-      ...Fs.readdirSync(Path.join(process.cwd(), "./src/middlewares/"))
-        .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-        .map(
-          (filename) =>
-            require(Path.join(process.cwd(), `./src/middlewares/${filename}`))[
-              filename.replace(/\.(ts|js)$/, "") + "Middleware"
-            ]
-        ),
+      ...(!Configuration.disabled
+        ? Fs.readdirSync(Path.join(process.cwd(), "./src/middlewares/"))
+            .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+            .map(
+              (filename) =>
+                require(Path.join(
+                  process.cwd(),
+                  `./src/middlewares/${filename}`
+                ))[filename.replace(/\.(ts|js)$/, "") + "Middleware"]
+            )
+        : []),
     ]);

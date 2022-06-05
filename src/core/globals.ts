@@ -215,14 +215,16 @@ export const DatabaseDriver = new MongoDBDriver(
     ),
 
     // Local Imports
-    ...Fs.readdirSync(Path.join(process.cwd(), "./src/models/"))
-      .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-      .map(
-        (filename) =>
-          require(Path.join(process.cwd(), `./src/models/${filename}`))[
-            filename.replace(/\.(ts|js)$/, "")
-          ]
-      ),
+    ...(!Configuration.disabled
+      ? Fs.readdirSync(Path.join(process.cwd(), "./src/models/"))
+          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+          .map(
+            (filename) =>
+              require(Path.join(process.cwd(), `./src/models/${filename}`))[
+                filename.replace(/\.(ts|js)$/, "")
+              ]
+          )
+      : []),
   ],
   process.env.DATABASE_URL || "mongodb://localhost:27017/test",
   {},

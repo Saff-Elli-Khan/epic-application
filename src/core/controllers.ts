@@ -36,14 +36,17 @@ import { Configuration } from "./globals";
     ),
 
     // Local Imports
-    ...Fs.readdirSync(Path.join(process.cwd(), "./src/controllers/"))
-      .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-      .map(
-        (filename) =>
-          require(Path.join(process.cwd(), `./src/controllers/${filename}`))[
-            filename.replace(/\.(ts|js)$/, "") + "Controller"
-          ]
-      ),
+    ...(!Configuration.disabled
+      ? Fs.readdirSync(Path.join(process.cwd(), "./src/controllers/"))
+          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+          .map(
+            (filename) =>
+              require(Path.join(
+                process.cwd(),
+                `./src/controllers/${filename}`
+              ))[filename.replace(/\.(ts|js)$/, "") + "Controller"]
+          )
+      : []),
   ],
 })
 export class MainController {
