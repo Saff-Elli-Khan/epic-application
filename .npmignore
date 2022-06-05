@@ -1,7 +1,7 @@
-temp/
-.temp/
-env/
-src/
-public/
-build/core/
-build/*.ts
+./temp/
+./.temp/
+./env/
+./src/
+./public/
+./build/core/
+./build/*.ts
