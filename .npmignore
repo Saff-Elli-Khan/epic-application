@@ -1,7 +1,9 @@
+# Development Source
 .temp/
-./temp/
-./env/
-./src/
-./public/
-./build/core/
-./build/*.ts
+temp/
+env/
+src/
+public/
+build/core/
+build/*.ts
+tsconfig.tsbuildinfo
