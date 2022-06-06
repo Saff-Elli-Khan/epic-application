@@ -22,7 +22,7 @@ import Fs from "fs";
           filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
         ]
     ),
-  /**/
+  /* --------------------------------- */
 })
 export class SampleController {
   @Get("/", "Get Something...")
