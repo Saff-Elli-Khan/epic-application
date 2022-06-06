@@ -77,8 +77,8 @@ export const Validator = new Validation({
       .isIn(notIn, "Invalid Username has been provided!"),
   isGender: (_) =>
     _.isIn(
-      ["Male", "Female", "Unknown"],
-      "Please provide a valid Gender 'Male', 'Female' or 'Unknown'!"
+      ["Male", "Female", "Other"],
+      "Please provide a valid Gender 'Male', 'Female' or 'Other'!"
     ),
   isPassword: (_) =>
     _.required()
