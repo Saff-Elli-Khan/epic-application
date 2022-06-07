@@ -4,7 +4,7 @@ import { HTTPServer } from "./server";
 
 (async () => {
   // Create a Database Connection
-  await DatabaseDriver.connect();
+  await DatabaseDriver.startUp();
 
   // Initialize Jobs
   await Schedule.init();
