@@ -16,7 +16,7 @@
     "sync:postman": "cross-env NODE_ENV=development ts-node --ignore 'cache/' -T --files ./src/core/syncPostman.ts"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.16",
+    "@oridune/epic-odm": "^1.0.17",
     "@saffellikhan/epic-express": "^2.0.3",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
