@@ -34,7 +34,12 @@ export const Middlewares = (Framework: Express) =>
       CookieParser(),
       Compression(),
       UserAgent.express(),
-      EXPRESS.json(),
+      EXPRESS.json({
+        verify: (req, _, buffer) => {
+          // @ts-ignore
+          req.rawBody = buffer;
+        },
+      }),
       EXPRESS.urlencoded({ extended: true }),
 
       // Global Features Injector Middleware
