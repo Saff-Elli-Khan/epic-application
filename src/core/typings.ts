@@ -1,6 +1,7 @@
 import { DatabaseSession } from "@oridune/epic-odm";
 import { CreateResponse } from "@saffellikhan/epic-express";
-import { GeoData, TokensManager, Validator } from "./globals";
+import { GeoData, TokensManager } from "./globals";
+import { Validator } from "./validator";
 
 // Override Express Interfaces
 declare module "express-serve-static-core" {
@@ -31,5 +32,8 @@ declare module "express-serve-static-core" {
 
     /** Get Current Response Object */
     response?: CreateResponse;
+
+    /** Raw Body */
+    rawBody: Buffer;
   }
 }

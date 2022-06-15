@@ -5,49 +5,10 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
-import Path from "path";
-import Fs from "fs";
-import { Configuration } from "./globals";
+import { LoadModules } from "./helpers";
 
 @RootController("/", {
-  childs: [
-    // Load Plugins
-    ...Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
-      (items, pluginName) => [
-        ...items,
-        ...(!Configuration.plugins[pluginName].disabled
-          ? Fs.readdirSync(
-              Path.join(
-                process.cwd(),
-                `./node_modules/${pluginName}/build/controllers/`
-              )
-            )
-              .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-              .map(
-                (filename) =>
-                  require(Path.join(
-                    process.cwd(),
-                    `./node_modules/${pluginName}/build/controllers/${filename}`
-                  ))[filename.replace(/\.(ts|js)$/, "") + "Controller"]
-              )
-          : []),
-      ],
-      []
-    ),
-
-    // Local Imports
-    ...(!Configuration.disabled
-      ? Fs.readdirSync(Path.join(process.cwd(), "./src/controllers/"))
-          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-          .map(
-            (filename) =>
-              require(Path.join(
-                process.cwd(),
-                `./src/controllers/${filename}`
-              ))[filename.replace(/\.(ts|js)$/, "") + "Controller"]
-          )
-      : []),
-  ],
+  childs: LoadModules("controller"),
 })
 export class MainController {
   @Get("/api/", {

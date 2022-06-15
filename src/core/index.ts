@@ -1,4 +1,5 @@
-import { DatabaseDriver, Schedule } from "./globals";
+import { DatabaseDriver } from "./database";
+import { Schedule } from "./globals";
 import { ExecuteJobs } from "./jobs";
 import { HTTPServer } from "./server";
 

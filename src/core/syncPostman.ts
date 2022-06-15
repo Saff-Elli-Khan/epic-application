@@ -1,5 +1,5 @@
-import { HTTPServer } from "./server";
 import Path from "path";
+import { HTTPServer } from "./server";
 
 // Load Environment Variables
 require("dotenv").config({

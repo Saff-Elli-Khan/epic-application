@@ -5,23 +5,11 @@ import {
   Get,
   Post,
 } from "@saffellikhan/epic-express";
-import Path from "path";
-import Fs from "fs";
+import { LoadChildControllers } from "@App/exports";
 
 @Controller("<<RouteNamespace>>", {
   /** Do not change the following code. */
-  childs: Fs.readdirSync(__dirname)
-    .filter((filename) =>
-      new RegExp(`^<<FileName>>.[A-Z]\\w+.(ts|js)$`.replace(".", "\\.")).test(
-        filename
-      )
-    )
-    .map(
-      (filename) =>
-        require(Path.join(__dirname, filename))[
-          filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
-        ]
-    ),
+  childs: LoadChildControllers(__dirname, `<<FileName>>`),
   /* --------------------------------- */
 })
 export class SampleController {
