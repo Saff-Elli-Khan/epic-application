@@ -1,8 +1,12 @@
 import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { Schedular } from "@saffellikhan/epic-schedular";
+import EventEmitter from "events";
 import Redis from "ioredis";
 import Path from "path";
+
+// Create Event Emitter Instance
+export const Events = new EventEmitter();
 
 // Load Environment Variables
 require("dotenv").config({

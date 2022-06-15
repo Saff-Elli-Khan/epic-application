@@ -7,7 +7,7 @@ import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseDriver } from "./database";
-import { GeoData, TokensManager } from "./globals";
+import { Events, GeoData, TokensManager } from "./globals";
 import { LoadModules } from "./helpers";
 import { Validator } from "./validator";
 
@@ -51,7 +51,10 @@ export const Middlewares = (Framework: Express) =>
           // On Request End
           res.on("close", async () => {
             // Final Tasks
-            await req.response?.AfterResponse();
+            await req.response?.AfterResponse?.();
+
+            // Emit Event
+            Events.emit(req.name, req.response);
 
             // Close Database Connection
             req.database.end();
