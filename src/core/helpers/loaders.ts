@@ -32,8 +32,9 @@ export const LoadLocalModules = (
     options?.moduleDir || Path.join(process.cwd(), `./src/${Pluralize(type)}/`);
 
   // Get Lock Information
-  const LockInfo = require(Path.join(ModuleDir, "../../epic.lock.json"));
-  const ModulesList = (LockInfo.modules as Array<{
+  const LockFilePath = Path.join(ModuleDir, "../../epic.lock.json");
+  const LockInfo = Fs.existsSync(LockFilePath) ? require(LockFilePath) : {};
+  const ModulesList = ((LockInfo.modules || []) as Array<{
     type: string;
     name: string;
   }>).filter((module) => module.type === type);
