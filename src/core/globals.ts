@@ -2,7 +2,6 @@ import { EpicGeo } from "epic-geo";
 import { EpicTokens } from "epic-tokens";
 import { Schedular } from "@saffellikhan/epic-schedular";
 import Redis from "ioredis";
-import Fs from "fs";
 import Path from "path";
 
 // Load Environment Variables
