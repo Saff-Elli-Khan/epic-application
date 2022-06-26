@@ -54,7 +54,7 @@ export const Middlewares = (Framework: Express) =>
             await req.response?.AfterResponse?.();
 
             // Emit Event
-            Events.emit(req.name, req.response);
+            Events.emit(req.name, req);
 
             // Close Database Connection
             req.database.end();

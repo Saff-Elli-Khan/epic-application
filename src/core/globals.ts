@@ -5,18 +5,13 @@ import EventEmitter from "events";
 import Redis from "ioredis";
 import Path from "path";
 
-// Create Event Emitter Instance
-export const Events = new EventEmitter();
-
 // Load Environment Variables
 require("dotenv").config({
   path: Path.join(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
 });
 
-// Global Tokens Manager
-export const TokensManager = new EpicTokens(
-  () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z"
-);
+// Create Event Emitter Instance
+export const Events = new EventEmitter();
 
 // Geo Data Library
 export const GeoData = new EpicGeo();
@@ -78,6 +73,12 @@ export const RedisClient = process.env.REDIS_HOST
       password: process.env.REDIS_PASSWORD,
     })
   : undefined;
+
+// Global Tokens Manager
+export const TokensManager = new EpicTokens(
+  () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z",
+  { redis: RedisClient }
+);
 
 // Create a Cron Scheduler Instance
 export const Schedule = new Schedular({
