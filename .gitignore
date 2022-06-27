@@ -78,3 +78,6 @@ env/
 temp/
 build/
 tsconfig.tsbuildinfo
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
