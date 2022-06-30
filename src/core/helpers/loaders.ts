@@ -29,57 +29,65 @@ export const LoadLocalModules = (
 ) => {
   // Get Module Directory
   const ModuleDir =
-    options?.moduleDir || Path.join(process.cwd(), `./src/${Pluralize(type)}/`);
+    options?.moduleDir ||
+    Path.join(
+      process.cwd(),
+      `./${process.env.NODE_ENV === "production" ? "build" : "src"}/${Pluralize(
+        type
+      )}/`
+    );
 
-  // Get Lock Information
-  const LockFilePath = Path.join(ModuleDir, "../../epic.lock.json");
-  const LockInfo = Fs.existsSync(LockFilePath) ? require(LockFilePath) : {};
-  const ModulesList = (
-    (LockInfo.modules || []) as Array<{
-      type: string;
-      name: string;
-    }>
-  ).filter((module) => module.type === type);
+  if (Fs.existsSync(ModuleDir)) {
+    // Get Lock Information
+    const LockFilePath = Path.join(ModuleDir, "../../epic.lock.json");
+    const LockInfo = Fs.existsSync(LockFilePath) ? require(LockFilePath) : {};
+    const ModulesList = (
+      (LockInfo.modules || []) as Array<{
+        type: string;
+        name: string;
+      }>
+    ).filter((module) => module.type === type);
 
-  // Load Modules
-  return !(options?.disabled ?? Configuration.disabled)
-    ? Fs.readdirSync(ModuleDir)
-        .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
-        .sort(
-          (a, b) =>
-            ModulesList.indexOf(
-              ModulesList.filter(
-                (item) => item.name === a.replace(/\.(ts|js)$/, "")
-              )[0]
-            ) -
-            ModulesList.indexOf(
-              ModulesList.filter(
-                (item) => item.name === b.replace(/\.(ts|js)$/, "")
-              )[0]
-            )
-        )
-        .map(
-          (filename) =>
-            require(Path.join(ModuleDir, filename))[
-              filename.replace(/\.(ts|js)$/, "") +
-                (() => {
-                  switch (type) {
-                    case "controller":
-                      return "Controller";
+    // Load Modules
+    return !(options?.disabled ?? Configuration.disabled)
+      ? Fs.readdirSync(ModuleDir)
+          .filter((filename) => /^[A-Z]\w+\.(ts|js)$/.test(filename))
+          .sort(
+            (a, b) =>
+              ModulesList.indexOf(
+                ModulesList.filter(
+                  (item) => item.name === a.replace(/\.(ts|js)$/, "")
+                )[0]
+              ) -
+              ModulesList.indexOf(
+                ModulesList.filter(
+                  (item) => item.name === b.replace(/\.(ts|js)$/, "")
+                )[0]
+              )
+          )
+          .map(
+            (filename) =>
+              require(Path.join(ModuleDir, filename))[
+                filename.replace(/\.(ts|js)$/, "") +
+                  (() => {
+                    switch (type) {
+                      case "controller":
+                        return "Controller";
 
-                    case "middleware":
-                      return "Middleware";
+                      case "middleware":
+                        return "Middleware";
 
-                    case "job":
-                      return "Job";
+                      case "job":
+                        return "Job";
 
-                    default:
-                      return "";
-                  }
-                })()
-            ]
-        )
-    : [];
+                      default:
+                        return "";
+                    }
+                  })()
+              ]
+          )
+      : [];
+  } else return [];
 };
 
 export const LoadModules = (type: ModuleTypes) => [

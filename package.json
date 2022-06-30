@@ -9,8 +9,8 @@
     "plugins": {}
   },
   "scripts": {
-    "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' -T -r tsconfig-paths/register --files ./src/core/index.ts",
-    "start": "cross-env PORT=3742 NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/core/index.js",
+    "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' --files ./src/core/index.ts",
+    "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "build": "epic build",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -22,7 +22,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.21",
+    "@oridune/epic-odm": "^1.0.22",
     "@saffellikhan/epic-express": "^2.0.4",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
