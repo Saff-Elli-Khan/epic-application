@@ -74,9 +74,14 @@ env/
 .fusebox/
 
 # Development Source
+.env
+env/
+.coverage/
+coverage/
 .temp/
 temp/
 build/
+dist/
 tsconfig.tsbuildinfo
 package-lock.json
 yarn.lock

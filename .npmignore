@@ -1,9 +1,15 @@
 # Development Source
+.env
+env/
+.coverage/
+coverage/
 .temp/
 temp/
 env/
 src/
 public/
+build/__tests__/
 build/core/
 build/*.ts
+dist/
 tsconfig.tsbuildinfo

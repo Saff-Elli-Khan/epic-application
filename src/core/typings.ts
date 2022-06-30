@@ -1,39 +1,52 @@
 import { DatabaseSession } from "@oridune/epic-odm";
 import { CreateResponse } from "@saffellikhan/epic-express";
+import { SuperTest, Test } from "supertest";
 import { GeoData, TokensManager } from "./globals";
 import { Validator } from "./validator";
 
 // Override Express Interfaces
-declare module "express-serve-static-core" {
-  interface Request {
-    /** Get Current Request ID */
-    id: string;
+declare global {
+  namespace NodeJS {
+    interface Global {
+      /** Database Connection Session */
+      database: DatabaseSession<any>;
 
-    /** Get Current Request Controller Name */
-    name: string;
+      /** Supertest Client for Testing */
+      supertest: SuperTest<Test>;
+    }
+  }
 
-    /** Get User's IP Address */
-    clientIp: string;
+  namespace Express {
+    interface Request {
+      /** Get Current Request ID */
+      id: string;
 
-    /** Current User Permission List */
-    permissions?: string[];
+      /** Get Current Request Controller Name */
+      name: string;
 
-    /** Database Connection Session */
-    database: DatabaseSession<any>;
+      /** Get User's IP Address */
+      clientIp: string;
 
-    /** Get Validator Instance */
-    validator: typeof Validator;
+      /** Current User Permission List */
+      permissions?: string[];
 
-    /** Get Tokens Manager Instance */
-    tokens: typeof TokensManager;
+      /** Database Connection Session */
+      database: DatabaseSession<any>;
 
-    /** Access Geo Data */
-    geo: typeof GeoData;
+      /** Get Validator Instance */
+      validator: typeof Validator;
 
-    /** Get Current Response Object */
-    response?: CreateResponse;
+      /** Get Tokens Manager Instance */
+      tokens: typeof TokensManager;
 
-    /** Raw Body */
-    rawBody: Buffer;
+      /** Access Geo Data */
+      geo: typeof GeoData;
+
+      /** Get Current Response Object */
+      response?: CreateResponse;
+
+      /** Raw Body */
+      rawBody: Buffer;
+    }
   }
 }

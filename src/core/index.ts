@@ -1,14 +1,10 @@
 import { DatabaseDriver } from "./database";
-import { Schedule } from "./globals";
 import { ExecuteJobs } from "./jobs";
 import { HTTPServer } from "./server";
 
 (async () => {
   // Create a Database Connection
   await DatabaseDriver.startUp();
-
-  // Initialize Jobs
-  await Schedule.init();
 
   // Start Executing Jobs
   await ExecuteJobs();

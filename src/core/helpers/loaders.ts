@@ -34,10 +34,12 @@ export const LoadLocalModules = (
   // Get Lock Information
   const LockFilePath = Path.join(ModuleDir, "../../epic.lock.json");
   const LockInfo = Fs.existsSync(LockFilePath) ? require(LockFilePath) : {};
-  const ModulesList = ((LockInfo.modules || []) as Array<{
-    type: string;
-    name: string;
-  }>).filter((module) => module.type === type);
+  const ModulesList = (
+    (LockInfo.modules || []) as Array<{
+      type: string;
+      name: string;
+    }>
+  ).filter((module) => module.type === type);
 
   // Load Modules
   return !(options?.disabled ?? Configuration.disabled)

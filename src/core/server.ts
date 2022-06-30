@@ -10,7 +10,7 @@ import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
 
-// Create Application
+// Prepare Application
 export class Application extends EpicApplication {
   _beforeInit = () => Middlewares(this.Framework);
   _onRouteError = (err: any, _: Request, res: Response) => {

@@ -2,9 +2,11 @@ import EXPRESS, { Express, Request, Response, NextFunction } from "express";
 import Compression from "compression";
 import Cors from "cors";
 import Helmet from "helmet";
+import Hpp from "hpp";
 import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
+import RateLimiter from "express-rate-limit";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseDriver } from "./database";
 import { Events, GeoData, TokensManager } from "./globals";
@@ -17,6 +19,7 @@ export const Middlewares = (Framework: Express) =>
     .use([
       Logger("dev"),
       Helmet(),
+      Hpp(),
       Cors({
         allowedHeaders: process.env.CORS_ALLOW_HEADERS,
         credentials: ["true", "1"].includes(
@@ -36,6 +39,14 @@ export const Middlewares = (Framework: Express) =>
         },
       }),
       EXPRESS.urlencoded({ extended: true }),
+      RateLimiter({
+        handler: (_, res, next) => {
+          res.status(429);
+          next(new Error(`Too many requests, please try again later.`));
+        },
+        windowMs: parseInt(process.env.RATE_LIMITER_WAITING_TIME || "90000"),
+        max: parseInt(process.env.RATE_LIMITER_MAX || "100"),
+      }),
 
       // Global Features Injector Middleware
       async (req: Request, res: Response, next: NextFunction) => {
@@ -56,7 +67,7 @@ export const Middlewares = (Framework: Express) =>
             // Emit Event
             Events.emit(req.name, req);
 
-            // Close Database Connection
+            // Close Database Session
             req.database.end();
           });
 

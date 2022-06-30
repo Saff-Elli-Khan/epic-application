@@ -7,11 +7,11 @@ import {
 } from "@saffellikhan/epic-express";
 import { LoadModules } from "./helpers";
 
-@RootController("/", {
+@RootController("/api/", {
   childs: LoadModules("controller"),
 })
 export class MainController {
-  @Get("/api/", {
+  @Get("/", {
     authType: "none",
     description: "Get the API details and metadata.",
   })
