@@ -1,7 +1,7 @@
 import { Model, BaseModel, Field } from "@oridune/epic-odm";
 
-@Model<Sample>()
-export class Sample extends BaseModel {
+@Model<SampleModel>()
+export class SampleModel extends BaseModel {
   @Field()
   createdBy!: string;
 }

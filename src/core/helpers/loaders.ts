@@ -80,6 +80,9 @@ export const LoadLocalModules = (
                       case "job":
                         return "Job";
 
+                      case "model":
+                        return "Model";
+
                       default:
                         return "";
                     }
