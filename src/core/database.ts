@@ -4,7 +4,8 @@ import { LoadModules } from "./helpers";
 // Create Database Driver
 export const DatabaseDriver = new MongoDBDriver(
   LoadModules("model"),
-  process.env.DATABASE_URL || "mongodb://localhost:27017/test",
+  process.env.DATABASE_URL ||
+    "mongodb://localhost:27017/" + process.env.NODE_ENV,
   {},
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV !== "production"
 );

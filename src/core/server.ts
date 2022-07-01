@@ -28,7 +28,7 @@ export class Application extends EpicApplication {
     // Return Response Object
     return new CreateResponse(
       err instanceof ValidatorException ? err.List : err.message || err,
-      process.env.NODE_ENV === "development" ? { stack: err.stack || err } : {}
+      process.env.NODE_ENV !== "production" ? { stack: err.stack || err } : {}
     ).isFalse();
   };
 }
