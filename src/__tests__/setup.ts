@@ -4,6 +4,9 @@ import { DatabaseDriver } from "@App/exports";
 import { agent as SupertestAgent } from "supertest";
 
 beforeAll(async () => {
+  // Create a Database Connection
+  await DatabaseDriver.startUp();
+
   // Prepare Application for Testing
   await HTTPServer.prepare();
 
