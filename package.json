@@ -22,8 +22,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.24",
-    "@saffellikhan/epic-express": "^2.0.5",
+    "@oridune/epic-odm": "^1.0.25",
+    "@saffellikhan/epic-express": "^2.0.8",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
@@ -36,6 +36,7 @@
     "epic-geo": "^2.0.6",
     "epic-pay": "^2.1.1",
     "epic-tokens": "^3.0.1",
+    "epic-translate": "^1.0.3",
     "epic-validator": "^3.2.0",
     "express-rate-limit": "^6.4.0",
     "express-useragent": "^1.0.15",

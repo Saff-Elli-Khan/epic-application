@@ -1,5 +1,6 @@
 import { DatabaseSession } from "@oridune/epic-odm";
-import { CreateResponse } from "@saffellikhan/epic-express";
+import { CreateResponse, DefaultResponse } from "@saffellikhan/epic-express";
+import { Translation, Translator } from "epic-translate";
 import { SuperTest, Test } from "supertest";
 import { GeoData, TokensManager } from "./globals";
 import { Validator } from "./validator";
@@ -36,6 +37,9 @@ declare global {
       /** Get Validator Instance */
       validator: typeof Validator;
 
+      /** Get Translator Session */
+      translator: Translator<Translation<string, string>>;
+
       /** Get Tokens Manager Instance */
       tokens: typeof TokensManager;
 
@@ -44,6 +48,9 @@ declare global {
 
       /** Get Current Response Object */
       response?: CreateResponse;
+
+      /** Format Current Response Object */
+      responseFormat?: (response: DefaultResponse<boolean, any>) => any;
 
       /** Raw Body */
       rawBody: Buffer;

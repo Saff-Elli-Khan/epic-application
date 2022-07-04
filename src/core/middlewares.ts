@@ -12,6 +12,8 @@ import { DatabaseDriver } from "./database";
 import { Events, GeoData, TokensManager } from "./globals";
 import { LoadModules } from "./helpers";
 import { Validator } from "./validator";
+import { Translation } from "./translation";
+import { Resolvable } from "epic-translate";
 
 export const Middlewares = (Framework: Express) =>
   Framework
@@ -58,6 +60,19 @@ export const Middlewares = (Framework: Express) =>
           req.geo = GeoData;
           req.tokens = TokensManager;
           req.validator = Validator;
+          req.translator = Translation.session();
+          req.responseFormat = async (response) => {
+            await Promise.all(
+              response.messages.map(async (item) => {
+                item.message = await (Resolvable.is(item.message)
+                  ? req.translator.resolve(item.message)
+                  : req.translator.t(item.message));
+
+                return item;
+              })
+            );
+            return response;
+          };
 
           // On Request End
           res.on("close", async () => {
