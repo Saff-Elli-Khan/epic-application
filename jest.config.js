@@ -5,6 +5,12 @@ module.exports = {
   verbose: true,
   forceExit: true,
   collectCoverageFrom: ["./src/**/*.ts"],
+  coveragePathIgnorePatterns: [
+    "./src/core/",
+    "./src/templates/",
+    "./src/common.ts",
+    "./src/exports.ts",
+  ],
   coverageDirectory: "./.coverage",
   coverageThreshold: {
     global: {
