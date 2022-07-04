@@ -61,6 +61,13 @@ export const Middlewares = (Framework: Express) =>
           req.tokens = TokensManager;
           req.validator = Validator;
           req.translator = Translation.session();
+
+          // Set Current Locale
+          req.translator.setLocale(
+            (locales) => req.acceptsLanguages(locales) || undefined
+          );
+
+          // Add Response Message Translation
           req.responseFormat = async (response) => {
             await Promise.all(
               response.messages.map(async (item) => {
