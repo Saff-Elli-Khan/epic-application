@@ -5,7 +5,7 @@ import { SuperTest, Test } from "supertest";
 import { GeoData, TokensManager } from "./globals";
 import { Validator } from "./validator";
 
-// Override Express Interfaces
+// Override Typings
 declare global {
   namespace NodeJS {
     interface Global {
