@@ -27,13 +27,10 @@ export class Application extends EpicApplication {
       else res.status(500);
     }
 
-    // Generate Error Code
-    const ErrorID = Utils.uuidShort();
-
     // Emit Internal Server Error Event
     if (!(err instanceof ValidatorException))
       Events.emit("internal_server_error", {
-        errorId: ErrorID,
+        errorId: req.id,
         message: err.message || err,
         stack: err.stack || err,
       });
@@ -46,7 +43,7 @@ export class Application extends EpicApplication {
         ? err.message || err
         : req.translator.tr(
             `Internal server error! Please contact support with the following Error ID: <>.`,
-            { params: [ErrorID] }
+            { params: [req.id] }
           ),
       process.env.NODE_ENV !== "production" ? { stack: err.stack || err } : {}
     ).isFalse();
