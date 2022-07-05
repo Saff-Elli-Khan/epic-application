@@ -1,3 +1,5 @@
+export {};
+
 // Override Typings
 declare global {
   namespace NodeJS {
