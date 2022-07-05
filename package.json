@@ -101,9 +101,7 @@
     "url": "https://github.com/Saff-Elli-Khan/epic-application/issues"
   },
   "lint-staged": {
-    "*.{js,ts}": [
-      "eslint --cache --fix",
-      "prettier --write"
-    ]
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,json}": "prettier --write"
   }
 }
