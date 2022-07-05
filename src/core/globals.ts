@@ -5,6 +5,8 @@ import EventEmitter from "events";
 import Redis from "ioredis";
 import Path from "path";
 
+for (const i of []) console.log(i);
+
 // Load Environment Variables
 require("dotenv").config({
   path: Path.join(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
