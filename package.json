@@ -74,6 +74,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.0",
     "jest": "^28.1.1",
+    "lint-staged": "^13.0.3",
     "nodemon": "^2.0.7",
     "prettier": "^2.7.1",
     "supertest": "^6.2.3",
@@ -98,5 +99,11 @@
   },
   "bugs": {
     "url": "https://github.com/Saff-Elli-Khan/epic-application/issues"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
   }
 }
