@@ -21,7 +21,7 @@ module.exports = {
     },
   },
   setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
-  testMatch: ["**/**/*.test.ts"],
+  testMatch: ["**/**/index.test.ts"],
   moduleNameMapper: {
     "^@App/(.*)$": "<rootDir>/src/$1",
     "^@AppExports": "<rootDir>/src/exports",

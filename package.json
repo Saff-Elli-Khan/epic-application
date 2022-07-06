@@ -12,9 +12,9 @@
     "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' --files ./src/core/index.ts",
     "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
     "build": "epic build",
-    "test": "jest --detectOpenHandles",
-    "test:watch": "jest --watch --detectOpenHandles",
-    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch --runInBand",
+    "test:coverage": "jest --coverage --runInBand",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:prettier": "prettier . --write",
@@ -22,7 +22,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.25",
+    "@oridune/epic-odm": "^1.0.26",
     "@saffellikhan/epic-express": "^2.0.8",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
