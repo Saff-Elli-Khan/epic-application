@@ -1,4 +1,4 @@
-import { Schedule } from "./globals";
+import { Schedule } from "./schedular";
 import { LoadModules } from "./helpers";
 
 // Create Jobs Executer

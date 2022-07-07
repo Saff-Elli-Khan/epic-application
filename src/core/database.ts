@@ -1,8 +1,8 @@
-import { MongoDBDriver } from "@oridune/epic-odm";
+import { MongoDBAdapter } from "@oridune/epic-odm";
 import { LoadModules } from "./helpers";
 
-// Create Database Driver
-export const DatabaseDriver = new MongoDBDriver(
+// Create Database Adapter
+export const DatabaseAdapter = new MongoDBAdapter(
   LoadModules("model"),
   process.env.DATABASE_URL ||
     "mongodb://localhost:27017/" + process.env.NODE_ENV,

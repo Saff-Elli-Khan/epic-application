@@ -1,20 +1,4 @@
-import { EpicGeo } from "epic-geo";
-import { EpicTokens } from "epic-tokens";
-import { Schedular } from "@saffellikhan/epic-schedular";
-import EventEmitter from "events";
-import Redis from "ioredis";
 import Path from "path";
-
-// Load Environment Variables
-require("dotenv").config({
-  path: Path.join(process.cwd(), `./env/.${process.env.NODE_ENV}.env`),
-});
-
-// Create Event Emitter Instance
-export const Events = new EventEmitter();
-
-// Geo Data Library
-export const GeoData = new EpicGeo();
 
 // Inject Environment Variables into objects
 const InjectEnv = <T extends Record<string, any>>(object: T): T => {
@@ -64,25 +48,3 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 export const Configuration = InjectEnv(
   require(Path.join(process.cwd(), "./package.json")).epic || {}
 );
-
-// Create Redis Client
-export const RedisClient = process.env.REDIS_HOST
-  ? new Redis({
-      host: process.env.REDIS_HOST,
-      port: parseInt(process.env.REDIS_PORT || "6379"),
-      username: process.env.REDIS_USERNAME,
-      password: process.env.REDIS_PASSWORD,
-    })
-  : undefined;
-
-// Global Tokens Manager
-export const TokensManager = new EpicTokens(
-  () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z",
-  { redis: RedisClient }
-);
-
-// Create a Cron Scheduler Instance
-export const Schedule = new Schedular({
-  name: require("../../package.json").name,
-  redis: RedisClient,
-});

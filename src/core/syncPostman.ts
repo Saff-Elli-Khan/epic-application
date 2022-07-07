@@ -1,3 +1,4 @@
+import "./loadEnv";
 import { HTTPServer } from "./server";
 
 /**

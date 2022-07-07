@@ -1,5 +1,5 @@
 import { Validation } from "epic-validator";
-import { GeoData } from "./globals";
+import { GeoData } from "./geo";
 
 // Data Validator Library
 export const Validator = new Validation({

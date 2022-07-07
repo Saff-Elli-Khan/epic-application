@@ -1,11 +1,8 @@
-import { DatabaseDriver } from "./database";
+import "./loadEnv";
 import { ExecuteJobs } from "./jobs";
 import { HTTPServer } from "./server";
 
 (async () => {
-  // Create a Database Connection
-  await DatabaseDriver.startUp();
-
   // Start Executing Jobs
   await ExecuteJobs();
 

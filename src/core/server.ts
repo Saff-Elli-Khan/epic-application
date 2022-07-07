@@ -9,8 +9,7 @@ import {
 import { Middlewares } from "./middlewares";
 import { ValidatorException } from "epic-validator";
 import { EpicTokensVerificationException } from "epic-tokens";
-import { Utils } from "@oridune/epic-odm";
-import { Events } from "./globals";
+import { Events } from "./events";
 
 // Prepare Application
 export class Application extends EpicApplication {

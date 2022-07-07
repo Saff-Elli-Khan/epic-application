@@ -2,8 +2,10 @@ import { DatabaseSession } from "@oridune/epic-odm";
 import { CreateResponse, DefaultResponse } from "@saffellikhan/epic-express";
 import { Translation, Translator } from "epic-translate";
 import { SuperTest, Test } from "supertest";
-import { GeoData, TokensManager } from "./globals";
+import { GeoData } from "./geo";
+import { TokensManager } from "./tokens";
 import { Validator } from "./validator";
+import Redis from "ioredis";
 
 // Override Typings
 declare global {
@@ -30,6 +32,9 @@ declare global {
 
       /** Current User Permission List */
       permissions?: string[];
+
+      /** Redis Client */
+      redis?: Redis;
 
       /** Database Connection Session */
       database: DatabaseSession<any>;

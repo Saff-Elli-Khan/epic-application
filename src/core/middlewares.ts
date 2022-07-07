@@ -8,12 +8,15 @@ import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
 import RateLimiter from "express-rate-limit";
 import { DatabaseSession } from "@oridune/epic-odm";
-import { DatabaseDriver } from "./database";
-import { Events, GeoData, TokensManager } from "./globals";
+import { DatabaseAdapter } from "./database";
+import { TokensManager } from "./tokens";
 import { LoadModules } from "./helpers";
 import { Validator } from "./validator";
 import { Translation } from "./translation";
 import { Resolvable } from "epic-translate";
+import { GeoData } from "./geo";
+import { Events } from "./events";
+import { RedisClient } from "./redis";
 
 export const Middlewares = (Framework: Express) =>
   Framework
@@ -50,13 +53,14 @@ export const Middlewares = (Framework: Express) =>
         max: parseInt(process.env.RATE_LIMITER_MAX || "100"),
       }),
 
-      // Global Features Injector Middleware
+      // Global Utilities Injector Middleware
       async (req: Request, res: Response, next: NextFunction) => {
         try {
           // Create Database Session
-          req.database = await new DatabaseSession(DatabaseDriver).start();
+          req.database = await new DatabaseSession(DatabaseAdapter).start();
 
-          // Add Common Features
+          // Add Utilities
+          req.redis = RedisClient;
           req.geo = GeoData;
           req.tokens = TokensManager;
           req.validator = Validator;
