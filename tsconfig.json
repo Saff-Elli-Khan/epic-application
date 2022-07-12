@@ -4,7 +4,6 @@
     "require": ["tsconfig-paths/register"]
   },
   "compilerOptions": {
-    "composite": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "target": "ES2017",
