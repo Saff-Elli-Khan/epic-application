@@ -5,4 +5,6 @@ import { RedisClient } from "./redis";
 export const TokensManager = new EpicTokens(
   () => process.env.ENCRYPTION_KEY || "nb4ZHjgVgu0BtM83K97ZNyw8934xUp2Z",
   { redis: RedisClient }
-);
+)
+  .onEncode((token) => encodeURIComponent(token))
+  .onDecode((token) => decodeURIComponent(token));
