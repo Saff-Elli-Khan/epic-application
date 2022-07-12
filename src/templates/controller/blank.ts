@@ -13,29 +13,6 @@ import { LoadChildControllers } from "@App/exports";
   /* --------------------------------- */
 })
 export class SampleController {
-  @Get("/", "Get Something...")
-  async GetSample(req: Request) {
-    // Query Validation
-    await req.validator
-      .validate(req.query)
-      .schema({}, { strict: false })
-      .exec();
-
-    /**
-     * It is recommended to keep the following validators in place even if you don't want to validate any data.
-     * It will prevent the client from injecting unexpected data into the request.
-     *
-     * */
-
-    // Params Validation
-    await req.validator.validate(req.params).schema({}).exec();
-
-    // Start coding here...
-
-    // Return Response
-    return new CreateResponse("Something great has been fetched successfully!");
-  }
-
   @Post("/", "Create Something...")
   async CreateSample(req: Request) {
     // Query Validation
@@ -60,5 +37,28 @@ export class SampleController {
 
     // Return Response
     return new CreateResponse("Something great has been done successfully!");
+  }
+
+  @Get("/", "Get Something...")
+  async GetSample(req: Request) {
+    // Query Validation
+    await req.validator
+      .validate(req.query)
+      .schema({}, { strict: false })
+      .exec();
+
+    /**
+     * It is recommended to keep the following validators in place even if you don't want to validate any data.
+     * It will prevent the client from injecting unexpected data into the request.
+     *
+     * */
+
+    // Params Validation
+    await req.validator.validate(req.params).schema({}).exec();
+
+    // Start coding here...
+
+    // Return Response
+    return new CreateResponse("Something great has been fetched successfully!");
   }
 }
