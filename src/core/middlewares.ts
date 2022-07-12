@@ -66,25 +66,6 @@ export const Middlewares = (Framework: Express) =>
           req.validator = Validator;
           req.translator = Translation.session();
 
-          // Set Current Locale
-          req.translator.setLocale(
-            (locales) => req.acceptsLanguages(locales) || undefined
-          );
-
-          // Add Response Message Translation
-          req.responseFormat = async (response) => {
-            await Promise.all(
-              response.messages.map(async (item) => {
-                item.message = await (Resolvable.is(item.message)
-                  ? req.translator.resolve(item.message)
-                  : req.translator.t(item.message));
-
-                return item;
-              })
-            );
-            return response;
-          };
-
           // On Request End
           res.on("close", async () => {
             // Final Tasks
