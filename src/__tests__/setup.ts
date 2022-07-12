@@ -1,7 +1,8 @@
-import { DatabaseSession } from "@oridune/epic-odm";
+import "@App/core/loadEnv";
 import { HTTPServer } from "@App/core/server";
 import { DatabaseAdapter } from "@App/exports";
-import { agent as SupertestAgent } from "supertest";
+import { DatabaseSession } from "@oridune/epic-odm";
+import { agent as SuperTestAgent } from "supertest";
 
 beforeAll(async () => {
   // Sync Database Schema
@@ -12,7 +13,7 @@ beforeAll(async () => {
 
   // Create Global Accessors
   global.database = await new DatabaseSession(DatabaseAdapter).start();
-  global.supertest = SupertestAgent(HTTPServer.Application.Framework);
+  global.supertest = SuperTestAgent(HTTPServer.Application.Framework);
 });
 
 afterAll(async () => {
