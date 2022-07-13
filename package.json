@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@oridune/epic-odm": "^1.0.38",
-    "@saffellikhan/epic-express": "^2.0.9",
+    "@saffellikhan/epic-express": "^2.0.10",
     "@saffellikhan/epic-schedular": "^2.0.2",
     "@saffellikhan/epic-time": "^1.0.0",
     "@supercharge/request-ip": "^1.1.2",
