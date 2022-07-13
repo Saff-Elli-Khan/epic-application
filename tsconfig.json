@@ -19,8 +19,8 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
-      "@App/*": ["./src/*"],
-      "@AppExports": ["./src/exports"],
+      "@App/common": ["./src/*"],
+      "@App/exports": ["./src/exports"],
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
       "@Models/*": ["./src/models/*"]
