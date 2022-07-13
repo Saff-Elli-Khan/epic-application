@@ -1,6 +1,5 @@
-import "@App/core/loadEnv";
-import { HTTPServer } from "@App/core/server";
-import { DatabaseAdapter } from "@App/exports";
+import "@App/Env";
+import { DatabaseAdapter, HTTPServer } from "@App/exports";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { agent as SuperTestAgent } from "supertest";
 
