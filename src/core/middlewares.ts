@@ -13,12 +13,11 @@ import { TokensManager } from "./tokens";
 import { LoadModules } from "./helpers";
 import { Validator } from "./validator";
 import { Translation } from "./translation";
-import { Resolvable } from "epic-translate";
 import { GeoData } from "./geo";
 import { Events } from "./events";
 import { RedisClient } from "./redis";
 
-export const Middlewares = (Framework: Express) =>
+export const Middlewares = async (Framework: Express) =>
   Framework
     // Utility Middlewares
     .use([
@@ -86,5 +85,5 @@ export const Middlewares = (Framework: Express) =>
       },
 
       // Load Modules
-      ...LoadModules("middleware"),
+      ...(await Promise.all(LoadModules("middleware"))),
     ]);

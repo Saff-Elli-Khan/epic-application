@@ -6,7 +6,7 @@ import { Configuration } from "../config";
 export type ModuleTypes = "controller" | "model" | "middleware" | "job";
 
 export const LoadModulesFromPlugins = (type: ModuleTypes) =>
-  Object.keys(Configuration.plugins).reduce<(new () => any)[]>(
+  Object.keys(Configuration.plugins).reduce<Promise<new () => any>[]>(
     (items, pluginName) => [
       ...items,
       ...LoadLocalModules(type, {
@@ -65,29 +65,31 @@ export const LoadLocalModules = (
                 )[0]
               )
           )
-          .map(
-            (filename) =>
-              require(Path.join(ModuleDir, filename))[
-                filename.replace(/\.(ts|js)$/, "") +
-                  (() => {
-                    switch (type) {
-                      case "controller":
-                        return "Controller";
+          .map((filename) =>
+            import(Path.join(ModuleDir, filename)).then(
+              (module) =>
+                module[
+                  filename.replace(/\.(ts|js)$/, "") +
+                    (() => {
+                      switch (type) {
+                        case "controller":
+                          return "Controller";
 
-                      case "middleware":
-                        return "Middleware";
+                        case "middleware":
+                          return "Middleware";
 
-                      case "job":
-                        return "Job";
+                        case "job":
+                          return "Job";
 
-                      case "model":
-                        return "Model";
+                        case "model":
+                          return "Model";
 
-                      default:
-                        return "";
-                    }
-                  })()
-              ]
+                        default:
+                          return "";
+                      }
+                    })()
+                ]
+            )
           )
       : [];
   } else return [];
@@ -108,9 +110,11 @@ export const LoadChildControllers = (path: string, parentName: string) =>
         filename
       )
     )
-    .map(
-      (filename) =>
-        require(Path.join(path, filename))[
-          filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
-        ]
+    .map((filename) =>
+      import(Path.join(path, filename)).then(
+        (module) =>
+          module[
+            filename.replace(/\.(ts|js)$/, "").replace(".", "") + "Controller"
+          ]
+      )
     );

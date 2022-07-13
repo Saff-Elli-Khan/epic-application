@@ -3,9 +3,12 @@ import { LoadModules } from "./helpers";
 
 // Create Jobs Executer
 export const ExecuteJobs = async () => {
-  // Initialize Jobs
+  // Initialize Jobs Schedular
   await Schedule.init();
 
+  // Resolve Jobs
+  const Jobs = await Promise.all(LoadModules("job"));
+
   // Execute each individule job in series.
-  for (const Job of LoadModules("job")) await Job();
+  for (const Job of Jobs) await Job?.();
 };
