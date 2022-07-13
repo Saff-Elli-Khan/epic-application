@@ -23,10 +23,11 @@ module.exports = {
   setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
   testMatch: ["**/**/index.test.ts"],
   moduleNameMapper: {
-    "^@App/(.*)$": "<rootDir>/src/$1",
-    "^@AppExports": "<rootDir>/src/exports",
-    "^@Controllers/(.*)$": "<rootDir>/src/controllers/$1",
-    "^@Middlewares/(.*)$": "<rootDir>/src/middlewares/$1",
-    "^@Models/(.*)$": "<rootDir>/src/models/$1",
+    "^@App/Env": "<rootDir>/src/core/loadEnv",
+    "^@App/common": "<rootDir>/src/common",
+    "^@App/exports": "<rootDir>/src/exports",
+    "^@Controllers/(.*)": "<rootDir>/src/controllers/$1",
+    "^@Middlewares/(.*)": "<rootDir>/src/middlewares/$1",
+    "^@Models/(.*)": "<rootDir>/src/models/$1",
   },
 };
