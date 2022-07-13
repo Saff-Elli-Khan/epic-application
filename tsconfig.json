@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
-      "@App/common": ["./src/*"],
+      "@App/common": ["./src/common"],
       "@App/exports": ["./src/exports"],
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
