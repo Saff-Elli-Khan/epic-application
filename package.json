@@ -19,8 +19,7 @@
     "lint:fix": "eslint . --fix",
     "format:prettier": "prettier . --write",
     "sync:postman": "cross-env NODE_ENV=development ts-node --ignore 'cache/' -T --files ./src/core/syncPostman.ts",
-    "sync:db:dev": "cross-env NODE_ENV=development ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts",
-    "sync:db:prod": "cross-env NODE_ENV=production ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts",
+    "sync:db": "cross-env NODE_ENV=production ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts",
     "prepare": "husky install"
   },
   "dependencies": {
