@@ -12,4 +12,9 @@ HTTPServer.Application.syncPostman({
   collectionId: process.env.POSTMAN_COLLECTION_ID || "",
   collectionName: process.env.POSTMAN_COLLECTION_NAME || "",
   disabled: !process.env.POSTMAN_API_KEY,
-}).then(() => console.log("Postman Syncronization Successful!"));
+}).then(() => {
+  console.log("Postman Syncronization Successful!");
+
+  // Exit Current Process
+  process.exit();
+});

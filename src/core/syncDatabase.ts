@@ -13,4 +13,7 @@ DatabaseAdapter.sync().then(async () => {
 
   // Disconnect
   await DatabaseAdapter.disconnect();
+
+  // Exit Current Process
+  process.exit();
 });
