@@ -47,7 +47,10 @@ export const Validator = new Validation({
       allowSymbols: false,
       allowSpaces: false,
     })
-      .isLength({ max: 50 }, "Maximum 50 characters allowed for Username!")
+      .isLength(
+        { min: 6, max: 50 },
+        "Minimum 6 and Maximum 50 characters allowed for a Username!"
+      )
       .not()
       .isIn(notIn, "Invalid Username has been provided!"),
   isGender: (_) =>
@@ -60,18 +63,25 @@ export const Validator = new Validation({
       .isAlphanumeric({ title: "Password" })
       .isLength(
         { min: 6, max: 50 },
-        "Minimum 6 and Maximum 50 characters allowed for Password!"
+        "Minimum 6 and Maximum 50 characters allowed for a Password!"
       ),
-  isPrice: (_, min = 1) =>
+  isPrice: (_, min = 1, max?: number) =>
     _.isNumeric({ sanitize: true }, "Please provide a valid Amount!").isAmount(
-      { min },
-      `Minimum allowed Amount is ${min}!`
+      { min, max },
+      max
+        ? `Minimum ${min} and Maximum ${max} is a valid amount!`
+        : `Minimum allowed amount is ${min}!`
     ),
   isQuantity: (_, min = 1, max?: number) =>
     _.isNumeric(
       { sanitize: true },
       "Please provide a valid Quantity!"
-    ).isAmount({ min, max }, `Minimum allowed Quantity is ${min}!`),
+    ).isAmount(
+      { min, max },
+      max
+        ? `Minimum ${min} and Maximum ${max} is a valid quantity!`
+        : `Minimum allowed Quantity is ${min}!`
+    ),
   isCountry: (_) =>
     _.isIn(GeoData.countryList(), "Invalid Country Name has been provided!"),
   isContact: (_) =>
