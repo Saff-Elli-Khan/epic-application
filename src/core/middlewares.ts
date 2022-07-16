@@ -1,5 +1,6 @@
 import EXPRESS, { Express, Request, Response, NextFunction } from "express";
 import Compression from "compression";
+import Cors from "cors";
 import Helmet from "helmet";
 import Hpp from "hpp";
 import Logger from "morgan";
@@ -23,6 +24,23 @@ export const Middlewares = async (Framework: Express) =>
       Logger("dev"),
       Helmet(),
       Hpp(),
+      Cors({
+        origin: process.env.CORS_ALLOW_ORIGIN?.split(",").map((item) =>
+          item.trim()
+        ),
+        allowedHeaders: process.env.CORS_ALLOW_HEADERS?.split(",").map((item) =>
+          item.trim()
+        ),
+        credentials: ["true", "1"].includes(
+          process.env.CORS_ALLOW_CREDENTIALS || ""
+        ),
+        exposedHeaders: process.env.CORS_EXPOSED_HEADERS?.split(",").map(
+          (item) => item.trim()
+        ),
+        methods: process.env.CORS_ALLOW_METHODS?.split(",").map((item) =>
+          item.trim()
+        ),
+      }),
       CookieParser(),
       Compression(),
       UserAgent.express(),
