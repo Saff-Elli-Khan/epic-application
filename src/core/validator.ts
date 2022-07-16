@@ -48,8 +48,8 @@ export const Validator = new Validation({
       allowSpaces: false,
     })
       .isLength(
-        { min: 6, max: 50 },
-        "Minimum 6 and Maximum 50 characters allowed for a Username!"
+        { min: 4, max: 50 },
+        "Minimum 4 and Maximum 50 characters allowed for a Username!"
       )
       .not()
       .isIn(notIn, "Invalid Username has been provided!"),
