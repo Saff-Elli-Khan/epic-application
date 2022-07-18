@@ -4,8 +4,7 @@ A powerful express based api framework.
 
 ### Environment variables are required
 
-In order to run the following repository you need to make sure that the directory where you cloned this repository contains the required environment files.\
-You need to create the following files:\
+In order to run the following repository you need to make sure that the directory where you cloned this repository contains the required environment files. You need to create the following files:\
 ./env/.development.env\
 ./env/.production.env\
 ./env/.test.env\
