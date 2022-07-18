@@ -1,5 +1,5 @@
 import Path from "path";
-import { Configuration } from "./exports";
+import { InjectEnv } from "./core/helpers/utils";
 
 /** Available Environments */
 export enum NODE_ENV {
@@ -7,6 +7,11 @@ export enum NODE_ENV {
   PRODUCTION = "production",
   TEST = "test",
 }
+
+// Get Epic Configuration
+export const Configuration = InjectEnv(
+  require(Path.join(process.cwd(), "./package.json")).epic || {}
+);
 
 /** Current App Name */
 export const AppName = require(Path.join(process.cwd(), "./package.json")).name;

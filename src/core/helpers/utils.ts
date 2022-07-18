@@ -1,7 +1,5 @@
-import Path from "path";
-
 // Inject Environment Variables into objects
-const InjectEnv = <T extends Record<string, any>>(object: T): T => {
+export const InjectEnv = <T extends Record<string, any>>(object: T): T => {
   for (const Key in object) {
     // Get Value
     const Value = object[Key];
@@ -43,8 +41,3 @@ const InjectEnv = <T extends Record<string, any>>(object: T): T => {
 
   return object;
 };
-
-// Get Epic Configuration
-export const Configuration = InjectEnv(
-  require(Path.join(process.cwd(), "./package.json")).epic || {}
-);

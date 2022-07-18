@@ -1,8 +1,7 @@
 import Fs from "fs";
 import Path from "path";
-import { NODE_ENV } from "@App/common";
+import { Configuration, NODE_ENV } from "@App/common";
 import { Pluralize } from "@oridune/epic-odm";
-import { Configuration } from "../config";
 
 export type ModuleTypes = "controller" | "model" | "middleware" | "job";
 

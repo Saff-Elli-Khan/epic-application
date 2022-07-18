@@ -1,5 +1,4 @@
 export * from "./core/helpers";
-export * from "./core/config";
 export * from "./core/database";
 export * from "./core/events";
 export * from "./core/geo";
