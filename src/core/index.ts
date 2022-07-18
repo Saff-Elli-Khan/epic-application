@@ -2,10 +2,12 @@ import "./loadEnv";
 import { ExecuteJobs } from "./jobs";
 import { HTTPServer } from "./server";
 import { DatabaseAdapter } from "./database";
+import { NODE_ENV } from "@App/common";
 
 (async () => {
   // Sync Database in Development
-  if (process.env.NODE_ENV === "development") await DatabaseAdapter.sync();
+  if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT)
+    await DatabaseAdapter.sync();
 
   // Start Executing Jobs
   await ExecuteJobs();
