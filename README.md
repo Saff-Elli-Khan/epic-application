@@ -16,6 +16,9 @@ You can copy the initial environment variables content from ./.sample.env and mo
 # Make sure you have the Epic CLI installed on your machine before you run the app or Install the CLI with the following command.
 npm i -g @oridune/epic
 
+# Or you can also update the CLI if it is already installed on your machine.
+epic update
+
 # For development server
 epic build && npm run dev
 
