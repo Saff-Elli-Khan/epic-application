@@ -13,7 +13,7 @@ You can copy the initial environment variables content from ./.sample.env and mo
 ### Execute the following commands to run the application on your local machine:
 
 ```sh
-# Make sure you have the Epic CLI installed your machine before you run the app or Install the CLI with the following command.
+# Make sure you have the Epic CLI installed on your machine before you run the app or Install the CLI with the following command.
 npm i -g @oridune/epic
 
 # For development server
@@ -28,6 +28,6 @@ epic build && npm start
 You should always keep your application updated in order to fix any possible vulnerabilities or bugs. You can update the core of this application by running the following command.
 
 ```sh
-# Following command updates the core of the application and make sure that the application has the lastest security patches.
+# Following command updates the core of the application and make sure that the application has the latest security patches.
 epic upgrade-api
 ```
