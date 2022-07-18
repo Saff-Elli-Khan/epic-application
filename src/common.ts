@@ -1,5 +1,5 @@
 import Path from "path";
-import { InjectEnv } from "./core/helpers/utils";
+import { InjectEnv } from "./exports";
 
 /** Available Environments */
 export enum NODE_ENV {
