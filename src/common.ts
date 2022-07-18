@@ -1,6 +1,13 @@
 import Path from "path";
 import { Configuration } from "./exports";
 
+/** Available Environments */
+export enum NODE_ENV {
+  DEVELOPMENT = "development",
+  PRODUCTION = "production",
+  TEST = "test",
+}
+
 /** Current App Name */
 export const AppName = require(Path.join(process.cwd(), "./package.json")).name;
 

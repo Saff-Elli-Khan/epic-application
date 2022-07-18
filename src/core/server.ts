@@ -1,4 +1,5 @@
 import "./controllers";
+import { NODE_ENV } from "@App/common";
 import {
   HTTP,
   EpicApplication,
@@ -33,13 +34,15 @@ export class Application extends EpicApplication {
       });
 
       return new CreateResponse(
-        process.env.NODE_ENV !== "production"
+        process.env.NODE_ENV !== NODE_ENV.PRODUCTION
           ? err.message || err
           : req.translator.tr(
               `Internal server error! Please contact support with the following Error ID: <>.`,
               { params: [req.id] }
             ),
-        process.env.NODE_ENV !== "production" ? { stack: err.stack || err } : {}
+        process.env.NODE_ENV !== NODE_ENV.PRODUCTION
+          ? { stack: err.stack || err }
+          : {}
       ).isFalse();
     }
 

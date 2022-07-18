@@ -1,5 +1,6 @@
 import Fs from "fs";
 import Path from "path";
+import { NODE_ENV } from "@App/common";
 import { Pluralize } from "@oridune/epic-odm";
 import { Configuration } from "../config";
 
@@ -32,9 +33,9 @@ export const LoadLocalModules = (
     options?.moduleDir ||
     Path.join(
       process.cwd(),
-      `./${process.env.NODE_ENV === "production" ? "build" : "src"}/${Pluralize(
-        type
-      )}/`
+      `./${
+        process.env.NODE_ENV === NODE_ENV.PRODUCTION ? "build" : "src"
+      }/${Pluralize(type)}/`
     );
 
   if (Fs.existsSync(ModuleDir)) {
