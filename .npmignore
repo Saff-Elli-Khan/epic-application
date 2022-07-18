@@ -14,7 +14,7 @@ build/__tests__/
 build/core/
 build/*.ts
 dist/
-.env.sample
+.sample.env
 .eslintcache
 .eslintrc.json
 .prettierrc
