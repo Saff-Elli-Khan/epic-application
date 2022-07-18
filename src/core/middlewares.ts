@@ -7,6 +7,7 @@ import Logger from "morgan";
 import CookieParser from "cookie-parser";
 import UserAgent from "express-useragent";
 import RateLimiter from "express-rate-limit";
+import { TOO_MANY_REQUESTS } from "http-status";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseAdapter } from "./database";
 import { TokensManager } from "./tokens";
@@ -53,7 +54,7 @@ export const Middlewares = async (Framework: Express) =>
       EXPRESS.urlencoded({ extended: true }),
       RateLimiter({
         handler: (_, res, next) => {
-          res.status(429);
+          res.status(TOO_MANY_REQUESTS);
           next(new Error(`Too many requests, please try again later.`));
         },
         windowMs: parseInt(process.env.RATE_LIMITER_WAITING_TIME || "90000"),

@@ -1,5 +1,6 @@
 import "./controllers";
 import { NODE_ENV } from "@App/common";
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "http-status";
 import {
   HTTP,
   EpicApplication,
@@ -16,17 +17,17 @@ export class Application extends EpicApplication {
   _beforeInit = () => Middlewares(this.Framework);
   _onRouteError = (err: any, req: Request, res: Response) => {
     // If the status code was not changed than predict it
-    if (res.statusCode === 200)
+    if (res.statusCode === OK)
       if (err instanceof ValidatorException)
         // Request Validation Error
-        res.status(400);
+        res.status(BAD_REQUEST);
       // Page Not Found
-      else if (err?.message === "Not Found") res.status(404);
+      else if (err?.message === "Not Found") res.status(NOT_FOUND);
       // Internal Server Error
-      else res.status(500);
+      else res.status(INTERNAL_SERVER_ERROR);
 
     // Emit Internal Server Error Event
-    if (res.statusCode >= 500) {
+    if (res.statusCode >= INTERNAL_SERVER_ERROR) {
       Events.emit("internal_server_error", {
         errorId: req.id,
         message: err.message || err,
