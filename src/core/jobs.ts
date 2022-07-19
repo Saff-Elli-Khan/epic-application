@@ -1,5 +1,5 @@
 import { Schedule } from "./schedular";
-import { LoadModules } from "./helpers";
+import { LoadModules } from "./helpers/loaders";
 
 // Create Jobs Executer
 export const ExecuteJobs = async () => {

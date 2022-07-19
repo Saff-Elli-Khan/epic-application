@@ -1,5 +1,10 @@
+/**
+ * IMPORTANT NOTE: Imports from core should always be done from the "./exports" module!
+ * Direct import from core folder would break the plugins flow!
+ */
+
 import Path from "path";
-import { InjectEnv } from "./exports";
+import { Configuration } from "./exports";
 
 /** Available Environments */
 export enum NODE_ENV {
@@ -7,11 +12,6 @@ export enum NODE_ENV {
   PRODUCTION = "production",
   TEST = "test",
 }
-
-// Get Epic Configuration
-export const Configuration = InjectEnv(
-  require(Path.join(process.cwd(), "./package.json")).epic || {}
-);
 
 /** Current App Name */
 export const AppName = require(Path.join(process.cwd(), "./package.json")).name;

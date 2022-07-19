@@ -1,6 +1,6 @@
 import { NODE_ENV } from "@App/common";
 import { MongoDBAdapter } from "@oridune/epic-odm";
-import { LoadModules } from "./helpers";
+import { LoadModules } from "./helpers/loaders";
 
 // Create Database Adapter
 export const DatabaseAdapter = new MongoDBAdapter(

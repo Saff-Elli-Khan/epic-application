@@ -11,7 +11,7 @@ import { TOO_MANY_REQUESTS } from "http-status";
 import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseAdapter } from "./database";
 import { TokensManager } from "./tokens";
-import { LoadModules } from "./helpers";
+import { LoadModules } from "./helpers/loaders";
 import { Validator } from "./validator";
 import { Translation } from "./translation";
 import { GeoData } from "./geo";

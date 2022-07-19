@@ -5,7 +5,7 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
-import { LoadModules } from "./helpers";
+import { LoadModules } from "./helpers/loaders";
 
 @RootController("/api/", {
   childs: LoadModules("controller"),
