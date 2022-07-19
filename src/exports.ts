@@ -1,6 +1,4 @@
-export * from "./core/helpers/utils";
 export * from "./core/helpers/loaders";
-export * from "./core/config";
 export * from "./core/database";
 export * from "./core/events";
 export * from "./core/geo";
