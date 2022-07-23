@@ -9,8 +9,9 @@ import {
   CreateResponse,
 } from "@saffellikhan/epic-express";
 import { Middlewares } from "./middlewares";
-import { ValidatorException } from "epic-validator";
 import { Events } from "./events";
+import { ValidatorException } from "epic-validator";
+import { ValidationException } from "@oridune/validator";
 
 // Prepare Application
 export class Application extends EpicApplication {
@@ -18,7 +19,10 @@ export class Application extends EpicApplication {
   _onRouteError = (err: any, req: Request, res: Response) => {
     // If the status code was not changed than predict it
     if (res.statusCode === OK)
-      if (err instanceof ValidatorException)
+      if (
+        err instanceof ValidatorException ||
+        err instanceof ValidationException
+      )
         // Request Validation Error
         res.status(BAD_REQUEST);
       // Page Not Found
@@ -49,7 +53,11 @@ export class Application extends EpicApplication {
 
     // Return Response Object
     return new CreateResponse(
-      err?.List || err?.message || err || "Unknown error occured!"
+      err?.List ||
+        err?.issues ||
+        err?.message ||
+        err ||
+        "Unknown error occured!"
     ).isFalse();
   };
 }
