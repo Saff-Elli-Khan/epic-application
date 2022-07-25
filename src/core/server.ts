@@ -49,11 +49,7 @@ export class Application extends EpicApplication {
 
     // Return Response Object
     return new CreateResponse(
-      err?.List ||
-        err?.issues ||
-        err?.message ||
-        err ||
-        "Unknown error occured!"
+      err?.issues || err?.message || err || "Unknown error occured!"
     ).isFalse();
   };
 }
