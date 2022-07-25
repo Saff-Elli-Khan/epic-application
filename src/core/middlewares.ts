@@ -12,7 +12,6 @@ import { DatabaseSession } from "@oridune/epic-odm";
 import { DatabaseAdapter } from "./database";
 import { TokensManager } from "./tokens";
 import { LoadModules } from "./helpers/loaders";
-import { Validator } from "./validator";
 import { Translation } from "./translation";
 import { GeoData } from "./geo";
 import { Events } from "./events";
@@ -71,7 +70,6 @@ export const Middlewares = async (Framework: Express) =>
           req.redis = RedisClient;
           req.geo = GeoData;
           req.tokens = TokensManager;
-          req.validator = Validator;
           req.translator = Translation.session();
 
           // On Request End

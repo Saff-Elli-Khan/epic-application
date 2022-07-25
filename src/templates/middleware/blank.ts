@@ -1,3 +1,4 @@
+import e from "@oridune/validator";
 import { Request, Response, NextFunction } from "@saffellikhan/epic-express";
 
 export const SampleMiddleware = async (
@@ -7,10 +8,9 @@ export const SampleMiddleware = async (
 ) => {
   try {
     // Query Validation (You can remove this validation if not required)
-    await req.validator
-      .validate(req.query)
-      .schema({}, { strict: false })
-      .exec();
+    const Query = await e
+      .object({}, { strict: false })
+      .validate(req.query, { label: "CreateSample::query" });
 
     // Continue to next middleware
     next();

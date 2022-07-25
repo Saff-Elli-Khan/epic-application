@@ -4,7 +4,6 @@ import { Translation, Translator } from "epic-translate";
 import { SuperTest, Test } from "supertest";
 import { GeoData } from "./geo";
 import { TokensManager } from "./tokens";
-import { Validator } from "./validator";
 import Redis from "ioredis";
 
 // Override Typings
@@ -38,9 +37,6 @@ declare global {
 
       /** Database Connection Session */
       database: DatabaseSession<any>;
-
-      /** Get Validator Instance */
-      validator: typeof Validator;
 
       /** Get Translator Session */
       translator: Translator<Translation<string, string>>;

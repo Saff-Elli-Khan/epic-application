@@ -1,3 +1,4 @@
+import e from "@oridune/validator";
 import {
   Request,
   Controller,
@@ -6,6 +7,7 @@ import {
   Post,
 } from "@saffellikhan/epic-express";
 import { LoadChildControllers } from "@App/exports";
+import { CREATED } from "http-status";
 
 @Controller("<<RouteNamespace>>", {
   /** Do not change the following code. */
@@ -16,10 +18,9 @@ export class SampleController {
   @Post("/", "Create Something...")
   async CreateSample(req: Request) {
     // Query Validation
-    await req.validator
-      .validate(req.query)
-      .schema({}, { strict: false })
-      .exec();
+    const Query = await e
+      .object({}, { strict: false })
+      .validate(req.query, { label: "CreateSample::query" });
 
     /**
      * It is recommended to keep the following validators in place even if you don't want to validate any data.
@@ -28,24 +29,29 @@ export class SampleController {
      * */
 
     // Params Validation
-    await req.validator.validate(req.params).schema({}).exec();
+    const Params = await e
+      .object({})
+      .validate(req.params, { label: "CreateSample::params" });
 
     // Body Validation
-    await req.validator.validate(req.body).schema({}).exec();
+    const Body = await e
+      .object({})
+      .validate(req.body, { label: "CreateSample::body" });
 
     // Start coding here...
 
     // Return Response
-    return new CreateResponse("Something great has been done successfully!");
+    return new CreateResponse(
+      "Something great has been created successfully!"
+    ).httpCode(CREATED);
   }
 
   @Get("/", "Get Something...")
   async GetSample(req: Request) {
     // Query Validation
-    await req.validator
-      .validate(req.query)
-      .schema({}, { strict: false })
-      .exec();
+    const Query = await e
+      .object({}, { strict: false })
+      .validate(req.query, { label: "GetSample::query" });
 
     /**
      * It is recommended to keep the following validators in place even if you don't want to validate any data.
@@ -54,7 +60,9 @@ export class SampleController {
      * */
 
     // Params Validation
-    await req.validator.validate(req.params).schema({}).exec();
+    const Params = await e
+      .object({})
+      .validate(req.params, { label: "GetSample::params" });
 
     // Start coding here...
 

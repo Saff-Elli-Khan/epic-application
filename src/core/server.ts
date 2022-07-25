@@ -10,7 +10,6 @@ import {
 } from "@saffellikhan/epic-express";
 import { Middlewares } from "./middlewares";
 import { Events } from "./events";
-import { ValidatorException } from "epic-validator";
 import { ValidationException } from "@oridune/validator";
 
 // Prepare Application
@@ -19,10 +18,7 @@ export class Application extends EpicApplication {
   _onRouteError = (err: any, req: Request, res: Response) => {
     // If the status code was not changed than predict it
     if (res.statusCode === OK)
-      if (
-        err instanceof ValidatorException ||
-        err instanceof ValidationException
-      )
+      if (err instanceof ValidationException)
         // Request Validation Error
         res.status(BAD_REQUEST);
       // Page Not Found
