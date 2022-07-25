@@ -24,7 +24,8 @@
       "@App/exports": ["./src/exports"],
       "@Controllers/*": ["./src/controllers/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
-      "@Models/*": ["./src/models/*"]
+      "@Models/*": ["./src/models/*"],
+      "@Utils/*": ["./src/utils/*"]
     }
   }
 }
