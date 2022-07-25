@@ -20,7 +20,7 @@ export class SampleController {
     // Query Validation
     const Query = await e
       .object({}, { strict: false })
-      .validate(req.query, { label: "CreateSample::query" });
+      .validate(req.query, { label: "Sample::query" });
 
     /**
      * It is recommended to keep the following validators in place even if you don't want to validate any data.
@@ -31,12 +31,12 @@ export class SampleController {
     // Params Validation
     const Params = await e
       .object({})
-      .validate(req.params, { label: "CreateSample::params" });
+      .validate(req.params, { label: "Sample::params" });
 
     // Body Validation
     const Body = await e
       .object({})
-      .validate(req.body, { label: "CreateSample::body" });
+      .validate(req.body, { label: "Sample::body" });
 
     // Start coding here...
 
@@ -51,7 +51,7 @@ export class SampleController {
     // Query Validation
     const Query = await e
       .object({}, { strict: false })
-      .validate(req.query, { label: "GetSample::query" });
+      .validate(req.query, { label: "Sample::query" });
 
     /**
      * It is recommended to keep the following validators in place even if you don't want to validate any data.
@@ -62,7 +62,7 @@ export class SampleController {
     // Params Validation
     const Params = await e
       .object({})
-      .validate(req.params, { label: "GetSample::params" });
+      .validate(req.params, { label: "Sample::params" });
 
     // Start coding here...
 
