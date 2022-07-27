@@ -29,5 +29,6 @@ module.exports = {
     "^@Controllers/(.*)": "<rootDir>/src/controllers/$1",
     "^@Middlewares/(.*)": "<rootDir>/src/middlewares/$1",
     "^@Models/(.*)": "<rootDir>/src/models/$1",
+    "^@Utils/(.*)": "<rootDir>/src/utils/$1",
   },
 };
