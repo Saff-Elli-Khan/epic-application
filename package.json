@@ -23,7 +23,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.0.47",
+    "@oridune/epic-odm": "^1.0.53",
     "@oridune/validator": "^0.0.15",
     "@saffellikhan/epic-express": "^2.0.15",
     "@saffellikhan/epic-schedular": "^2.0.3",
