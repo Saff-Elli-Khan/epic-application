@@ -55,7 +55,7 @@
       }
     ],
     "import/no-extraneous-dependencies": "off",
-    "@typescript-eslint/no-throw-literal": "warn"
+    "@typescript-eslint/no-throw-literal": "off"
   },
   "settings": {
     "import/resolver": {
