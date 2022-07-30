@@ -37,7 +37,7 @@
     "cross-env": "^7.0.2",
     "dotenv": "^10.0.0",
     "epic-geo": "^2.0.6",
-    "epic-tokens": "^3.0.3",
+    "epic-tokens": "^3.0.5",
     "express-rate-limit": "^6.4.0",
     "express-useragent": "^1.0.15",
     "glob": "^7.1.6",
