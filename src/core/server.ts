@@ -1,6 +1,5 @@
 import "./controllers";
 import { NODE_ENV } from "@App/common";
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "http-status";
 import {
   HTTP,
   EpicApplication,
@@ -8,13 +7,26 @@ import {
   Response,
   CreateResponse,
 } from "@saffellikhan/epic-express";
+import { ValidationException } from "@oridune/validator";
 import { Middlewares } from "./middlewares";
 import { Events } from "./events";
-import { ValidationException } from "@oridune/validator";
+import { ExecuteJobs } from "./jobs";
+import { DatabaseAdapter } from "./database";
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "http-status";
 
 // Prepare Application
 export class Application extends EpicApplication {
-  _beforeInit = () => Middlewares(this.Framework);
+  _beforeInit = async () => {
+    // Sync Database in Development
+    if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT)
+      await DatabaseAdapter.sync();
+
+    // Install Middlewares
+    await Middlewares(this.Framework);
+
+    // Start Executing Jobs
+    await ExecuteJobs();
+  };
   _onRouteError = (err: any, req: Request, res: Response) => {
     // If the status code was not changed than predict it
     if (res.statusCode === OK)
