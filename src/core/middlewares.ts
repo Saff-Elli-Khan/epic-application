@@ -40,6 +40,9 @@ export const Middlewares = async (Framework: Express) =>
         methods: process.env.CORS_ALLOW_METHODS?.split(",").map((item) =>
           item.trim()
         ),
+        preflightContinue: ["true", "1"].includes(
+          process.env.CORS_PREFLIGHT_CONTINUE || ""
+        ),
       }),
       CookieParser(),
       Compression(),
