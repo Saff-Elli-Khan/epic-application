@@ -1,7 +1,7 @@
 import Fs from "fs";
 import Path from "path";
 import { Configuration, NODE_ENV } from "@App/common";
-import { Pluralize } from "@oridune/epic-odm";
+import { Utils } from "@oridune/epic-odm";
 
 export type ModuleTypes = "controller" | "model" | "middleware" | "job";
 
@@ -13,7 +13,7 @@ export const LoadModulesFromPlugins = (type: ModuleTypes) =>
         disabled: Configuration.plugins[pluginName].disabled,
         moduleDir: Path.join(
           process.cwd(),
-          `./node_modules/${pluginName}/build/${Pluralize(type)}/`
+          `./node_modules/${pluginName}/build/${Utils.pluralize(type)}/`
         ),
       }),
     ],
@@ -34,7 +34,7 @@ export const LoadLocalModules = (
       process.cwd(),
       `./${
         process.env.NODE_ENV === NODE_ENV.PRODUCTION ? "build" : "src"
-      }/${Pluralize(type)}/`
+      }/${Utils.pluralize(type)}/`
     );
 
   if (Fs.existsSync(ModuleDir)) {
