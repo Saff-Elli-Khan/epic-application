@@ -56,7 +56,8 @@
     ],
     "import/no-extraneous-dependencies": "off",
     "@typescript-eslint/no-throw-literal": "off",
-    "no-await-in-loop": "warn"
+    "no-await-in-loop": "warn",
+    "import/no-cycle": "warn"
   },
   "settings": {
     "import/resolver": {
