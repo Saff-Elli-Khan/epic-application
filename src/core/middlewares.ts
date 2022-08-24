@@ -16,6 +16,7 @@ import { Translation } from "./translation";
 import { GeoData } from "./geo";
 import { Events } from "./events";
 import { RedisClient } from "./redis";
+import { DefaultCorsConfiguration } from "@App/common";
 
 export const Middlewares = async (Framework: Express) =>
   Framework
@@ -24,26 +25,7 @@ export const Middlewares = async (Framework: Express) =>
       Logger("dev"),
       Helmet(),
       Hpp(),
-      Cors({
-        origin: process.env.CORS_ALLOW_ORIGIN?.split(",").map((item) =>
-          item.trim()
-        ),
-        allowedHeaders: process.env.CORS_ALLOW_HEADERS?.split(",").map((item) =>
-          item.trim()
-        ),
-        credentials: ["true", "1"].includes(
-          process.env.CORS_ALLOW_CREDENTIALS || ""
-        ),
-        exposedHeaders: process.env.CORS_EXPOSED_HEADERS?.split(",").map(
-          (item) => item.trim()
-        ),
-        methods: process.env.CORS_ALLOW_METHODS?.split(",").map((item) =>
-          item.trim()
-        ),
-        preflightContinue: ["true", "1"].includes(
-          process.env.CORS_PREFLIGHT_CONTINUE || ""
-        ),
-      }),
+      Cors(DefaultCorsConfiguration),
       CookieParser(),
       Compression(),
       UserAgent.express(),

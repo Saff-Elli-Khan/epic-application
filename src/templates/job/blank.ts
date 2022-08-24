@@ -1,7 +1,6 @@
 import { DatabaseAdapter, Schedule } from "@App/exports";
 import { DatabaseSession } from "@oridune/epic-odm";
 
-// Note: Jobs are never executed in the test environment! Please import the specific jobs into your test environment manually.
 // Start Sample Cron Job
 export const SampleJob = () =>
   Schedule.task("Sample", "0 0 * * *", async (info) => {

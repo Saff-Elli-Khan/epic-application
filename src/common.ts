@@ -5,12 +5,30 @@
 
 import Path from "path";
 
-/** Available Environments */
+// Available Environments
 export enum NODE_ENV {
   DEVELOPMENT = "development",
   PRODUCTION = "production",
   TEST = "test",
 }
+
+// Default Cors Configuration
+export const DefaultCorsConfiguration = {
+  origin: process.env.CORS_ALLOW_ORIGIN?.split(",").map((item) => item.trim()),
+  allowedHeaders: process.env.CORS_ALLOW_HEADERS?.split(",").map((item) =>
+    item.trim()
+  ),
+  credentials: ["true", "1"].includes(process.env.CORS_ALLOW_CREDENTIALS || ""),
+  exposedHeaders: process.env.CORS_EXPOSED_HEADERS?.split(",").map((item) =>
+    item.trim()
+  ),
+  methods: process.env.CORS_ALLOW_METHODS?.split(",").map((item) =>
+    item.trim()
+  ),
+  preflightContinue: ["true", "1"].includes(
+    process.env.CORS_PREFLIGHT_CONTINUE || ""
+  ),
+};
 
 // Inject Environment Variables into objects
 export const InjectEnv = <T extends Record<string, any>>(object: T): T => {
@@ -61,15 +79,15 @@ export const Configuration = InjectEnv(
   require(Path.join(process.cwd(), "./package.json")).epic || {}
 );
 
-/** Current App Name */
+// Current App Name
 export const AppName = require(Path.join(process.cwd(), "./package.json")).name;
 
-/** Current Repository Name */
+// Current Repository Name
 export const RepositoryName = require("../package.json").name;
 
-/** State of the application */
+// State of the application
 export const IsPlugin = !!Configuration.plugins[RepositoryName];
 
-/** Application's local settings */
+// Application's local settings
 export const Locals: Record<string, any> =
   Configuration.plugins[RepositoryName]?.locals || Configuration.locals;
