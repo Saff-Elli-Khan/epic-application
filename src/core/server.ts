@@ -6,6 +6,7 @@ import {
   Request,
   Response,
   CreateResponse,
+  RouteAccessDenied,
 } from "@saffellikhan/epic-express";
 import { ValidationException } from "@oridune/validator";
 import { Middlewares } from "./middlewares";
@@ -61,7 +62,11 @@ export class Application extends EpicApplication {
 
     // Return Response Object
     return new CreateResponse(
-      err?.issues || err?.message || err || "Unknown error occured!"
+      err instanceof RouteAccessDenied
+        ? req.translator.tr(`You are not permitted! Missing permission '<>'.`, {
+            params: [err.Permission],
+          })
+        : err?.issues || err?.message || err || "Unknown error occured!"
     ).isFalse();
   };
 }
