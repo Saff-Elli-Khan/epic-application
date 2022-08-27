@@ -34,7 +34,7 @@ export class Application extends EpicApplication {
       if (err instanceof ValidationException)
         // Request Validation Error
         res.status(BAD_REQUEST);
-      // Page Not Found
+      // Not Found
       else if (err?.message === "Not Found") res.status(NOT_FOUND);
       // Internal Server Error
       else res.status(INTERNAL_SERVER_ERROR);
