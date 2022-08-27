@@ -9,4 +9,7 @@ export const SampleJob = async () => {
 
   // Do something on start...
   console.log("Sample job has been executed!");
+
+  // Make sure to end the database session!
+  await Database.end();
 };

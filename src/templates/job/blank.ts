@@ -10,4 +10,7 @@ export const SampleJob = () =>
 
     // Do something very important (Every day at 00:00)...
     console.log("Sample job has been executed:", info);
+
+    // Make sure to end the database session!
+    await Database.end();
   });
