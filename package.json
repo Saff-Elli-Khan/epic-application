@@ -6,6 +6,8 @@
   "packageManager": "npm",
   "epic": {
     "branch": "v2",
+    "locals": {},
+    "plugins": {},
     "packingSources": [
       "build/**",
       "resources/**",
@@ -14,9 +16,7 @@
       "pnpm-lock.yaml",
       "epic.lock.json",
       "yarn.lock"
-    ],
-    "locals": {},
-    "plugins": {}
+    ]
   },
   "scripts": {
     "preinstall": "npm i -g @oridune/epic",
