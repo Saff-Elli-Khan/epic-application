@@ -5,6 +5,16 @@
   "private": true,
   "packageManager": "npm",
   "epic": {
+    "branch": "v2",
+    "packingSources": [
+      "build/**",
+      "resources/**",
+      "package.json",
+      "package-lock.json",
+      "pnpm-lock.yaml",
+      "epic.lock.json",
+      "yarn.lock"
+    ],
     "locals": {},
     "plugins": {}
   },
