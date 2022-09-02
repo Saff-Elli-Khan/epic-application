@@ -9,9 +9,11 @@
     "plugins": {}
   },
   "scripts": {
-    "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' --files ./src/core/index.ts",
+    "preinstall": "npm i -g @oridune/epic",
+    "prepare": "epic build",
+    "dev": "cross-env NODE_ENV=development nodemon --ignore 'cache/' --files ./src/core/index.ts",
     "start": "cross-env NODE_ENV=production node ./build/core/index.js",
-    "build": "epic build",
+    "build": "epic build -c",
     "test": "jest --runInBand",
     "test:watch": "jest --watch --runInBand",
     "test:coverage": "jest --coverage --runInBand",
