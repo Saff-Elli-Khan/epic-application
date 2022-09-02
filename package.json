@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "cross-env PORT=3742 NODE_ENV=development nodemon --ignore 'cache/' --files ./src/core/index.ts",
-    "start": "cross-env PORT=3742 NODE_ENV=production node ./build/core/index.js",
+    "start": "cross-env NODE_ENV=production node ./build/core/index.js",
     "build": "epic build",
     "test": "jest --runInBand",
     "test:watch": "jest --watch --runInBand",
@@ -19,8 +19,7 @@
     "lint:fix": "eslint . --fix",
     "format:prettier": "prettier . --write",
     "sync:postman": "cross-env NODE_ENV=development ts-node --ignore 'cache/' -T --files ./src/core/syncPostman.ts",
-    "sync:db": "cross-env NODE_ENV=production ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts",
-    "prepare": "husky install"
+    "sync:db": "cross-env NODE_ENV=production ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts"
   },
   "dependencies": {
     "@oridune/epic-odm": "^1.0.70",
@@ -38,6 +37,7 @@
     "dotenv": "^10.0.0",
     "epic-geo": "^2.0.6",
     "epic-tokens": "^3.0.5",
+    "epic-translate": "^1.0.9",
     "express-rate-limit": "^6.4.0",
     "express-useragent": "^1.0.15",
     "glob": "^7.1.6",
@@ -63,7 +63,6 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
-    "epic-translate": "^1.0.9",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
