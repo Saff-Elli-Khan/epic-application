@@ -80,7 +80,6 @@ env/
 coverage/
 .temp/
 temp/
-build/
 dist/
 tsconfig.tsbuildinfo
 package-lock.json
