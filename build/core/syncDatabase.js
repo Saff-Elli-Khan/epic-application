@@ -9,9 +9,9 @@ const database_1 = require("./database");
  *
  */
 database_1.DatabaseAdapter.sync().then(async () => {
-  console.log("Database Syncronization Successful!");
-  // Disconnect
-  await database_1.DatabaseAdapter.disconnect();
-  // Exit Current Process
-  process.exit();
+    console.log("Database Syncronization Successful!");
+    // Disconnect
+    await database_1.DatabaseAdapter.disconnect();
+    // Exit Current Process
+    process.exit();
 });

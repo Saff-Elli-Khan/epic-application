@@ -9,12 +9,12 @@ const server_1 = require("./server");
  *
  */
 server_1.HTTPServer.Application.syncPostman({
-  apiKey: process.env.POSTMAN_API_KEY || "",
-  collectionId: process.env.POSTMAN_COLLECTION_ID || "",
-  collectionName: process.env.POSTMAN_COLLECTION_NAME || "",
-  disabled: !process.env.POSTMAN_API_KEY,
+    apiKey: process.env.POSTMAN_API_KEY || "",
+    collectionId: process.env.POSTMAN_COLLECTION_ID || "",
+    collectionName: process.env.POSTMAN_COLLECTION_NAME || "",
+    disabled: !process.env.POSTMAN_API_KEY,
 }).then(() => {
-  console.log("Postman Syncronization Successful!");
-  // Exit Current Process
-  process.exit();
+    console.log("Postman Syncronization Successful!");
+    // Exit Current Process
+    process.exit();
 });
