@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MainController = void 0;
+exports.AppController = exports.APIController = void 0;
 const epic_express_1 = require("@saffellikhan/epic-express");
 const loaders_1 = require("./helpers/loaders");
-let MainController = class MainController {
+let APIController = class APIController {
     async APIHome(_, res) {
         // Get API Details
         delete res.locals.useragent;
@@ -28,10 +28,31 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], MainController.prototype, "APIHome", null);
-MainController = __decorate([
-    (0, epic_express_1.RootController)("/api/", {
+], APIController.prototype, "APIHome", null);
+APIController = __decorate([
+    (0, epic_express_1.Controller)("/api/", {
         childs: (0, loaders_1.LoadModules)("controller"),
     })
-], MainController);
-exports.MainController = MainController;
+], APIController);
+exports.APIController = APIController;
+let AppController = class AppController {
+    async AppHome(_) {
+        // Return API Details
+        return new epic_express_1.CreateResponse(`No resources exists here, Please navigate to the desired endpoint!`);
+    }
+};
+__decorate([
+    (0, epic_express_1.Get)("/", {
+        authType: "none",
+        description: "Hello world from the app home.",
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "AppHome", null);
+AppController = __decorate([
+    (0, epic_express_1.RootController)("/", {
+        childs: [APIController],
+    })
+], AppController);
+exports.AppController = AppController;

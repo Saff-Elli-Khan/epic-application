@@ -1,4 +1,5 @@
 import {
+  Controller,
   RootController,
   Get,
   Request,
@@ -7,10 +8,10 @@ import {
 } from "@saffellikhan/epic-express";
 import { LoadModules } from "./helpers/loaders";
 
-@RootController("/api/", {
+@Controller("/api/", {
   childs: LoadModules("controller"),
 })
-export class MainController {
+export class APIController {
   @Get("/", {
     authType: "none",
     description: "Get the API details and metadata.",
@@ -23,6 +24,22 @@ export class MainController {
     return new CreateResponse(
       `The API is online listening to the requests!`,
       res.locals
+    );
+  }
+}
+
+@RootController("/", {
+  childs: [APIController],
+})
+export class AppController {
+  @Get("/", {
+    authType: "none",
+    description: "Hello world from the app home.",
+  })
+  async AppHome(_: Request) {
+    // Return API Details
+    return new CreateResponse(
+      `No resources exists here, Please navigate to the desired endpoint!`
     );
   }
 }
