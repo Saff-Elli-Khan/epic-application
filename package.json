@@ -32,7 +32,7 @@
     "sync:db": "npx -y cross-env NODE_ENV=production ts-node --ignore 'cache/' -T --files ./src/core/syncDatabase.ts"
   },
   "dependencies": {
-    "@oridune/epic-odm": "^1.1.0",
+    "@oridune/epic-odm": "^1.1.1",
     "@oridune/validator": "^0.0.21",
     "@saffellikhan/epic-express": "^2.0.26",
     "@saffellikhan/epic-schedular": "^2.0.3",

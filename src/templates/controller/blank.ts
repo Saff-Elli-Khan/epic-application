@@ -15,7 +15,13 @@ import { CREATED } from "http-status";
   /* --------------------------------- */
 })
 export class SampleController {
-  @Post("/", "Create Something...")
+  @Post("/", {
+    group: "Sample",
+    description: "Do/Create Something...",
+    authType: "bearer",
+    bodyType: "urlencoded",
+    body: {},
+  })
   async CreateSample(req: Request) {
     // Query Validation
     const Query = await e
@@ -46,7 +52,12 @@ export class SampleController {
     ).httpCode(CREATED);
   }
 
-  @Get("/", "Get Something...")
+  @Get("/", {
+    group: "Sample",
+    description: "Get Something...",
+    authType: "bearer",
+    query: {},
+  })
   async GetSample(req: Request) {
     // Query Validation
     const Query = await e
