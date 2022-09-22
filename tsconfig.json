@@ -23,9 +23,9 @@
       "@App/common": ["./src/common"],
       "@App/exports": ["./src/exports"],
       "@Controllers/*": ["./src/controllers/*"],
+      "@Jobs/*": ["./src/jobs/*"],
       "@Middlewares/*": ["./src/middlewares/*"],
       "@Models/*": ["./src/models/*"],
-      "@Jobs/*": ["./src/jobs/*"],
       "@Utils/*": ["./src/utils/*"]
     }
   }
