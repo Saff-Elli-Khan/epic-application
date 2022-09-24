@@ -55,6 +55,9 @@ declare global {
 
       /** Raw Body */
       rawBody: Buffer;
+
+      /** Set Debug Information */
+      debugInfo: Record<string, any>;
     }
   }
 }

@@ -41,6 +41,8 @@ declare global {
             responseFormat?: (response: DefaultResponse<boolean, any>) => any;
             /** Raw Body */
             rawBody: Buffer;
+            /** Set Debug Information */
+            debugInfo: Record<string, any>;
         }
     }
 }

@@ -45,6 +45,7 @@ export class Application extends EpicApplication {
         errorId: req.id,
         message: err.message || err,
         stack: err.stack || err,
+        debugInfo: req.debugInfo,
       });
 
       return new CreateResponse(

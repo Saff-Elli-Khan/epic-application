@@ -41,6 +41,7 @@ class Application extends epic_express_1.EpicApplication {
                     errorId: req.id,
                     message: err.message || err,
                     stack: err.stack || err,
+                    debugInfo: req.debugInfo,
                 });
                 return new epic_express_1.CreateResponse(process.env.NODE_ENV !== common_1.NODE_ENV.PRODUCTION
                     ? err.message || err

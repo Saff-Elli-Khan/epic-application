@@ -18,6 +18,8 @@ const InjectRequestUtils = () => async (req, _res, next) => {
         req.geo = geo_1.GeoData;
         req.tokens = tokens_1.TokensManager;
         req.translator = translation_1.Translation.session();
+        // Misc
+        req.debugInfo = {};
         // Continue to Next Middleware
         next();
     }

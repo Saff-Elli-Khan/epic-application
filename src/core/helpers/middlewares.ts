@@ -20,6 +20,9 @@ export const InjectRequestUtils =
       req.tokens = TokensManager;
       req.translator = Translation.session();
 
+      // Misc
+      req.debugInfo = {};
+
       // Continue to Next Middleware
       next();
     } catch (error) {
