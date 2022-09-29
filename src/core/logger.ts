@@ -2,9 +2,12 @@ import { Events } from "./events";
 
 export enum LogTypes {
   LOG = "log",
+  INFO = "info",
   DEBUG = "debug",
   WARN = "warn",
   ERROR = "error",
+  TABLE = "table",
+  TRACE = "trace",
 }
 
 // Catch Logs
@@ -21,6 +24,9 @@ const OverrideLogger = (type: LogTypes) => {
 };
 
 console.log = OverrideLogger(LogTypes.LOG);
+console.info = OverrideLogger(LogTypes.INFO);
 console.warn = OverrideLogger(LogTypes.WARN);
 console.error = OverrideLogger(LogTypes.ERROR);
 console.debug = OverrideLogger(LogTypes.DEBUG);
+console.table = OverrideLogger(LogTypes.TABLE);
+console.trace = OverrideLogger(LogTypes.TRACE);
