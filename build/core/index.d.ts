@@ -1,1 +1,2 @@
 import "./loadEnv";
+import "./logger";
