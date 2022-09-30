@@ -16,4 +16,5 @@ jest.config.js
 tsconfig.tsbuildinfo
 
 # Public Files
-!/public/**/www/**/*
+public/**/*
+!public/**/www/**/*
