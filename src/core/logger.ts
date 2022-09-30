@@ -10,7 +10,11 @@ export enum LogTypes {
   TRACE = "trace",
 }
 
-// Catch Logs
+export interface IDetectedLog {
+  type: LogTypes;
+  params: string[];
+}
+
 export const OverrideLogger = (type: LogTypes) => {
   const OriginalLogger = console[type];
 

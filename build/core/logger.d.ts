@@ -7,4 +7,8 @@ export declare enum LogTypes {
     TABLE = "table",
     TRACE = "trace"
 }
+export interface IDetectedLog {
+    type: LogTypes;
+    params: string[];
+}
 export declare const OverrideLogger: (type: LogTypes) => (...params: any[]) => void;

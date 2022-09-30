@@ -12,7 +12,6 @@ var LogTypes;
     LogTypes["TABLE"] = "table";
     LogTypes["TRACE"] = "trace";
 })(LogTypes = exports.LogTypes || (exports.LogTypes = {}));
-// Catch Logs
 const OverrideLogger = (type) => {
     const OriginalLogger = console[type];
     return (...params) => {
