@@ -19,6 +19,7 @@ __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV ==
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/database")), exports);
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/events")), exports);
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/geo")), exports);
+__exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/logger")), exports);
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/redis")), exports);
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/schedular")), exports);
 __exportStar(require(require("path").join(process.cwd(), process.env.NODE_ENV === "production" ? "./build" : "./src", "./core/tokens")), exports);

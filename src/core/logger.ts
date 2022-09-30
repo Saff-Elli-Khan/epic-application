@@ -11,7 +11,7 @@ export enum LogTypes {
 }
 
 // Catch Logs
-const OverrideLogger = (type: LogTypes) => {
+export const OverrideLogger = (type: LogTypes) => {
   const OriginalLogger = console[type];
 
   return (...params: any[]) => {

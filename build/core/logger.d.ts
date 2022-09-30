@@ -7,3 +7,4 @@ export declare enum LogTypes {
     TABLE = "table",
     TRACE = "trace"
 }
+export declare const OverrideLogger: (type: LogTypes) => (...params: any[]) => void;

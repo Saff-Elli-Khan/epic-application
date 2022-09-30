@@ -3,6 +3,7 @@ export * from "./core/helpers/middlewares";
 export * from "./core/database";
 export * from "./core/events";
 export * from "./core/geo";
+export * from "./core/logger";
 export * from "./core/redis";
 export * from "./core/schedular";
 export * from "./core/tokens";
