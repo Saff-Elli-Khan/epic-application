@@ -1,6 +1,6 @@
 {
   "name": "epic-application",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "A powerful express based api framework.",
   "private": true,
   "packageManager": "npm@8.19.1",
