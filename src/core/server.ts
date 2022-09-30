@@ -23,14 +23,14 @@ export class Application extends EpicApplication {
     if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT)
       await DatabaseAdapter.sync();
 
+    // Serve Static Content
+    await ServeStaticContent(this.Framework);
+
     // Install Middlewares
     await Middlewares(this.Framework);
 
     // Start Executing Jobs
     await ExecuteJobs();
-
-    // Serve Static Content
-    await ServeStaticContent(this.Framework);
   };
 
   _onRouteError = (err: any, req: Request, res: Response) => {
