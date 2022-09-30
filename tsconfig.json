@@ -29,6 +29,6 @@
       "@Utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["./src"],
+  "include": ["./src", "./typings/"],
   "exclude": ["./public", "./resources"]
 }
