@@ -12,24 +12,11 @@ import { DefaultCorsConfiguration } from "@App/common";
 import { InjectRequestUtils, HandleRequestClose } from "./helpers/middlewares";
 import { LoadModules } from "./helpers/loaders";
 
-export const Middlewares = async (Framework: Express) =>
+export const UtilityMiddlewares = async (Framework: Express) =>
   Framework
     // Utility Middlewares
     .use([
       Logger("dev"),
-      Helmet(),
-      Hpp(),
-      Cors(DefaultCorsConfiguration),
-      CookieParser(),
-      Compression(),
-      UserAgent.express(),
-      EXPRESS.json({
-        verify: (req, _, buffer) => {
-          // @ts-ignore
-          req.rawBody = buffer;
-        },
-      }),
-      EXPRESS.urlencoded({ extended: true }),
       RateLimiter({
         handler: (_, res, next) => {
           res.status(TOO_MANY_REQUESTS);
@@ -38,9 +25,25 @@ export const Middlewares = async (Framework: Express) =>
         windowMs: parseInt(process.env.RATE_LIMITER_WAITING_TIME || "90000"),
         max: parseInt(process.env.RATE_LIMITER_MAX || "100"),
       }),
-      InjectRequestUtils(),
-      HandleRequestClose(),
-
-      // Load Modules
-      ...(await Promise.all(LoadModules("middleware"))),
+      Helmet(),
+      Hpp(),
+      Cors(DefaultCorsConfiguration),
+      CookieParser(),
+      Compression(),
+      UserAgent.express(),
+      EXPRESS.json({
+        verify: (req, _, buffer) => {
+          req.rawBody = buffer;
+        },
+      }),
+      EXPRESS.urlencoded({ extended: true }),
     ]);
+
+export const AppMiddlewares = async (Framework: Express) =>
+  Framework.use([
+    InjectRequestUtils(),
+    HandleRequestClose(),
+
+    // Load Modules
+    ...(await Promise.all(LoadModules("middleware"))),
+  ]);

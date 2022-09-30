@@ -24,7 +24,7 @@ declare global {
       id: string;
 
       /** Get Current Request Controller Name */
-      name: string;
+      name?: string;
 
       /** Get User's IP Address */
       clientIp: string;
@@ -59,5 +59,11 @@ declare global {
       /** Set Debug Information */
       debugInfo: Record<string, any>;
     }
+  }
+}
+
+declare module "http" {
+  interface IncomingMessage {
+    rawBody: Buffer;
   }
 }

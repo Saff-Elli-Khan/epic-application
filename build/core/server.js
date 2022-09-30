@@ -19,12 +19,14 @@ class Application extends epic_express_1.EpicApplication {
             // Sync Database in Development
             if (process.env.NODE_ENV === common_1.NODE_ENV.DEVELOPMENT)
                 await database_1.DatabaseAdapter.sync();
-            // Install Middlewares
-            await (0, middlewares_1.Middlewares)(this.Framework);
-            // Start Executing Jobs
-            await (0, jobs_1.ExecuteJobs)();
+            // Install Utility Middlewares
+            await (0, middlewares_1.UtilityMiddlewares)(this.Framework);
             // Serve Static Content
             await (0, staticServer_1.ServeStaticContent)(this.Framework);
+            // Install App Middlewares
+            await (0, middlewares_1.AppMiddlewares)(this.Framework);
+            // Start Executing Jobs
+            await (0, jobs_1.ExecuteJobs)();
         };
         this._onRouteError = (err, req, res) => {
             // If the status code was not changed than predict it

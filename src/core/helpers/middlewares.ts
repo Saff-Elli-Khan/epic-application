@@ -38,10 +38,10 @@ export const HandleRequestClose =
       await req.response?.AfterResponse?.();
 
       // Emit Event
-      Events.emit(req.name, req);
+      if (req.name) Events.emit(req.name, req);
 
       // Close Database Session
-      req.database.end();
+      req.database?.end();
     });
 
     // Continue to Next Middleware

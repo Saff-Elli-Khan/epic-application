@@ -31,13 +31,14 @@ exports.InjectRequestUtils = InjectRequestUtils;
 const HandleRequestClose = () => async (req, res, next) => {
     // On Request End
     res.on("close", async () => {
-        var _a, _b;
+        var _a, _b, _c;
         // Final Tasks
         await ((_b = (_a = req.response) === null || _a === void 0 ? void 0 : _a.AfterResponse) === null || _b === void 0 ? void 0 : _b.call(_a));
         // Emit Event
-        events_1.Events.emit(req.name, req);
+        if (req.name)
+            events_1.Events.emit(req.name, req);
         // Close Database Session
-        req.database.end();
+        (_c = req.database) === null || _c === void 0 ? void 0 : _c.end();
     });
     // Continue to Next Middleware
     next();

@@ -9,7 +9,7 @@ import {
   RouteAccessDenied,
 } from "@saffellikhan/epic-express";
 import { ValidationException } from "@oridune/validator";
-import { Middlewares } from "./middlewares";
+import { UtilityMiddlewares, AppMiddlewares } from "./middlewares";
 import { Events } from "./events";
 import { ExecuteJobs } from "./jobs";
 import { DatabaseAdapter } from "./database";
@@ -23,11 +23,14 @@ export class Application extends EpicApplication {
     if (process.env.NODE_ENV === NODE_ENV.DEVELOPMENT)
       await DatabaseAdapter.sync();
 
+    // Install Utility Middlewares
+    await UtilityMiddlewares(this.Framework);
+
     // Serve Static Content
     await ServeStaticContent(this.Framework);
 
-    // Install Middlewares
-    await Middlewares(this.Framework);
+    // Install App Middlewares
+    await AppMiddlewares(this.Framework);
 
     // Start Executing Jobs
     await ExecuteJobs();
