@@ -9,6 +9,7 @@ const middlewares_1 = require("./middlewares");
 const events_1 = require("./events");
 const jobs_1 = require("./jobs");
 const database_1 = require("./database");
+const staticServer_1 = require("./helpers/staticServer");
 const http_status_1 = require("http-status");
 // Prepare Application
 class Application extends epic_express_1.EpicApplication {
@@ -22,6 +23,8 @@ class Application extends epic_express_1.EpicApplication {
             await (0, middlewares_1.Middlewares)(this.Framework);
             // Start Executing Jobs
             await (0, jobs_1.ExecuteJobs)();
+            // Serve Static Content
+            await (0, staticServer_1.ServeStaticContent)(this.Framework);
         };
         this._onRouteError = (err, req, res) => {
             // If the status code was not changed than predict it

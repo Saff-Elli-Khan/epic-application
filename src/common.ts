@@ -12,6 +12,14 @@ export enum NODE_ENV {
   TEST = "test",
 }
 
+export interface IPluginDetails {
+  name: string;
+  locals: Record<string, any>;
+  dependencyOf: string[];
+  development: boolean;
+  disabled: boolean;
+}
+
 // Default Cors Configuration
 export const DefaultCorsConfiguration = {
   origin: process.env.CORS_ALLOW_ORIGIN?.split(",").map((item) => item.trim()),
@@ -74,20 +82,28 @@ export const InjectEnv = <T extends Record<string, any>>(object: T): T => {
   return object;
 };
 
-// Get Epic Configuration
+/** Get Current Configuration */
 export const Configuration = InjectEnv(
   require(Path.join(process.cwd(), "./package.json")).epic || {}
 );
 
-// Current App Name
+/** Current App Name */
 export const AppName = require(Path.join(process.cwd(), "./package.json")).name;
 
-// Current Repository Name
+/** Current Repository Name */
 export const RepositoryName = require("../package.json").name;
 
-// State of the application
+/** Type of the application */
 export const IsPlugin = !!Configuration.plugins[RepositoryName];
 
-// Application's local settings
+/** Application's local settings */
 export const Locals: Record<string, any> =
   Configuration.plugins[RepositoryName]?.locals || Configuration.locals;
+
+/** Loop over the application plugins */
+export const ForEachEnabledPlugin = <T extends any>(
+  callback: (pluginDetails: IPluginDetails) => T
+) =>
+  Object.keys(Configuration.plugins)
+    .filter((name) => !Configuration.plugins[name].disabled)
+    .map((name) => callback({ name, ...Configuration.plugins[name] }));

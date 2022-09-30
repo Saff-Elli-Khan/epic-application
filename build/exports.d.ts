@@ -1,5 +1,6 @@
 export * from "./core/helpers/loaders";
 export * from "./core/helpers/middlewares";
+export * from "./core/helpers/staticServer";
 export * from "./core/database";
 export * from "./core/events";
 export * from "./core/geo";

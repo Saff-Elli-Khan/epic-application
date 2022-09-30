@@ -28,5 +28,7 @@
       "@Models/*": ["./src/models/*"],
       "@Utils/*": ["./src/utils/*"]
     }
-  }
+  },
+  "include": ["./src"],
+  "exclude": ["./public", "./resources"]
 }

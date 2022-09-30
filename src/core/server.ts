@@ -13,6 +13,7 @@ import { Middlewares } from "./middlewares";
 import { Events } from "./events";
 import { ExecuteJobs } from "./jobs";
 import { DatabaseAdapter } from "./database";
+import { ServeStaticContent } from "./helpers/staticServer";
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND, OK } from "http-status";
 
 // Prepare Application
@@ -27,7 +28,11 @@ export class Application extends EpicApplication {
 
     // Start Executing Jobs
     await ExecuteJobs();
+
+    // Serve Static Content
+    await ServeStaticContent(this.Framework);
   };
+
   _onRouteError = (err: any, req: Request, res: Response) => {
     // If the status code was not changed than predict it
     if (res.statusCode === OK)

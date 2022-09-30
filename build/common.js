@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Locals = exports.IsPlugin = exports.RepositoryName = exports.AppName = exports.Configuration = exports.InjectEnv = exports.DefaultCorsConfiguration = exports.NODE_ENV = void 0;
+exports.ForEachEnabledPlugin = exports.Locals = exports.IsPlugin = exports.RepositoryName = exports.AppName = exports.Configuration = exports.InjectEnv = exports.DefaultCorsConfiguration = exports.NODE_ENV = void 0;
 const path_1 = __importDefault(require("path"));
 // Available Environments
 var NODE_ENV;
@@ -59,13 +59,18 @@ const InjectEnv = (object) => {
     return object;
 };
 exports.InjectEnv = InjectEnv;
-// Get Epic Configuration
+/** Get Current Configuration */
 exports.Configuration = (0, exports.InjectEnv)(require(path_1.default.join(process.cwd(), "./package.json")).epic || {});
-// Current App Name
+/** Current App Name */
 exports.AppName = require(path_1.default.join(process.cwd(), "./package.json")).name;
-// Current Repository Name
+/** Current Repository Name */
 exports.RepositoryName = require("../package.json").name;
-// State of the application
+/** Type of the application */
 exports.IsPlugin = !!exports.Configuration.plugins[exports.RepositoryName];
-// Application's local settings
+/** Application's local settings */
 exports.Locals = ((_e = exports.Configuration.plugins[exports.RepositoryName]) === null || _e === void 0 ? void 0 : _e.locals) || exports.Configuration.locals;
+/** Loop over the application plugins */
+const ForEachEnabledPlugin = (callback) => Object.keys(exports.Configuration.plugins)
+    .filter((name) => !exports.Configuration.plugins[name].disabled)
+    .map((name) => callback(Object.assign({ name }, exports.Configuration.plugins[name])));
+exports.ForEachEnabledPlugin = ForEachEnabledPlugin;
