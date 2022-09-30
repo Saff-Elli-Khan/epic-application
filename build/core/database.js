@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatabaseAdapter = void 0;
-const common_1 = require("@App/common");
+const common_1 = require("../common");
 const epic_odm_1 = require("@oridune/epic-odm");
 const loaders_1 = require("./helpers/loaders");
 // Create Database Adapter

@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoadChildControllers = exports.LoadModules = exports.LoadLocalModules = exports.LoadModulesFromPlugins = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const common_1 = require("@App/common");
+const common_1 = require("../../common");
 const epic_odm_1 = require("@oridune/epic-odm");
 const LoadModulesFromPlugins = (type) => Object.keys(common_1.Configuration.plugins).reduce((items, pluginName) => [
     ...items,

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HTTPServer = exports.Application = void 0;
 require("./controllers");
-const common_1 = require("@App/common");
+const common_1 = require("../common");
 const epic_express_1 = require("@saffellikhan/epic-express");
 const validator_1 = require("@oridune/validator");
 const middlewares_1 = require("./middlewares");

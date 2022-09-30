@@ -14,7 +14,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_useragent_1 = __importDefault(require("express-useragent"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const http_status_1 = require("http-status");
-const common_1 = require("@App/common");
+const common_1 = require("../common");
 const middlewares_1 = require("./helpers/middlewares");
 const loaders_1 = require("./helpers/loaders");
 const Middlewares = async (Framework) => Framework
