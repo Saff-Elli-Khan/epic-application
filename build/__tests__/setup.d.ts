@@ -1,1 +1,1 @@
-import "../core/loadEnv";
+import "@App/Env";

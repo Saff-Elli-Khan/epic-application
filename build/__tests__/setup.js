@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("../core/loadEnv");
-const exports_1 = require("../exports");
+require("@App/Env");
+const exports_1 = require("@App/exports");
 const epic_odm_1 = require("@oridune/epic-odm");
 const supertest_1 = require("supertest");
 beforeAll(async () => {

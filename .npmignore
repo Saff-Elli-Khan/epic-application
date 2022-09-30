@@ -1,21 +1,15 @@
 # Development Source
-.env
-env/
 .coverage/
-coverage/
 .husky/
-husky/
 .temp/
-temp/
 env/
 src/
-public/
 build/__tests__/
 build/core/
 build/*.ts
-dist/
 .sample.env
 .eslintcache
+.eslintignore
 .eslintrc.json
 .prettierrc
 jest.config.js

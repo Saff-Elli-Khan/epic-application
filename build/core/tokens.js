@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokensManager = void 0;
-const common_1 = require("../common");
+const common_1 = require("@App/common");
 const epic_tokens_1 = require("epic-tokens");
 const redis_1 = require("./redis");
 // Global Tokens Manager
