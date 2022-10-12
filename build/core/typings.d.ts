@@ -24,6 +24,8 @@ declare global {
             name?: string;
             /** Get User's IP Address */
             clientIp: string;
+            /** Permission Checker */
+            isPermitted?: (permission: string) => boolean;
             /** Security Manager */
             security: SecurityManager;
             /** Redis Client */

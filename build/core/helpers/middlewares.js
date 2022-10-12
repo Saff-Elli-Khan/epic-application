@@ -16,6 +16,7 @@ const InjectRequestUtils = () => async (req, _res, next) => {
         req.database = await new epic_odm_1.DatabaseSession(database_1.DatabaseAdapter).start();
         // Add Security Manager
         req.security = new security_1.SecurityManager();
+        req.isPermitted = req.security.isPermitted.bind(req.security);
         // Add Utilities
         req.redis = redis_1.RedisClient;
         req.geo = geo_1.GeoData;
