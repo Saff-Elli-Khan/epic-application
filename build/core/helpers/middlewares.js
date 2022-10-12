@@ -8,11 +8,14 @@ const translation_1 = require("../translation");
 const geo_1 = require("../geo");
 const events_1 = require("../events");
 const redis_1 = require("../redis");
+const security_1 = require("../lib/security");
 // Global Utilities Injector Middleware
 const InjectRequestUtils = () => async (req, _res, next) => {
     try {
         // Create Database Session
         req.database = await new epic_odm_1.DatabaseSession(database_1.DatabaseAdapter).start();
+        // Add Security Manager
+        req.security = new security_1.SecurityManager();
         // Add Utilities
         req.redis = redis_1.RedisClient;
         req.geo = geo_1.GeoData;

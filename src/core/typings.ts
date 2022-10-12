@@ -1,10 +1,11 @@
-import { DatabaseSession } from "@oridune/epic-odm";
 import { CreateResponse, DefaultResponse } from "@saffellikhan/epic-express";
+import { DatabaseSession } from "@oridune/epic-odm";
+import { Redis } from "ioredis";
 import { Translation, Translator } from "epic-translate";
 import { SuperTest, Test } from "supertest";
+import { SecurityManager } from "./lib/security";
 import { GeoData } from "./geo";
 import { TokensManager } from "./tokens";
-import Redis from "ioredis";
 
 // Override Typings
 declare global {
@@ -29,8 +30,8 @@ declare global {
       /** Get User's IP Address */
       clientIp: string;
 
-      /** Current User Permission List */
-      permissions?: string[];
+      /** Security Manager */
+      security: SecurityManager;
 
       /** Redis Client */
       redis?: Redis;

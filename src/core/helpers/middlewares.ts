@@ -6,6 +6,7 @@ import { Translation } from "../translation";
 import { GeoData } from "../geo";
 import { Events } from "../events";
 import { RedisClient } from "../redis";
+import { SecurityManager } from "../lib/security";
 
 // Global Utilities Injector Middleware
 export const InjectRequestUtils =
@@ -13,6 +14,9 @@ export const InjectRequestUtils =
     try {
       // Create Database Session
       req.database = await new DatabaseSession(DatabaseAdapter).start();
+
+      // Add Security Manager
+      req.security = new SecurityManager();
 
       // Add Utilities
       req.redis = RedisClient;
