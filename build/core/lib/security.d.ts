@@ -35,4 +35,9 @@ export declare class SecurityManager {
      * @returns
      */
     isPermitted(permission: string): boolean;
+    /**
+     * Check if has full access
+     * @returns
+     */
+    hasFullAccess(): boolean;
 }

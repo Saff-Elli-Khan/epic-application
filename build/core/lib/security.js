@@ -93,5 +93,12 @@ class SecurityManager {
                 return true;
         return false;
     }
+    /**
+     * Check if has full access
+     * @returns
+     */
+    hasFullAccess() {
+        return this.FullAccess;
+    }
 }
 exports.SecurityManager = SecurityManager;

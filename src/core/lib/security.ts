@@ -113,4 +113,12 @@ export class SecurityManager {
 
     return false;
   }
+
+  /**
+   * Check if has full access
+   * @returns
+   */
+  public hasFullAccess() {
+    return this.FullAccess;
+  }
 }
