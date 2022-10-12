@@ -17,6 +17,7 @@ export const InjectRequestUtils =
 
       // Add Security Manager
       req.security = new SecurityManager();
+      req.isPermitted = req.security.isPermitted.bind(req.security);
 
       // Add Utilities
       req.redis = RedisClient;
