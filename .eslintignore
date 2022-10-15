@@ -7,3 +7,4 @@ public/
 typings/
 src/core/
 src/*.ts
+jest.config.js
