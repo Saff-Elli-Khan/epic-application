@@ -6,7 +6,7 @@ class SecurityManager {
         this.FetchedRoles = new Set();
         this.FullAccess = false;
         this.Permissions = new Set();
-        this.PlainPermissions = new Set();
+        this.PlainPermissions = new Map();
         this.PermissionPatterns = [];
     }
     /**
@@ -75,8 +75,21 @@ class SecurityManager {
         for (const Permission of this.Permissions)
             if (/^MATCH:.+/.test(Permission))
                 this.PermissionPatterns.push(new RegExp(Permission.replace(/^MATCH:/, "")));
-            else
-                this.PlainPermissions.add(Permission);
+            else {
+                // Split Permission & Props
+                const PermissionParts = Permission.split("?");
+                // Set Permission
+                this.PlainPermissions.set(PermissionParts.shift(), {
+                    props: Object.assign({}, PermissionParts.join("?")
+                        .split("&")
+                        .reduce((props, pair) => {
+                        const Pair = pair.split("=");
+                        const Key = Pair.shift();
+                        const Value = Pair.join("=");
+                        return Object.assign(Object.assign({}, props), { [Key]: Pair.length ? Value : true });
+                    }, {})),
+                });
+            }
     }
     /**
      * Check if permission exists.
@@ -92,6 +105,14 @@ class SecurityManager {
             if (Pattern.test(permission))
                 return true;
         return false;
+    }
+    /**
+     * Get Permission
+     * @param permission Target permission name.
+     * @returns
+     */
+    getPermission(permission) {
+        return this.PlainPermissions.get(permission);
     }
     /**
      * Check if has full access

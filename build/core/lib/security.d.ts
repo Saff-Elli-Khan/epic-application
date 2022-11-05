@@ -1,11 +1,14 @@
 export declare type PermissionsFetcher = (this: SecurityManager, role: string) => Promise<string[] | "*"> | string[] | "*";
+export declare type TPermission<P extends Record<string, string | boolean> = {}> = {
+    props: P;
+};
 export declare class SecurityManager {
     protected Role?: string;
     protected FetchedRoles: Set<string>;
     protected PermissionsFetcher?: PermissionsFetcher;
     protected FullAccess: boolean;
     protected Permissions: Set<string>;
-    protected PlainPermissions: Set<string>;
+    protected PlainPermissions: Map<string, TPermission<{}>>;
     protected PermissionPatterns: RegExp[];
     /**
      * Get current role.
@@ -35,6 +38,12 @@ export declare class SecurityManager {
      * @returns
      */
     isPermitted(permission: string): boolean;
+    /**
+     * Get Permission
+     * @param permission Target permission name.
+     * @returns
+     */
+    getPermission<P extends Record<string, string | boolean>>(permission: string): TPermission<P>;
     /**
      * Check if has full access
      * @returns

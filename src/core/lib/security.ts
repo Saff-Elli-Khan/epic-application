@@ -3,6 +3,10 @@ export type PermissionsFetcher = (
   role: string
 ) => Promise<string[] | "*"> | string[] | "*";
 
+export type TPermission<P extends Record<string, string | boolean> = {}> = {
+  props: P;
+};
+
 export class SecurityManager {
   protected Role?: string;
   protected FetchedRoles = new Set<string>();
@@ -10,7 +14,7 @@ export class SecurityManager {
 
   protected FullAccess = false;
   protected Permissions = new Set<string>();
-  protected PlainPermissions = new Set<string>();
+  protected PlainPermissions = new Map<string, TPermission>();
   protected PermissionPatterns: RegExp[] = [];
 
   /**
@@ -95,7 +99,27 @@ export class SecurityManager {
         this.PermissionPatterns.push(
           new RegExp(Permission.replace(/^MATCH:/, ""))
         );
-      else this.PlainPermissions.add(Permission);
+      else {
+        // Split Permission & Props
+        const PermissionParts = Permission.split("?");
+
+        // Set Permission
+        this.PlainPermissions.set(PermissionParts.shift()!, {
+          props: {
+            ...PermissionParts.join("?")
+              .split("&")
+              .reduce((props, pair) => {
+                const Pair = pair.split("=");
+                const Key = Pair.shift()!;
+                const Value = Pair.join("=");
+                return {
+                  ...props,
+                  [Key]: Pair.length ? Value : true,
+                };
+              }, {}),
+          },
+        });
+      }
   }
 
   /**
@@ -112,6 +136,17 @@ export class SecurityManager {
       if (Pattern.test(permission)) return true;
 
     return false;
+  }
+
+  /**
+   * Get Permission
+   * @param permission Target permission name.
+   * @returns
+   */
+  public getPermission<P extends Record<string, string | boolean>>(
+    permission: string
+  ) {
+    return this.PlainPermissions.get(permission) as TPermission<P>;
   }
 
   /**
