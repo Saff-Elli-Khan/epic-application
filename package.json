@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@oridune/epic-odm": "^1.1.11",
-    "@oridune/validator": "^0.0.25",
+    "@oridune/validator": "^0.0.27",
     "@saffellikhan/epic-express": "^2.4.5",
     "@saffellikhan/epic-schedular": "^2.0.3",
     "@saffellikhan/epic-time": "^1.0.0",
