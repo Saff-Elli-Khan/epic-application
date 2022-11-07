@@ -5,6 +5,7 @@ export type PermissionsFetcher = (
 
 export type TPermission<P extends Record<string, string | boolean> = {}> = {
   props: P;
+  toString(): string;
 };
 
 export class SecurityManager {
@@ -105,6 +106,9 @@ export class SecurityManager {
 
         // Set Permission
         this.PlainPermissions.set(PermissionParts.shift()!, {
+          toString() {
+            return Permission;
+          },
           props: {
             ...PermissionParts.join("?")
               .split("&")
